@@ -13,7 +13,7 @@ export const PERSONAL = {
 
 export const ABOUT = {
   greeting: "Hey, I'm Namrata.",
-  bio: 'Software engineer who builds things that work, and occasionally things that make people go "wait, that\'s cool." Fueled by K-drama marathons and too many cups of chai. Built across India and Canada: systems, teams, and time zones.',
+  bio: 'Software engineer who builds things that work, and occasionally things that make people go "wait, that\'s cool." Fueled by K-drama marathons and too many cups of lattè. Built across India and Canada: systems, teams, and time zones.',
   highlights: [
     {
       icon: "⚡",
@@ -47,7 +47,7 @@ export const ABOUT = {
     "REST APIs",
     "Redis",
   ],
-  flourish: "k-drama nights ✦ chai mornings ✦ borahae code",
+  flourish: "k-drama nights ✦ lattè mornings ✦ borahae code",
 };
 
 export const EDUCATION = {

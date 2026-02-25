@@ -95,7 +95,7 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
             >
               &ldquo;wait, that&apos;s cool.&rdquo;
             </span>{" "}
-            Fueled by K-drama marathons and too many cups of chai. Built across India and Canada:
+            Fueled by K-drama marathons and too many cups of lattè. Built across India and Canada:
             systems, teams, and time zones.
           </p>
         </div>

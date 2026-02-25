@@ -240,7 +240,7 @@ export default function ContactScene({ onBack }: ContactSceneProps) {
             transition: "opacity 2s ease-out 0.5s",
           }}
         >
-          built with Next.js, Framer Motion, and a lot of chai &#10022;
+          built with Next.js, Framer Motion, and a lot of espresso &#10022;
         </p>
       </div>
     </div>
