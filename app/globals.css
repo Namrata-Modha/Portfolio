@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ═══════════════════════════════════════════
+   BASE RESET
+   ═══════════════════════════════════════════ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #06031a;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(150, 80, 220, 0.3);
+  color: #faf5ff;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 80, 220, 0.15);
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════
+   BOKEH FLOAT ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes bokehFloat0 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate(15px, -20px) scale(1.1); opacity: 0.95; }
+  100% { transform: translate(-8px, -12px) scale(0.95); opacity: 0.6; }
+}
+
+@keyframes bokehFloat1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-12px, -15px) scale(1.08); opacity: 0.4; }
+  100% { transform: translate(8px, -22px) scale(1.12); opacity: 0.85; }
+}
+
+@keyframes bokehFloat2 {
+  0% { transform: translate(0, 0) scale(0.95); opacity: 0.4; }
+  50% { transform: translate(10px, 12px) scale(1.12); opacity: 0.8; }
+  100% { transform: translate(-6px, -8px) scale(1); opacity: 0.5; }
+}
+
+@keyframes bokehFloat3 {
+  0% { transform: translate(0, 0) scale(1.05); opacity: 0.7; }
+  50% { transform: translate(-16px, -8px) scale(0.9); opacity: 0.35; }
+  100% { transform: translate(5px, -18px) scale(1.1); opacity: 0.85; }
+}
+
+/* ═══════════════════════════════════════════
+   PETAL FALL ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes petalFall0 {
+  0% { transform: translate(0, -5vh) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 0.8; }
+  100% { transform: translate(35px, 110vh) rotate(200deg); opacity: 0; }
+}
+
+@keyframes petalFall1 {
+  0% { transform: translate(0, -5vh) rotate(45deg); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 0.8; }
+  100% { transform: translate(-30px, 110vh) rotate(240deg); opacity: 0; }
+}
+
+@keyframes petalFall2 {
+  0% { transform: translate(0, -5vh) rotate(90deg); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 0.7; }
+  100% { transform: translate(20px, 110vh) rotate(320deg); opacity: 0; }
+}
+
+@keyframes petalFall3 {
+  0% { transform: translate(0, -5vh) rotate(135deg); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 0.7; }
+  100% { transform: translate(-18px, 110vh) rotate(360deg); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════
+   SPARKLE & DUST ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes sparkleFlash {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  15% { opacity: 1; transform: scale(1.1) rotate(15deg); }
+  30% { opacity: 0.7; transform: scale(0.9) rotate(-5deg); }
+  50% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+}
+
+@keyframes dustDrift0 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(10px, -16px); }
+}
+
+@keyframes dustDrift1 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-12px, 10px); }
+}
+
+@keyframes dustDrift2 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(7px, 12px); }
+}
+
+/* ═══════════════════════════════════════════
+   GLOW & WAVE ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes lightRayShimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes purpleWave1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  100% { transform: translate(3%, -2%) scale(1.05); opacity: 1; }
+}
+
+@keyframes purpleWave2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  100% { transform: translate(-2%, 2.5%) scale(1.04); opacity: 1; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.88; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+@keyframes glowPulseInner {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.85; }
+}
+
+/* ═══════════════════════════════════════════
+   UI ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes tagFloat {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gentleFade {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.38; }
+}
+
+@keyframes monumentFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+/* ═══════════════════════════════════════════
+   CONSTELLATION ANIMATIONS (Experience)
+   ═══════════════════════════════════════════ */
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes constellationPulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes orbitSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dataStreamUp {
+  0% { transform: translateY(100%) scaleY(0); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.3; }
+  100% { transform: translateY(-100%) scaleY(1); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
