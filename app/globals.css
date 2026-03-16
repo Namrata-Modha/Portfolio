@@ -172,6 +172,27 @@ body {
 }
 
 /* ═══════════════════════════════════════════
+   PORTRAIT ANIME EFFECTS
+   ═══════════════════════════════════════════ */
+
+@keyframes portraitAura {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+@keyframes portraitOrbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes portraitSheen {
+  0%, 100% { opacity: 0; transform: translateX(-80%) skewX(-15deg); }
+  40% { opacity: 1; }
+  60% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(180%) skewX(-15deg); }
+}
+
+/* ═══════════════════════════════════════════
    CONSTELLATION ANIMATIONS (Experience)
    ═══════════════════════════════════════════ */
 

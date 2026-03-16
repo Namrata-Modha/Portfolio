@@ -101,7 +101,7 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
             </p>
           </div>
 
-          {/* Portrait */}
+          {/* Portrait with anime effects */}
           <div
             className="mt-8 md:mt-0 flex-shrink-0"
             style={{
@@ -113,40 +113,167 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
             <div
               className="relative mx-auto md:mx-0"
               style={{
-                width: "clamp(180px, 20vw, 240px)",
-                height: "clamp(220px, 25vw, 300px)",
-                borderRadius: "32% 68% 55% 45% / 40% 45% 55% 60%",
-                overflow: "hidden",
-                border: "1.5px solid rgba(175,115,235,0.18)",
-                boxShadow: "0 0 50px rgba(150,80,220,0.12), 0 0 100px rgba(150,80,220,0.06)",
-                animation: "monumentFloat 8s ease-in-out infinite alternate",
+                width: "clamp(200px, 22vw, 260px)",
+                height: "clamp(250px, 28vw, 330px)",
               }}
             >
-              <img
-                src="/namrata.jpg"
-                alt="Namrata Modha"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center 20%",
-                  filter: "brightness(0.92) contrast(1.05) saturate(0.9)",
-                }}
-              />
-              {/* Purple overlay for aesthetic blend */}
+              {/* Outer pulsing aura */}
               <div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute pointer-events-none"
                 style={{
-                  background: "linear-gradient(170deg, rgba(150,80,220,0.08) 0%, rgba(100,50,180,0.15) 100%)",
-                  mixBlendMode: "color",
+                  inset: "-18%",
+                  borderRadius: "32% 68% 55% 45% / 40% 45% 55% 60%",
+                  background: "radial-gradient(ellipse, rgba(150,80,220,0.12) 0%, rgba(150,80,220,0.04) 45%, transparent 70%)",
+                  animation: "portraitAura 4s ease-in-out infinite",
+                  filter: "blur(12px)",
                 }}
               />
+
+              {/* Orbiting sparkle ring */}
+              {[0, 1, 2, 3, 4, 5].map((i) => (
+                <div
+                  key={`orbit-${i}`}
+                  className="absolute pointer-events-none"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    top: 0,
+                    left: 0,
+                    animation: `portraitOrbit ${12 + i * 2}s linear ${i * 1.5}s infinite`,
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: i % 2 === 0 ? "-6px" : "auto",
+                      bottom: i % 2 !== 0 ? "-6px" : "auto",
+                      left: `${15 + i * 12}%`,
+                      width: i % 3 === 0 ? 5 : 3,
+                      height: i % 3 === 0 ? 5 : 3,
+                      borderRadius: "50%",
+                      background: i % 2 === 0
+                        ? "rgba(255,225,195,0.9)"
+                        : "rgba(210,180,255,0.9)",
+                      boxShadow: `0 0 ${8 + i * 2}px ${i % 2 === 0 ? "rgba(255,220,180,0.5)" : "rgba(190,160,240,0.5)"}`,
+                    }}
+                  />
+                </div>
+              ))}
+
+              {/* Floating anime sparkles around the photo */}
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                <div
+                  key={`sparkle-${i}`}
+                  className="absolute pointer-events-none"
+                  style={{
+                    left: `${["-8%", "95%", "50%", "-12%", "102%", "30%", "80%", "10%"][i]}`,
+                    top: `${["20%", "35%", "-6%", "65%", "70%", "105%", "10%", "90%"][i]}`,
+                    width: [8, 6, 10, 5, 7, 6, 8, 5][i],
+                    height: [8, 6, 10, 5, 7, 6, 8, 5][i],
+                    animation: `sparkleFlash ${[2.5, 3.2, 2.8, 3.5, 2.2, 3.8, 2.6, 3.1][i]}s ease-in-out ${[0, 1.2, 0.5, 2.1, 0.8, 1.5, 1.8, 0.3][i]}s infinite`,
+                  }}
+                >
+                  <div
+                    className="absolute"
+                    style={{
+                      left: "50%",
+                      top: 0,
+                      width: 1,
+                      height: "100%",
+                      transform: "translateX(-50%)",
+                      background: `linear-gradient(to bottom, transparent, ${i % 2 === 0 ? "rgba(255,225,195,0.9)" : "rgba(210,180,255,0.9)"} 50%, transparent)`,
+                    }}
+                  />
+                  <div
+                    className="absolute"
+                    style={{
+                      top: "50%",
+                      left: 0,
+                      height: 1,
+                      width: "100%",
+                      transform: "translateY(-50%)",
+                      background: `linear-gradient(to right, transparent, ${i % 2 === 0 ? "rgba(255,225,195,0.9)" : "rgba(210,180,255,0.9)"} 50%, transparent)`,
+                    }}
+                  />
+                  <div
+                    className="absolute rounded-full"
+                    style={{
+                      width: 2,
+                      height: 2,
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%,-50%)",
+                      background: i % 2 === 0 ? "rgba(255,240,220,1)" : "rgba(230,210,255,1)",
+                    }}
+                  />
+                </div>
+              ))}
+
+              {/* Floating dust motes */}
+              {[0, 1, 2, 3, 4].map((i) => (
+                <div
+                  key={`dust-${i}`}
+                  className="absolute pointer-events-none rounded-full"
+                  style={{
+                    left: `${[-5, 105, 50, -10, 95][i]}%`,
+                    top: `${[30, 50, 110, 80, 15][i]}%`,
+                    width: [2, 2.5, 1.5, 2, 1.5][i],
+                    height: [2, 2.5, 1.5, 2, 1.5][i],
+                    background: i % 2 === 0
+                      ? "rgba(250,220,180,0.6)"
+                      : "rgba(200,175,240,0.6)",
+                    boxShadow: `0 0 6px ${i % 2 === 0 ? "rgba(250,220,180,0.3)" : "rgba(190,160,235,0.3)"}`,
+                    animation: `dustDrift${i % 3} ${14 + i * 3}s ease-in-out ${i * 2}s infinite alternate`,
+                  }}
+                />
+              ))}
+
+              {/* Photo frame */}
               <div
-                className="absolute inset-0 pointer-events-none"
+                className="relative w-full h-full"
                 style={{
-                  background: "radial-gradient(ellipse at 50% 30%, transparent 50%, rgba(16,10,40,0.4) 100%)",
+                  borderRadius: "32% 68% 55% 45% / 40% 45% 55% 60%",
+                  overflow: "hidden",
+                  border: "1.5px solid rgba(175,115,235,0.2)",
+                  boxShadow: "0 0 40px rgba(150,80,220,0.15), 0 0 80px rgba(150,80,220,0.08), inset 0 0 30px rgba(150,80,220,0.05)",
+                  animation: "monumentFloat 8s ease-in-out infinite alternate",
                 }}
-              />
+              >
+                <img
+                  src="/namrata.jpg"
+                  alt="Namrata Modha"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center 20%",
+                    filter: "brightness(0.9) contrast(1.08) saturate(0.85)",
+                  }}
+                />
+                {/* Purple color blend */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(170deg, rgba(150,80,220,0.06) 0%, rgba(100,50,180,0.12) 100%)",
+                    mixBlendMode: "color",
+                  }}
+                />
+                {/* Vignette */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: "radial-gradient(ellipse at 50% 30%, transparent 45%, rgba(16,10,40,0.45) 100%)",
+                  }}
+                />
+                {/* Anime light streak */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(135deg, transparent 30%, rgba(220,200,255,0.06) 45%, transparent 60%)",
+                    animation: "portraitSheen 6s ease-in-out 2s infinite",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
