@@ -165,6 +165,21 @@ export const PROJECTS: ProjectEntry[] = [
     theme: "medical",
   },
   {
+    title: "MediLight",
+    award: undefined,
+    description:
+      "AI-powered smart pharmacy dispensing system. Upload a prescription, Gemini AI reads it, medications match to inventory, and LED shelf lights guide the pharmacist to the right product.",
+    highlights: [
+      "Built full-stack pipeline: React dashboard, Express API, and PostgreSQL on Neon with real-time WebSocket shelf control.",
+      "Integrated Google Gemini 2.5 Flash for prescription OCR handling handwritten, misspelled, and low-quality images.",
+      "Designed LED digital twin simulating ESP32 shelf hardware for live demo without physical devices.",
+      "Deployed across Vercel and Render with Swagger API docs and 10 automated test endpoints.",
+    ],
+    techStack: ["React", "Node.js", "Express", "PostgreSQL", "Gemini AI", "WebSocket"],
+    theme: "dashboard",
+    github: "https://github.com/Namrata-Modha/Medilight-guide",
+  },
+  {
     title: "InsightOps",
     award: undefined,
     description:

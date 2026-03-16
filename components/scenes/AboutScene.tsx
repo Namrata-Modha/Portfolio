@@ -49,55 +49,106 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 py-16 md:pt-24 md:pb-12">
         <SectionLabel index="01" label="About" visible={phase >= 1} />
 
-        {/* Heading */}
-        <div
-          className="mt-7"
-          style={{
-            opacity: phase >= 1 ? 1 : 0,
-            transform: phase >= 1 ? "translateY(0)" : "translateY(22px)",
-            transition: "all 1.1s cubic-bezier(0.16,1,0.3,1) 0.15s",
-          }}
-        >
-          <h2
+        {/* Heading + Photo */}
+        <div className="mt-7 flex flex-col md:flex-row md:items-center md:gap-12">
+          <div
+            className="flex-1"
             style={{
-              fontFamily: "'Cormorant Garamond', Garamond, serif",
-              fontSize: "clamp(2.5rem, 6vw, 4rem)",
-              fontWeight: 400,
-              lineHeight: 1.1,
-              background:
-                "linear-gradient(150deg, rgba(255,248,255,0.94) 0%, rgba(220,195,248,0.87) 40%, rgba(190,155,230,0.78) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              opacity: phase >= 1 ? 1 : 0,
+              transform: phase >= 1 ? "translateY(0)" : "translateY(22px)",
+              transition: "all 1.1s cubic-bezier(0.16,1,0.3,1) 0.15s",
             }}
           >
-            Hey, I&apos;m Namrata.
-          </h2>
-          <p
-            className="mt-4"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "clamp(1rem, 1.9vw, 1.2rem)",
-              lineHeight: 1.85,
-              color: "rgba(220,210,242,0.72)",
-              maxWidth: 580,
-              fontWeight: 300,
-            }}
-          >
-            Software engineer who builds things that work, and occasionally things that make
-            people go{" "}
-            <span
+            <h2
               style={{
-                color: "rgba(200,160,240,0.82)",
-                fontStyle: "italic",
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "1.05em",
+                fontFamily: "'Cormorant Garamond', Garamond, serif",
+                fontSize: "clamp(2.5rem, 6vw, 4rem)",
+                fontWeight: 400,
+                lineHeight: 1.1,
+                background:
+                  "linear-gradient(150deg, rgba(255,248,255,0.94) 0%, rgba(220,195,248,0.87) 40%, rgba(190,155,230,0.78) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
               }}
             >
-              &ldquo;wait, that&apos;s cool.&rdquo;
-            </span>{" "}
-            Fueled by K-drama marathons and too many cups of lattè. Built across India and Canada:
-            systems, teams, and time zones.
-          </p>
+              Hey, I&apos;m Namrata.
+            </h2>
+            <p
+              className="mt-4"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "clamp(1rem, 1.9vw, 1.2rem)",
+                lineHeight: 1.85,
+                color: "rgba(220,210,242,0.72)",
+                maxWidth: 580,
+                fontWeight: 300,
+              }}
+            >
+              Software engineer who builds things that work, and occasionally things that make
+              people go{" "}
+              <span
+                style={{
+                  color: "rgba(200,160,240,0.82)",
+                  fontStyle: "italic",
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "1.05em",
+                }}
+              >
+                &ldquo;wait, that&apos;s cool.&rdquo;
+              </span>{" "}
+              Fueled by K-drama marathons and too many cups of latt&egrave;. Built across India and Canada:
+              systems, teams, and time zones.
+            </p>
+          </div>
+
+          {/* Portrait */}
+          <div
+            className="mt-8 md:mt-0 flex-shrink-0"
+            style={{
+              opacity: phase >= 1 ? 1 : 0,
+              transform: phase >= 1 ? "translateY(0) scale(1)" : "translateY(18px) scale(0.97)",
+              transition: "all 1.3s cubic-bezier(0.16,1,0.3,1) 0.4s",
+            }}
+          >
+            <div
+              className="relative mx-auto md:mx-0"
+              style={{
+                width: "clamp(180px, 20vw, 240px)",
+                height: "clamp(220px, 25vw, 300px)",
+                borderRadius: "32% 68% 55% 45% / 40% 45% 55% 60%",
+                overflow: "hidden",
+                border: "1.5px solid rgba(175,115,235,0.18)",
+                boxShadow: "0 0 50px rgba(150,80,220,0.12), 0 0 100px rgba(150,80,220,0.06)",
+                animation: "monumentFloat 8s ease-in-out infinite alternate",
+              }}
+            >
+              <img
+                src="/namrata.jpg"
+                alt="Namrata Modha"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center 20%",
+                  filter: "brightness(0.92) contrast(1.05) saturate(0.9)",
+                }}
+              />
+              {/* Purple overlay for aesthetic blend */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: "linear-gradient(170deg, rgba(150,80,220,0.08) 0%, rgba(100,50,180,0.15) 100%)",
+                  mixBlendMode: "color",
+                }}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: "radial-gradient(ellipse at 50% 30%, transparent 50%, rgba(16,10,40,0.4) 100%)",
+                }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Highlight cards */}
