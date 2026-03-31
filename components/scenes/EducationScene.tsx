@@ -1,495 +1,276 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { usePhase } from "@/lib/usePhase";
+import { motion } from "framer-motion";
 import { EDUCATION } from "@/lib/data";
-import { SectionLabel, NavigateButton } from "@/components/ui";
-import { GujaratSkyline, OntarioSkyline } from "@/components/monuments";
-import {
-  BokehLights,
-  FloatingPetals,
-  AnimeSparkles,
-  MagicDust,
-  LightRays,
-  PurpleGlow,
-} from "@/components/visuals";
+import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
+import GlassCard from "@/components/visuals/GlassCard";
 
-interface EducationSceneProps {
-  onBack: () => void;
-  onContinue: () => void;
-}
-
-export default function EducationScene({ onBack, onContinue }: EducationSceneProps) {
-  const [entered, setEntered] = useState(false);
-  const [leaving, setLeaving] = useState(false);
-  const [activeTab, setActiveTab] = useState<"india" | "canada">("india");
-  const [tabFade, setTabFade] = useState(false);
-  const phase = usePhase([500, 1000, 1500]);
-
-  useEffect(() => {
-    const t = setTimeout(() => setEntered(true), 150);
-    return () => clearTimeout(t);
-  }, []);
-
-  const switchTab = (tab: "india" | "canada") => {
-    if (tab === activeTab) return;
-    setTabFade(true);
-    setTimeout(() => {
-      setActiveTab(tab);
-      setTabFade(false);
-    }, 500);
-  };
-
-  const isIndia = activeTab === "india";
-
-  const handleContinue = () => {
-    setLeaving(true);
-    setTimeout(onContinue, 1200);
-  };
-
+export default function EducationScene() {
   return (
-    <div
-      className="relative min-h-screen overflow-hidden flex items-center"
-      style={{
-        opacity: entered && !leaving ? 1 : 0,
-        transition: "opacity 1.2s ease-out",
-      }}
-    >
-      {/* Dynamic background */}
-      <div
-        className="absolute inset-0 transition-all duration-1000"
-        style={{
-          background: isIndia
-            ? "linear-gradient(170deg,#120a28 0%,#1e1448 20%,#261855 38%,#241650 55%,#1c1240 72%,#100c2a 90%,#08061a 100%)"
-            : "linear-gradient(170deg,#0c1025 0%,#101838 20%,#142042 38%,#12223e 55%,#0e1a35 72%,#081228 90%,#04081a 100%)",
-          opacity: tabFade ? 0.6 : 1,
-        }}
-      />
-      <div
-        className="absolute inset-0 transition-all duration-1000"
-        style={{
-          background: isIndia
-            ? "radial-gradient(ellipse at 40% 40%,rgba(160,80,180,0.1) 0%,transparent 50%)"
-            : "radial-gradient(ellipse at 40% 40%,rgba(80,160,180,0.07) 0%,transparent 50%)",
-          animation: "purpleWave1 22s ease-in-out infinite alternate",
-        }}
-      />
-      <div
-        className="absolute inset-0 transition-all duration-1000"
-        style={{
-          background: isIndia
-            ? "radial-gradient(ellipse at 65% 55%,rgba(180,100,160,0.06) 0%,transparent 45%)"
-            : "radial-gradient(ellipse at 65% 60%,rgba(100,140,200,0.05) 0%,transparent 45%)",
-          animation: "purpleWave2 28s ease-in-out 4s infinite alternate",
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "radial-gradient(ellipse at 50% 75%,rgba(110,45,170,0.06) 0%,transparent 45%)",
-          animation: "purpleWave2 30s ease-in-out 2s infinite alternate",
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 right-0 pointer-events-none"
-        style={{
-          height: "30%",
-          background: isIndia
-            ? "linear-gradient(to top,rgba(150,80,170,0.06) 0%,transparent 100%)"
-            : "linear-gradient(to top,rgba(80,140,170,0.04) 0%,transparent 100%)",
-          transition: "all 1s ease",
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(6,3,20,0.4) 100%)",
-        }}
-      />
-
-      {/* Particles */}
-      <LightRays hue={isIndia ? 280 : 200} />
-      <BokehLights count={20} palette={isIndia ? "indiaWarm" : "cool"} />
-      <MagicDust count={38} palette={isIndia ? "indiaWarm" : "cool"} />
-      <FloatingPetals count={14} palette={isIndia ? "indiaWarm" : "cool"} />
-      <AnimeSparkles count={10} warm={isIndia} />
-      <PurpleGlow size={350} x="12%" y="30%" intensity={0.7} hue={isIndia ? 285 : 200} />
-      <PurpleGlow size={280} x="85%" y="55%" intensity={0.5} hue={isIndia ? 275 : 210} />
-
-      {/* Monuments */}
-      <div
-        className="transition-all duration-800"
-        style={{
-          opacity: isIndia && !tabFade ? 1 : 0,
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-        }}
-      >
-        <GujaratSkyline />
-      </div>
-      <div
-        className="transition-all duration-800"
-        style={{
-          opacity: !isIndia && !tabFade ? 1 : 0,
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-        }}
-      >
-        <OntarioSkyline />
-      </div>
+    <div className="relative w-full h-screen overflow-hidden">
+      <CinematicEnvironment scene="education" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 py-16 md:pt-24 md:pb-12">
-        <SectionLabel index="02" label="Education" visible={phase >= 1} />
+      <div className="relative z-10 h-full flex items-center justify-center px-8">
+        <div className="w-full max-w-7xl">
+          {/* Section header */}
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-16 text-center"
+          >
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent">
+              Education
+            </h1>
+            <p className="text-purple-200/70 text-lg">Built across continents</p>
+          </motion.div>
 
-        <h2
-          className="mt-6"
-          style={{
-            fontFamily: "'Cormorant Garamond', Garamond, serif",
-            fontSize: "clamp(2.2rem, 5vw, 3.4rem)",
-            fontWeight: 400,
-            lineHeight: 1.15,
-            background:
-              "linear-gradient(150deg, rgba(255,248,255,0.92) 0%, rgba(220,195,248,0.85) 50%, rgba(190,155,230,0.75) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            opacity: phase >= 1 ? 1 : 0,
-            transform: phase >= 1 ? "translateY(0)" : "translateY(20px)",
-            transition: "all 1s cubic-bezier(0.16,1,0.3,1) 0.15s",
-          }}
-        >
-          Where I learned to build.
-        </h2>
-
-        {/* Tabs */}
-        <div
-          className="mt-8 flex gap-3"
-          style={{
-            opacity: phase >= 2 ? 1 : 0,
-            transform: phase >= 2 ? "translateY(0)" : "translateY(12px)",
-            transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)",
-          }}
-        >
-          {([
-            { id: "india" as const, label: "\ud83c\uddee\ud83c\uddf3 India", sub: "Gujarat, 2014 \u2013 2020" },
-            { id: "canada" as const, label: "\ud83c\udde8\ud83c\udde6 Canada", sub: "Ontario, 2023 \u2013 2025" },
-          ]).map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => switchTab(tab.id)}
-              className="px-5 py-3 rounded-xl cursor-pointer transition-all duration-500 text-left"
-              style={{
-                background:
-                  activeTab === tab.id
-                    ? tab.id === "india"
-                      ? "rgba(170,100,200,0.08)"
-                      : "rgba(80,160,190,0.08)"
-                    : "rgba(150,100,200,0.02)",
-                border: `1px solid ${
-                  activeTab === tab.id
-                    ? tab.id === "india"
-                      ? "rgba(190,130,220,0.18)"
-                      : "rgba(100,180,210,0.18)"
-                    : "rgba(150,100,200,0.06)"
-                }`,
-                boxShadow:
-                  activeTab === tab.id
-                    ? tab.id === "india"
-                      ? "0 0 25px rgba(170,100,200,0.06)"
-                      : "0 0 25px rgba(80,160,190,0.06)"
-                    : "none",
-              }}
+          {/* Side-by-side cards WITH monuments */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* INDIA - Left card with Taj Mahal monument */}
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+              className="relative"
             >
-              <div
-                style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: "1rem",
-                  letterSpacing: "0.04em",
-                  color:
-                    activeTab === tab.id
-                      ? "rgba(230,215,250,0.85)"
-                      : "rgba(195,175,228,0.55)",
-                  transition: "color 0.5s ease",
-                }}
-              >
-                {tab.label}
-              </div>
-              <div
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "0.9rem",
-                  color: "rgba(180,165,215,0.5)",
-                  marginTop: 2,
-                }}
-              >
-                {tab.sub}
-              </div>
-            </button>
-          ))}
-        </div>
-
-        {/* Tab content */}
-        <div
-          className="mt-8 transition-all duration-500"
-          style={{
-            opacity: tabFade ? 0 : phase >= 2 ? 1 : 0,
-            transform: tabFade ? "translateY(12px)" : "translateY(0)",
-          }}
-        >
-          {isIndia ? (
-            <div className="space-y-5">
-              {EDUCATION.india.map((edu, i) => (
-                <div
-                  key={i}
-                  className="p-6 rounded-2xl transition-all duration-500 cursor-default"
+              {/* Floating diyas (Indian lamps) */}
+              {[0, 1, 2].map((i) => (
+                <motion.div
+                  key={`diya-${i}`}
+                  className="absolute w-6 h-6 rounded-full"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: [0.4, 0.8, 0.4],
+                    y: [0, -20, 0],
+                    x: [0, i % 2 === 0 ? 10 : -10, 0],
+                  }}
+                  transition={{
+                    duration: 4 + i,
+                    repeat: Infinity,
+                    delay: i * 0.8,
+                  }}
                   style={{
-                    background: "rgba(170,110,200,0.02)",
-                    border: "1px solid rgba(180,120,210,0.07)",
+                    left: `${20 + i * 25}%`,
+                    top: `${10 + i * 15}%`,
+                    background: "radial-gradient(circle, rgba(255, 200, 100, 0.8) 0%, rgba(255, 150, 50, 0.4) 70%)",
+                    boxShadow: "0 0 20px rgba(255, 180, 80, 0.6)",
+                    filter: "blur(2px)",
                   }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = "rgba(170,110,200,0.06)";
-                    el.style.borderColor = "rgba(195,140,225,0.16)";
-                    el.style.boxShadow = "0 12px 40px rgba(170,110,200,0.06)";
-                    el.style.transform = "translateY(-3px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = "rgba(170,110,200,0.02)";
-                    el.style.borderColor = "rgba(180,120,210,0.07)";
-                    el.style.boxShadow = "none";
-                    el.style.transform = "translateY(0)";
-                  }}
-                >
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
-                    <div>
-                      <h3
-                        style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: "1.4rem",
-                          fontWeight: 500,
-                          color: "rgba(230,200,245,0.82)",
-                        }}
-                      >
-                        {edu.degree}
-                      </h3>
-                      <p
-                        style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontSize: "1rem",
-                          color: "rgba(215,185,235,0.72)",
-                          marginTop: 2,
-                        }}
-                      >
-                        {edu.field}
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: "'Space Mono', monospace",
-                          fontSize: "0.95rem",
-                          color: "rgba(195,165,220,0.55)",
-                          marginTop: 6,
-                        }}
-                      >
-                        {edu.school} &middot; {edu.location}
-                      </p>
-                    </div>
-                    <div className="text-right flex-shrink-0">
-                      <span
-                        style={{
-                          fontFamily: "'Space Mono', monospace",
-                          fontSize: "1.15rem",
-                          color: "rgba(200,170,225,0.6)",
-                          letterSpacing: "0.05em",
-                        }}
-                      >
-                        {edu.years}
-                      </span>
-                      {edu.gpa && (
-                        <p
-                          style={{
-                            fontFamily: "'Space Mono', monospace",
-                            fontSize: "1rem",
-                            color: "rgba(220,185,245,0.65)",
-                            marginTop: 4,
-                            fontWeight: 700,
-                          }}
-                        >
-                          {edu.gpa}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <p
-                    className="mt-3"
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: "1rem",
-                      color: "rgba(195,170,220,0.52)",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    {edu.note}
-                  </p>
-                </div>
+                />
               ))}
-            </div>
-          ) : (
-            <div>
-              <div
-                className="p-6 rounded-2xl transition-all duration-500 cursor-default"
-                style={{
-                  background: "rgba(80,160,190,0.02)",
-                  border: "1px solid rgba(100,180,210,0.08)",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "rgba(80,160,190,0.05)";
-                  el.style.borderColor = "rgba(110,190,220,0.16)";
-                  el.style.boxShadow = "0 12px 40px rgba(80,160,190,0.05)";
-                  el.style.transform = "translateY(-3px)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "rgba(80,160,190,0.02)";
-                  el.style.borderColor = "rgba(100,180,210,0.08)";
-                  el.style.boxShadow = "none";
-                  el.style.transform = "translateY(0)";
-                }}
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
-                  <div>
-                    <h3
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "1.4rem",
-                        fontWeight: 500,
-                        color: "rgba(185,225,240,0.85)",
-                      }}
-                    >
-                      {EDUCATION.canada.degree}
-                    </h3>
-                    <p
-                      style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: "1rem",
-                        color: "rgba(170,210,225,0.72)",
-                        marginTop: 2,
-                      }}
-                    >
-                      {EDUCATION.canada.field}
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: "0.95rem",
-                        color: "rgba(150,195,215,0.55)",
-                        marginTop: 6,
-                      }}
-                    >
-                      {EDUCATION.canada.school} &middot; {EDUCATION.canada.location}
-                    </p>
-                  </div>
-                  <div className="text-right flex-shrink-0">
-                    <span
-                      style={{
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: "1.15rem",
-                        color: "rgba(140,200,220,0.6)",
-                        letterSpacing: "0.05em",
-                      }}
-                    >
-                      {EDUCATION.canada.years}
-                    </span>
-                    <p
-                      style={{
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: "1rem",
-                        color: "rgba(130,220,240,0.7)",
-                        marginTop: 4,
-                        fontWeight: 700,
-                      }}
-                    >
-                      {EDUCATION.canada.gpa}
-                    </p>
-                  </div>
+
+              <GlassCard depth="near" className="h-full overflow-hidden">
+                {/* Monument silhouette - Taj Mahal */}
+                <div className="absolute bottom-0 left-0 right-0 h-48 opacity-15 pointer-events-none">
+                  <svg viewBox="0 0 200 100" className="w-full h-full">
+                    {/* Central dome */}
+                    <ellipse cx="100" cy="40" rx="25" ry="30" fill="rgba(255, 200, 180, 0.6)" />
+                    {/* Central dome top */}
+                    <path d="M 100 10 L 95 20 L 105 20 Z" fill="rgba(255, 180, 150, 0.7)" />
+                    {/* Side domes */}
+                    <ellipse cx="60" cy="50" rx="15" ry="20" fill="rgba(255, 200, 180, 0.5)" />
+                    <ellipse cx="140" cy="50" rx="15" ry="20" fill="rgba(255, 200, 180, 0.5)" />
+                    {/* Minarets */}
+                    <rect x="30" y="30" width="8" height="60" fill="rgba(255, 200, 180, 0.5)" />
+                    <rect x="162" y="30" width="8" height="60" fill="rgba(255, 200, 180, 0.5)" />
+                    <ellipse cx="34" cy="28" rx="6" ry="8" fill="rgba(255, 180, 150, 0.6)" />
+                    <ellipse cx="166" cy="28" rx="6" ry="8" fill="rgba(255, 180, 150, 0.6)" />
+                    {/* Base */}
+                    <rect x="50" y="80" width="100" height="20" fill="rgba(255, 200, 180, 0.4)" />
+                  </svg>
                 </div>
-                <p
-                  className="mt-2"
+
+                <div className="relative p-8 z-10">
+                  {/* Region header with warm accent */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <motion.div
+                      className="w-2 h-12 rounded-full bg-gradient-to-b from-rose-400 to-amber-400"
+                      animate={{ scaleY: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <h2 className="text-3xl font-bold text-rose-200">India</h2>
+                  </div>
+
+                  {/* Bachelor's degree */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                    className="mb-8 pb-8 border-b border-rose-300/20"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h3 className="text-xl font-semibold text-rose-100">
+                          {EDUCATION.india[0].degree}
+                        </h3>
+                        <p className="text-rose-200/80">{EDUCATION.india[0].field}</p>
+                      </div>
+                      <span className="text-sm text-rose-300/60 whitespace-nowrap">
+                        {EDUCATION.india[0].years}
+                      </span>
+                    </div>
+                    <p className="text-rose-200/70 text-sm mb-2">{EDUCATION.india[0].school}</p>
+                    <p className="text-rose-200/70 text-sm mb-3">{EDUCATION.india[0].location}</p>
+                    <div className="flex items-center gap-4 text-sm">
+                      <span className="text-rose-200/80">
+                        GPA: <span className="font-semibold text-rose-100">{EDUCATION.india[0].gpa}</span>
+                      </span>
+                    </div>
+                    <p className="text-rose-300/60 text-xs mt-2 italic">{EDUCATION.india[0].note}</p>
+                  </motion.div>
+
+                  {/* Diploma */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7, duration: 0.6 }}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h3 className="text-xl font-semibold text-rose-100">
+                          {EDUCATION.india[1].degree}
+                        </h3>
+                        <p className="text-rose-200/80">{EDUCATION.india[1].field}</p>
+                      </div>
+                      <span className="text-sm text-rose-300/60 whitespace-nowrap">
+                        {EDUCATION.india[1].years}
+                      </span>
+                    </div>
+                    <p className="text-rose-200/70 text-sm mb-2">{EDUCATION.india[1].school}</p>
+                    <p className="text-rose-200/70 text-sm mb-3">{EDUCATION.india[1].location}</p>
+                    <p className="text-rose-300/60 text-xs italic">{EDUCATION.india[1].note}</p>
+                  </motion.div>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            {/* CANADA - Right card with CN Tower */}
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
+              className="relative"
+            >
+              {/* Floating maple leaves */}
+              {[0, 1, 2, 3].map((i) => (
+                <motion.div
+                  key={`maple-${i}`}
+                  className="absolute"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: [0.3, 0.7, 0.3],
+                    y: [0, 40, 80],
+                    x: [0, i % 2 === 0 ? -15 : 15, 0],
+                    rotate: [0, 180, 360],
+                  }}
+                  transition={{
+                    duration: 6 + i,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                  }}
                   style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: "1rem",
-                    color: "rgba(140,210,230,0.62)",
+                    left: `${15 + i * 20}%`,
+                    top: `${-10 + i * 5}%`,
                   }}
                 >
-                  &#10022; {EDUCATION.canada.honors}
-                </p>
-              </div>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(200, 100, 100, 0.6)">
+                    <path d="M12 2L9 9L2 9L7 13L5 20L12 15L19 20L17 13L22 9L15 9L12 2Z" />
+                  </svg>
+                </motion.div>
+              ))}
 
-              {/* Certifications */}
-              <div className="mt-6">
-                <p
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: "0.9rem",
-                    letterSpacing: "0.3em",
-                    textTransform: "uppercase",
-                    color: "rgba(140,190,215,0.52)",
-                  }}
-                >
-                  Certifications
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {EDUCATION.canada.certs.map((cert) => (
-                    <span
-                      key={cert}
-                      className="px-3 py-1.5 rounded-full transition-all duration-500 cursor-default"
-                      style={{
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: "0.9rem",
-                        color: "rgba(150,200,220,0.6)",
-                        background: "rgba(80,160,190,0.03)",
-                        border: "1px solid rgba(100,180,210,0.08)",
-                      }}
-                      onMouseEnter={(e) => {
-                        const el = e.currentTarget;
-                        el.style.borderColor = "rgba(120,200,230,0.22)";
-                        el.style.color = "rgba(180,225,240,0.75)";
-                        el.style.background = "rgba(80,160,190,0.08)";
-                        el.style.boxShadow = "0 0 14px rgba(80,160,190,0.06)";
-                      }}
-                      onMouseLeave={(e) => {
-                        const el = e.currentTarget;
-                        el.style.borderColor = "rgba(100,180,210,0.08)";
-                        el.style.color = "rgba(150,200,220,0.6)";
-                        el.style.background = "rgba(80,160,190,0.03)";
-                        el.style.boxShadow = "none";
-                      }}
-                    >
-                      {cert}
-                    </span>
-                  ))}
+              <GlassCard depth="near" className="h-full overflow-hidden">
+                {/* Monument silhouette - CN Tower */}
+                <div className="absolute bottom-0 right-8 h-56 w-24 opacity-15 pointer-events-none">
+                  <svg viewBox="0 0 40 120" className="w-full h-full">
+                    {/* Tower body */}
+                    <rect x="17" y="40" width="6" height="80" fill="rgba(150, 200, 220, 0.6)" />
+                    {/* Observation deck */}
+                    <ellipse cx="20" cy="45" rx="12" ry="8" fill="rgba(150, 200, 220, 0.7)" />
+                    <rect x="8" y="43" width="24" height="4" fill="rgba(150, 200, 220, 0.8)" />
+                    {/* Spire */}
+                    <rect x="18" y="10" width="4" height="30" fill="rgba(150, 200, 220, 0.5)" />
+                    <path d="M 20 10 L 18 15 L 22 15 Z" fill="rgba(150, 200, 220, 0.7)" />
+                    {/* Base */}
+                    <rect x="10" y="120" width="20" height="8" fill="rgba(150, 200, 220, 0.5)" />
+                  </svg>
                 </div>
-              </div>
-            </div>
-          )}
-        </div>
 
-        {/* Navigate */}
-        <div className="mt-12 flex items-center gap-4">
-          <NavigateButton
-            label="Back"
-            onClick={onBack}
-            direction="back"
-            visible={phase >= 3}
-          />
-          <NavigateButton
-            label="Continue to Experience"
-            onClick={handleContinue}
-            visible={phase >= 3}
-          />
+                <div className="relative p-8 z-10">
+                  {/* Region header with cool accent */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <motion.div
+                      className="w-2 h-12 rounded-full bg-gradient-to-b from-emerald-400 to-blue-400"
+                      animate={{ scaleY: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    />
+                    <h2 className="text-3xl font-bold text-emerald-200">Canada</h2>
+                  </div>
+
+                  {/* Postgraduate credential */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7, duration: 0.6 }}
+                    className="mb-6"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h3 className="text-xl font-semibold text-emerald-100">
+                          {EDUCATION.canada.degree}
+                        </h3>
+                        <p className="text-emerald-200/80">{EDUCATION.canada.field}</p>
+                      </div>
+                      <span className="text-sm text-emerald-300/60 whitespace-nowrap">
+                        {EDUCATION.canada.years}
+                      </span>
+                    </div>
+                    <p className="text-emerald-200/70 text-sm mb-2">{EDUCATION.canada.school}</p>
+                    <p className="text-emerald-200/70 text-sm mb-3">{EDUCATION.canada.location}</p>
+                    <div className="flex items-center gap-4 text-sm mb-3">
+                      <span className="text-emerald-200/80">
+                        GPA:{" "}
+                        <span className="font-semibold text-emerald-100">{EDUCATION.canada.gpa}</span>
+                      </span>
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.9, type: "spring" }}
+                        className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-200 text-xs font-medium"
+                      >
+                        {EDUCATION.canada.honors}
+                      </motion.span>
+                    </div>
+                  </motion.div>
+
+                  {/* Certifications */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.9, duration: 0.6 }}
+                  >
+                    <h4 className="text-sm font-semibold text-emerald-200/80 mb-3">Certifications</h4>
+                    <div className="grid grid-cols-2 gap-2">
+                      {EDUCATION.canada.certs.map((cert, i) => (
+                        <motion.div
+                          key={cert}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          transition={{ duration: 0.4, delay: 1.1 + i * 0.1 }}
+                          className="px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-300/20 text-xs text-emerald-200/90 text-center cursor-default"
+                        >
+                          {cert}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </GlassCard>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>

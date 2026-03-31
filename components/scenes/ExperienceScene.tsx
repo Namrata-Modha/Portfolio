@@ -1,323 +1,238 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { usePhase } from "@/lib/usePhase";
+import { motion } from "framer-motion";
 import { EXPERIENCE } from "@/lib/data";
-import { SectionLabel, NavigateButton } from "@/components/ui";
-import SceneBackground from "@/components/visuals/SceneBackground";
+import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
+import GlassCard from "@/components/visuals/GlassCard";
 
-interface ExperienceSceneProps {
-  onBack: () => void;
-  onContinue: () => void;
-}
-
-export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneProps) {
-  const [entered, setEntered] = useState(false);
-  const [leaving, setLeaving] = useState(false);
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [cardFade, setCardFade] = useState(false);
-  const phase = usePhase([500, 1000, 1500, 2000]);
-
-  useEffect(() => {
-    const t = setTimeout(() => setEntered(true), 150);
-    return () => clearTimeout(t);
-  }, []);
-
-  const switchCompany = (idx: number) => {
-    if (idx === activeIdx) return;
-    setCardFade(true);
-    setTimeout(() => {
-      setActiveIdx(idx);
-      setCardFade(false);
-    }, 400);
-  };
-
-  const active = EXPERIENCE[activeIdx];
-  const isConstellation = active.theme === "constellation";
-
-  const handleContinue = () => {
-    setLeaving(true);
-    setTimeout(onContinue, 1200);
-  };
-
+export default function ExperienceScene() {
   return (
-    <div
-      className="relative min-h-screen overflow-hidden flex items-center"
-      style={{
-        opacity: entered && !leaving ? 1 : 0,
-        transition: "opacity 1.2s ease-out",
-      }}
-    >
-      <SceneBackground
-        gradient={
-          isConstellation
-            ? "linear-gradient(170deg,#0a0820 0%,#12103a 20%,#1a1548 38%,#181345 55%,#120e38 72%,#0a0825 90%,#050418 100%)"
-            : "linear-gradient(170deg,#0e0a25 0%,#181240 20%,#201650 38%,#1e1448 55%,#16103a 72%,#0c0828 90%,#06041a 100%)"
-        }
-        hue={isConstellation ? 250 : 270}
-        palette="purple"
-        bokehCount={18}
-        dustCount={35}
-        petalCount={10}
-        sparkleCount={14}
-        glows={[
-          { size: 380, x: "15%", y: "30%", intensity: 0.7, hue: isConstellation ? 245 : 270 },
-          { size: 300, x: "80%", y: "65%", intensity: 0.5, hue: isConstellation ? 260 : 280 },
-        ]}
-      />
+    <div className="relative w-full min-h-screen overflow-auto">
+      <CinematicEnvironment scene="experience" />
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 py-16 md:pt-24 md:pb-12">
-        <SectionLabel index="03" label="Experience" visible={phase >= 1} />
-
-        <h2
-          className="mt-6"
-          style={{
-            fontFamily: "'Cormorant Garamond', Garamond, serif",
-            fontSize: "clamp(2.2rem, 5vw, 3.4rem)",
-            fontWeight: 400,
-            lineHeight: 1.15,
-            background:
-              "linear-gradient(150deg, rgba(255,248,255,0.92) 0%, rgba(220,195,248,0.85) 50%, rgba(190,155,230,0.75) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            opacity: phase >= 1 ? 1 : 0,
-            transform: phase >= 1 ? "translateY(0)" : "translateY(20px)",
-            transition: "all 1s cubic-bezier(0.16,1,0.3,1) 0.15s",
-          }}
-        >
-          Where I shipped real things.
-        </h2>
-
-        {/* Company selector */}
-        <div
-          className="mt-8 flex gap-3"
-          style={{
-            opacity: phase >= 2 ? 1 : 0,
-            transform: phase >= 2 ? "translateY(0)" : "translateY(12px)",
-            transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)",
-          }}
-        >
-          {EXPERIENCE.map((exp, i) => (
-            <button
-              key={exp.company}
-              onClick={() => switchCompany(i)}
-              className="px-5 py-3 rounded-xl cursor-pointer transition-all duration-500 text-left"
-              style={{
-                background:
-                  activeIdx === i
-                    ? "rgba(150,80,220,0.08)"
-                    : "rgba(150,100,200,0.02)",
-                border: `1px solid ${
-                  activeIdx === i
-                    ? "rgba(175,115,235,0.18)"
-                    : "rgba(150,100,200,0.06)"
-                }`,
-                boxShadow:
-                  activeIdx === i ? "0 0 25px rgba(150,80,220,0.06)" : "none",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: "1rem",
-                  letterSpacing: "0.04em",
-                  color:
-                    activeIdx === i
-                      ? "rgba(230,215,250,0.85)"
-                      : "rgba(195,175,228,0.55)",
-                  transition: "color 0.5s ease",
-                }}
-              >
-                {exp.company}
-              </div>
-              <div
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "0.9rem",
-                  color: "rgba(180,165,215,0.5)",
-                  marginTop: 2,
-                }}
-              >
-                {exp.period}
-              </div>
-            </button>
-          ))}
-        </div>
-
-        {/* Active company card */}
-        <div
-          className="mt-8 transition-all duration-500"
-          style={{
-            opacity: cardFade ? 0 : phase >= 2 ? 1 : 0,
-            transform: cardFade ? "translateY(12px)" : "translateY(0)",
-          }}
-        >
-          <div
-            className="p-7 rounded-2xl transition-all duration-500"
-            style={{
-              background: "rgba(150,80,220,0.02)",
-              border: "1px solid rgba(155,90,215,0.08)",
-            }}
+      <div className="relative z-10 py-20 px-8">
+        <div className="w-full max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-16 text-center"
           >
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
-              <div>
-                <h3
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "1.5rem",
-                    fontWeight: 500,
-                    color: "rgba(230,210,248,0.85)",
-                  }}
-                >
-                  {active.role}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: "0.95rem",
-                    color: "rgba(195,170,225,0.6)",
-                    marginTop: 4,
-                  }}
-                >
-                  {active.company} &middot; {active.location}
-                </p>
-              </div>
-              <span
-                style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: "1.15rem",
-                  color: "rgba(200,170,230,0.6)",
-                  letterSpacing: "0.05em",
-                  flexShrink: 0,
-                }}
-              >
-                {active.period}
-              </span>
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent">
+              Experience
+            </h1>
+            <p className="text-purple-200/70 text-lg">3+ years bridging strategy and engineering</p>
+          </motion.div>
+
+          <div className="relative">
+            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5">
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-500/40 via-pink-500/40 to-blue-500/40" />
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-b from-purple-400/60 via-pink-400/60 to-transparent"
+                animate={{ scaleY: [0, 1] }}
+                transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
+                style={{ transformOrigin: "top" }}
+              />
             </div>
 
-            {/* Highlights */}
-            <div className="mt-6 space-y-3">
-              {active.highlights.map((h, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <span
-                    style={{
-                      color: "rgba(180,140,235,0.6)",
-                      fontSize: "0.6rem",
-                      marginTop: 6,
-                      flexShrink: 0,
-                    }}
-                  >
-                    &#9670;
-                  </span>
-                  <p
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: "0.95rem",
-                      lineHeight: 1.7,
-                      color: "rgba(210,195,235,0.68)",
-                      fontWeight: 300,
-                    }}
-                  >
-                    {h}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <div className="space-y-16">
+              {EXPERIENCE.map((job, index) => {
+                const isLeft = index % 2 === 0;
+                const isHotel = job.theme === "hotel";
+                const isConstellation = job.theme === "constellation";
 
-            {/* Notable project */}
-            {active.notableProject && (
-              <div
-                className="mt-6 p-4 rounded-xl"
-                style={{
-                  background: "rgba(150,80,220,0.03)",
-                  border: "1px solid rgba(155,90,215,0.06)",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: "0.9rem",
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    color: "rgba(180,150,225,0.55)",
-                  }}
-                >
-                  Notable Project
-                </p>
-                <h4
-                  className="mt-2"
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "1.15rem",
-                    fontWeight: 500,
-                    color: "rgba(220,200,245,0.75)",
-                  }}
-                >
-                  {active.notableProject.name}
-                </h4>
-                <p
-                  className="mt-1"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.65,
-                    color: "rgba(195,180,225,0.62)",
-                    fontWeight: 300,
-                  }}
-                >
-                  {active.notableProject.desc}
-                </p>
-              </div>
-            )}
+                return (
+                  <motion.div
+                    key={job.company}
+                    initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.9, delay: 0.2 + index * 0.3, ease: "easeOut" }}
+                    className={`relative ${
+                      isLeft ? "md:pr-[calc(50%+2rem)]" : "md:pl-[calc(50%+2rem)]"
+                    }`}
+                  >
+                    <div className="absolute left-0 md:left-1/2 top-8 w-4 h-4 rounded-full bg-purple-400 -translate-x-[7px] md:-translate-x-1/2 z-20">
+                      <motion.div
+                        className="absolute inset-0 rounded-full bg-purple-300"
+                        animate={{ scale: [1, 1.5, 1], opacity: [0.75, 0, 0.75] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                    </div>
 
-            {/* Tech chips */}
-            <div className="mt-5 flex flex-wrap gap-2">
-              {active.techUsed.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 rounded-full transition-all duration-500 cursor-default"
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: "1rem",
-                    color: "rgba(180,155,225,0.58)",
-                    background: "rgba(150,80,220,0.03)",
-                    border: "1px solid rgba(155,90,215,0.06)",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.borderColor = "rgba(175,120,235,0.22)";
-                    el.style.color = "rgba(220,205,248,0.75)";
-                    el.style.background = "rgba(150,80,220,0.08)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.borderColor = "rgba(155,90,215,0.06)";
-                    el.style.color = "rgba(180,155,225,0.58)";
-                    el.style.background = "rgba(150,80,220,0.03)";
-                  }}
-                >
-                  {tech}
-                </span>
-              ))}
+                    <GlassCard depth="mid" className="relative overflow-hidden">
+                      {isHotel && (
+                        <>
+                          <div className="absolute bottom-0 right-0 w-48 h-64 opacity-10 pointer-events-none">
+                            <svg viewBox="0 0 100 150" className="w-full h-full">
+                              <rect x="10" y="40" width="80" height="110" fill="rgba(200, 180, 220, 0.6)" />
+                              {Array.from({ length: 6 }).map((_, row) =>
+                                Array.from({ length: 4 }).map((_, col) => (
+                                  <rect
+                                    key={`${row}-${col}`}
+                                    x={20 + col * 15}
+                                    y={50 + row * 15}
+                                    width="8"
+                                    height="10"
+                                    fill="rgba(255, 220, 150, 0.4)"
+                                  />
+                                ))
+                              )}
+                              <rect x="40" y="130" width="20" height="20" fill="rgba(255, 220, 150, 0.5)" />
+                            </svg>
+                          </div>
+                          {[0, 1, 2].map((i) => (
+                            <motion.div
+                              key={`ui-${i}`}
+                              className="absolute w-16 h-12 rounded border border-purple-300/20 bg-purple-500/10"
+                              animate={{
+                                opacity: [0.2, 0.4, 0.2],
+                                y: [0, -15, 0],
+                                x: [0, i % 2 === 0 ? 5 : -5, 0],
+                              }}
+                              transition={{ duration: 4 + i, repeat: Infinity, delay: i * 0.6 }}
+                              style={{ right: `${10 + i * 15}%`, top: `${20 + i * 20}%` }}
+                            >
+                              <div className="p-2 space-y-1">
+                                <div className="h-1 bg-purple-300/30 rounded w-3/4" />
+                                <div className="h-1 bg-purple-300/20 rounded w-1/2" />
+                              </div>
+                            </motion.div>
+                          ))}
+                        </>
+                      )}
+
+                      {isConstellation && (
+                        <>
+                          <svg className="absolute inset-0 w-full h-full opacity-15 pointer-events-none" viewBox="0 0 200 200">
+                            {[[30, 40], [60, 30], [90, 50], [120, 35], [150, 55], [50, 90], [100, 100], [140, 110], [70, 140], [130, 150]].map(([x, y], i) => (
+                              <motion.circle
+                                key={i}
+                                cx={x}
+                                cy={y}
+                                r="2"
+                                fill="rgba(200, 180, 240, 0.8)"
+                                animate={{ opacity: [0.3, 0.9, 0.3] }}
+                                transition={{ duration: 2 + i * 0.3, repeat: Infinity, delay: i * 0.2 }}
+                              />
+                            ))}
+                            <motion.path
+                              d="M 30 40 L 60 30 L 90 50 L 120 35 L 150 55"
+                              stroke="rgba(200, 180, 240, 0.4)"
+                              strokeWidth="1"
+                              fill="none"
+                              initial={{ pathLength: 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ duration: 3, delay: 0.5 + index * 0.3 }}
+                            />
+                            <motion.path
+                              d="M 50 90 L 100 100 L 140 110"
+                              stroke="rgba(200, 180, 240, 0.4)"
+                              strokeWidth="1"
+                              fill="none"
+                              initial={{ pathLength: 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ duration: 3, delay: 0.8 + index * 0.3 }}
+                            />
+                          </svg>
+                          {["♈", "♉", "♊"].map((symbol, i) => (
+                            <motion.div
+                              key={`zodiac-${i}`}
+                              className="absolute text-2xl text-purple-300/30"
+                              animate={{
+                                opacity: [0.2, 0.5, 0.2],
+                                y: [0, -20, 0],
+                                rotate: [0, 360],
+                              }}
+                              transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 0.8 }}
+                              style={{ left: `${15 + i * 25}%`, top: `${15 + i * 20}%` }}
+                            >
+                              {symbol}
+                            </motion.div>
+                          ))}
+                        </>
+                      )}
+
+                      <div className="relative p-8 z-10">
+                        <div className={`flex items-center gap-4 mb-6 ${isLeft ? "md:flex-row-reverse" : ""}`}>
+                          <motion.div
+                            className={`flex-1 h-0.5 bg-gradient-to-${isLeft ? "l" : "r"} from-purple-500/50 to-transparent`}
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ duration: 0.8, delay: 0.4 + index * 0.3 }}
+                            style={{ transformOrigin: isLeft ? "right" : "left" }}
+                          />
+                          <h2 className="text-2xl font-bold text-purple-100 whitespace-nowrap">
+                            {job.company}
+                          </h2>
+                        </div>
+
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.5 + index * 0.3 }}
+                          className="mb-6"
+                        >
+                          <h3 className="text-xl font-semibold text-purple-200 mb-2">{job.role}</h3>
+                          <div className="flex items-center gap-4 text-sm text-purple-300/70 flex-wrap">
+                            <span>{job.location}</span>
+                            <span>•</span>
+                            <span>{job.period}</span>
+                          </div>
+                        </motion.div>
+
+                        <div className="space-y-3 mb-6">
+                          {job.highlights.map((highlight, i) => (
+                            <motion.div
+                              key={i}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5, delay: 0.6 + index * 0.3 + i * 0.1 }}
+                              className="flex items-start gap-3"
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                              <p className="text-purple-200/80 text-sm leading-relaxed">{highlight}</p>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {job.techUsed.map((tech, i) => (
+                            <motion.span
+                              key={tech}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              whileHover={{ scale: 1.05, y: -2 }}
+                              transition={{ duration: 0.3, delay: 0.8 + index * 0.3 + i * 0.05 }}
+                              className="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-300/20 text-xs text-purple-200/90 cursor-default"
+                            >
+                              {tech}
+                            </motion.span>
+                          ))}
+                        </div>
+
+                        {job.notableProject && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 1 + index * 0.3 }}
+                            className="pt-6 border-t border-purple-300/10"
+                          >
+                            <div className="flex items-center gap-2 mb-2">
+                              <div className="w-1 h-4 rounded-full bg-gradient-to-b from-pink-400 to-purple-400" />
+                              <h4 className="text-sm font-semibold text-pink-200">
+                                Notable: {job.notableProject.name}
+                              </h4>
+                            </div>
+                            <p className="text-purple-200/70 text-xs">{job.notableProject.desc}</p>
+                          </motion.div>
+                        )}
+                      </div>
+                    </GlassCard>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
-        </div>
-
-        {/* Navigate */}
-        <div className="mt-12 flex items-center gap-4">
-          <NavigateButton
-            label="Back"
-            onClick={onBack}
-            direction="back"
-            visible={phase >= 3}
-          />
-          <NavigateButton
-            label="Continue to Projects"
-            onClick={handleContinue}
-            visible={phase >= 3}
-          />
         </div>
       </div>
     </div>

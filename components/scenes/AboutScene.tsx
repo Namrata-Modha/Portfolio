@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { usePhase } from "@/lib/usePhase";
 import { ABOUT } from "@/lib/data";
 import { SectionLabel, NavigateButton } from "@/components/ui";
-import SceneBackground from "@/components/visuals/SceneBackground";
+import DepthEnvironment from "@/components/visuals/DepthEnvironment";
+import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 
 interface AboutSceneProps {
   onBack: () => void;
@@ -14,11 +15,24 @@ interface AboutSceneProps {
 export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
   const [entered, setEntered] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  const phase = usePhase([600, 1100, 1600, 2100]);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const [portraitHover, setPortraitHover] = useState(false);
+  const phase = usePhase([600, 1100, 1600, 2100, 2600]);
 
   useEffect(() => {
     const t = setTimeout(() => setEntered(true), 150);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const handleContinue = () => {
@@ -26,111 +40,135 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
     setTimeout(onContinue, 1200);
   };
 
+  // Portrait parallax effect
+  const portraitParallax = {
+    x: (mousePos.x - 0.5) * 20,
+    y: (mousePos.y - 0.5) * 20,
+  };
+
   return (
     <div
-      className="relative min-h-screen overflow-hidden flex items-center"
+      className="relative min-h-screen overflow-hidden"
       style={{
         opacity: entered && !leaving ? 1 : 0,
         transition: "opacity 1.2s ease-out",
       }}
     >
-      <SceneBackground
-        gradient="linear-gradient(170deg,#100a28 0%,#1c1450 22%,#241858 40%,#201448 58%,#18103e 75%,#0e0a28 90%,#060418 100%)"
-        bokehCount={22}
-        dustCount={45}
-        petalCount={14}
-        sparkleCount={12}
-        glows={[
-          { size: 400, x: "8%", y: "25%", intensity: 0.8 },
-          { size: 300, x: "90%", y: "60%", intensity: 0.6 },
-        ]}
-      />
+      {/* ENVIRONMENTAL LAYERS */}
+      <DepthEnvironment scene="about" />
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 py-16 md:pt-24 md:pb-12">
+      {/* MAIN CONTENT LAYER */}
+      <div className="relative z-20 w-full max-w-6xl mx-auto px-6 md:px-12 py-16 md:pt-24 md:pb-12">
         <SectionLabel index="01" label="About" visible={phase >= 1} />
 
-        {/* Heading + Photo */}
-        <div className="mt-7 flex flex-col md:flex-row md:items-center md:gap-12">
+        {/* HEADING + PORTRAIT */}
+        <div className="mt-10 flex flex-col md:flex-row md:items-start md:gap-16">
+          {/* Text content */}
           <div
-            className="flex-1"
+            className="flex-1 relative z-10"
             style={{
               opacity: phase >= 1 ? 1 : 0,
-              transform: phase >= 1 ? "translateY(0)" : "translateY(22px)",
-              transition: "all 1.1s cubic-bezier(0.16,1,0.3,1) 0.15s",
+              transform: phase >= 1 ? "translateY(0)" : "translateY(30px)",
+              transition: "all 1.2s cubic-bezier(0.16,1,0.3,1) 0.15s",
             }}
           >
             <h2
               style={{
                 fontFamily: "'Cormorant Garamond', Garamond, serif",
-                fontSize: "clamp(2.5rem, 6vw, 4rem)",
-                fontWeight: 400,
-                lineHeight: 1.1,
+                fontSize: "clamp(2.8rem, 6.5vw, 4.5rem)",
+                fontWeight: 300,
+                lineHeight: 1.05,
                 background:
-                  "linear-gradient(150deg, rgba(255,248,255,0.94) 0%, rgba(220,195,248,0.87) 40%, rgba(190,155,230,0.78) 100%)",
+                  "linear-gradient(160deg, rgba(255,250,255,0.98) 0%, rgba(230,210,255,0.92) 35%, rgba(200,170,245,0.85) 70%, rgba(180,150,235,0.78) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                textShadow: "0 0 80px rgba(200, 170, 240, 0.3)",
               }}
             >
               Hey, I&apos;m Namrata.
             </h2>
             <p
-              className="mt-4"
+              className="mt-5"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                fontSize: "clamp(1rem, 1.9vw, 1.2rem)",
-                lineHeight: 1.85,
-                color: "rgba(220,210,242,0.72)",
-                maxWidth: 580,
+                fontSize: "clamp(1.05rem, 2vw, 1.3rem)",
+                lineHeight: 1.9,
+                color: "rgba(230,220,250,0.8)",
+                maxWidth: 620,
                 fontWeight: 300,
+                textShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
               }}
             >
               Software engineer who builds things that work, and occasionally things that make
               people go{" "}
               <span
                 style={{
-                  color: "rgba(200,160,240,0.82)",
+                  color: "rgba(220,180,255,0.9)",
                   fontStyle: "italic",
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.05em",
+                  fontSize: "1.1em",
                 }}
               >
                 &ldquo;wait, that&apos;s cool.&rdquo;
               </span>{" "}
-              Fueled by K-drama marathons and too many cups of latt&egrave;. Built across India and Canada:
+              Fueled by K-drama marathons and too many cups of lattè. Built across India and Canada:
               systems, teams, and time zones.
             </p>
           </div>
 
-          {/* Portrait with anime effects */}
+          {/* Portrait - IN THE ENVIRONMENT */}
           <div
-            className="mt-8 md:mt-0 flex-shrink-0"
+            className="mt-10 md:mt-0 flex-shrink-0 relative"
             style={{
               opacity: phase >= 1 ? 1 : 0,
-              transform: phase >= 1 ? "translateY(0) scale(1)" : "translateY(18px) scale(0.97)",
-              transition: "all 1.3s cubic-bezier(0.16,1,0.3,1) 0.4s",
+              transform: phase >= 1 
+                ? `translateY(0) scale(1)` 
+                : `translateY(25px) scale(0.96)`,
+              transition: "all 1.4s cubic-bezier(0.16,1,0.3,1) 0.5s",
             }}
           >
             <div
-              className="relative mx-auto md:mx-0"
+              className="relative"
               style={{
-                width: "clamp(200px, 22vw, 260px)",
-                height: "clamp(250px, 28vw, 330px)",
+                width: "clamp(220px, 24vw, 300px)",
+                height: "clamp(280px, 32vw, 380px)",
               }}
+              onMouseEnter={() => setPortraitHover(true)}
+              onMouseLeave={() => setPortraitHover(false)}
             >
-              {/* Outer pulsing aura */}
+              {/* Outer energy field */}
               <div
                 className="absolute pointer-events-none"
                 style={{
-                  inset: "-18%",
-                  borderRadius: "32% 68% 55% 45% / 40% 45% 55% 60%",
-                  background: "radial-gradient(ellipse, rgba(150,80,220,0.12) 0%, rgba(150,80,220,0.04) 45%, transparent 70%)",
+                  inset: "-25%",
+                  borderRadius: "40% 60% 65% 35% / 45% 50% 50% 55%",
+                  background: portraitHover
+                    ? "radial-gradient(ellipse, rgba(200, 140, 255, 0.25) 0%, rgba(170, 110, 240, 0.12) 40%, transparent 65%)"
+                    : "radial-gradient(ellipse, rgba(170, 110, 240, 0.15) 0%, rgba(150, 90, 220, 0.08) 40%, transparent 65%)",
+                  filter: "blur(20px)",
                   animation: "portraitAura 4s ease-in-out infinite",
-                  filter: "blur(12px)",
+                  transform: `translate(${portraitParallax.x * 0.3}px, ${portraitParallax.y * 0.3}px)`,
+                  transition: "all 0.6s cubic-bezier(0.16,1,0.3,1)",
                 }}
               />
 
-              {/* Orbiting sparkle ring */}
-              {[0, 1, 2, 3, 4, 5].map((i) => (
+              {/* Mid-layer glow */}
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  inset: "-15%",
+                  borderRadius: "45% 55% 60% 40% / 40% 45% 55% 60%",
+                  background: portraitHover
+                    ? "radial-gradient(ellipse, rgba(220, 170, 255, 0.18) 0%, transparent 60%)"
+                    : "radial-gradient(ellipse, rgba(180, 130, 240, 0.12) 0%, transparent 60%)",
+                  filter: "blur(15px)",
+                  transform: `translate(${portraitParallax.x * 0.5}px, ${portraitParallax.y * 0.5}px) scale(${portraitHover ? 1.08 : 1})`,
+                  transition: "all 0.5s cubic-bezier(0.16,1,0.3,1)",
+                }}
+              />
+
+              {/* Orbiting light particles */}
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
                 <div
                   key={`orbit-${i}`}
                   className="absolute pointer-events-none"
@@ -139,49 +177,54 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
                     height: "100%",
                     top: 0,
                     left: 0,
-                    animation: `portraitOrbit ${12 + i * 2}s linear ${i * 1.5}s infinite`,
+                    animation: `portraitOrbit ${14 + i * 2.5}s linear ${i * 2}s infinite`,
+                    opacity: portraitHover ? 1 : 0.7,
+                    transition: "opacity 0.5s ease",
                   }}
                 >
                   <div
                     style={{
                       position: "absolute",
-                      top: i % 2 === 0 ? "-6px" : "auto",
-                      bottom: i % 2 !== 0 ? "-6px" : "auto",
-                      left: `${15 + i * 12}%`,
-                      width: i % 3 === 0 ? 5 : 3,
-                      height: i % 3 === 0 ? 5 : 3,
+                      top: i % 2 === 0 ? "-8px" : "auto",
+                      bottom: i % 2 !== 0 ? "-8px" : "auto",
+                      left: `${10 + i * 12}%`,
+                      width: portraitHover ? 7 : 5,
+                      height: portraitHover ? 7 : 5,
                       borderRadius: "50%",
                       background: i % 2 === 0
-                        ? "rgba(255,225,195,0.9)"
-                        : "rgba(210,180,255,0.9)",
-                      boxShadow: `0 0 ${8 + i * 2}px ${i % 2 === 0 ? "rgba(255,220,180,0.5)" : "rgba(190,160,240,0.5)"}`,
+                        ? "rgba(255,235,210,0.95)"
+                        : "rgba(230,200,255,0.95)",
+                      boxShadow: `0 0 ${12 + i * 3}px ${i % 2 === 0 ? "rgba(255,230,200,0.6)" : "rgba(210,180,255,0.6)"}`,
+                      transition: "all 0.3s ease",
                     }}
                   />
                 </div>
               ))}
 
-              {/* Floating anime sparkles around the photo */}
-              {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+              {/* Anime sparkles */}
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
                 <div
                   key={`sparkle-${i}`}
                   className="absolute pointer-events-none"
                   style={{
-                    left: `${["-8%", "95%", "50%", "-12%", "102%", "30%", "80%", "10%"][i]}`,
-                    top: `${["20%", "35%", "-6%", "65%", "70%", "105%", "10%", "90%"][i]}`,
-                    width: [8, 6, 10, 5, 7, 6, 8, 5][i],
-                    height: [8, 6, 10, 5, 7, 6, 8, 5][i],
-                    animation: `sparkleFlash ${[2.5, 3.2, 2.8, 3.5, 2.2, 3.8, 2.6, 3.1][i]}s ease-in-out ${[0, 1.2, 0.5, 2.1, 0.8, 1.5, 1.8, 0.3][i]}s infinite`,
+                    left: `${["-10%", "98%", "45%", "-15%", "105%", "25%", "85%", "8%", "55%", "-8%"][i]}`,
+                    top: `${["18%", "32%", "-8%", "68%", "75%", "108%", "8%", "92%", "50%", "40%"][i]}`,
+                    width: portraitHover ? [10, 8, 12, 7, 9, 8, 10, 7, 11, 8][i] : [8, 6, 10, 5, 7, 6, 8, 5, 9, 6][i],
+                    height: portraitHover ? [10, 8, 12, 7, 9, 8, 10, 7, 11, 8][i] : [8, 6, 10, 5, 7, 6, 8, 5, 9, 6][i],
+                    animation: `sparkleFlash ${[2.3, 3.5, 2.6, 3.8, 2.1, 4.0, 2.5, 3.3, 2.8, 3.1][i]}s ease-in-out ${[0, 1.3, 0.4, 2.3, 0.7, 1.6, 2.0, 0.2, 1.0, 1.8][i]}s infinite`,
+                    transition: "all 0.3s ease",
                   }}
                 >
+                  {/* Four-pointed star */}
                   <div
                     className="absolute"
                     style={{
                       left: "50%",
                       top: 0,
-                      width: 1,
+                      width: 1.5,
                       height: "100%",
                       transform: "translateX(-50%)",
-                      background: `linear-gradient(to bottom, transparent, ${i % 2 === 0 ? "rgba(255,225,195,0.9)" : "rgba(210,180,255,0.9)"} 50%, transparent)`,
+                      background: `linear-gradient(to bottom, transparent, ${i % 2 === 0 ? "rgba(255,235,210,0.95)" : "rgba(230,200,255,0.95)"} 50%, transparent)`,
                     }}
                   />
                   <div
@@ -189,56 +232,43 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
                     style={{
                       top: "50%",
                       left: 0,
-                      height: 1,
+                      height: 1.5,
                       width: "100%",
                       transform: "translateY(-50%)",
-                      background: `linear-gradient(to right, transparent, ${i % 2 === 0 ? "rgba(255,225,195,0.9)" : "rgba(210,180,255,0.9)"} 50%, transparent)`,
+                      background: `linear-gradient(to right, transparent, ${i % 2 === 0 ? "rgba(255,235,210,0.95)" : "rgba(230,200,255,0.95)"} 50%, transparent)`,
                     }}
                   />
                   <div
                     className="absolute rounded-full"
                     style={{
-                      width: 2,
-                      height: 2,
+                      width: 3,
+                      height: 3,
                       top: "50%",
                       left: "50%",
                       transform: "translate(-50%,-50%)",
-                      background: i % 2 === 0 ? "rgba(255,240,220,1)" : "rgba(230,210,255,1)",
+                      background: i % 2 === 0 ? "rgba(255,250,230,1)" : "rgba(240,220,255,1)",
                     }}
                   />
                 </div>
               ))}
 
-              {/* Floating dust motes */}
-              {[0, 1, 2, 3, 4].map((i) => (
-                <div
-                  key={`dust-${i}`}
-                  className="absolute pointer-events-none rounded-full"
-                  style={{
-                    left: `${[-5, 105, 50, -10, 95][i]}%`,
-                    top: `${[30, 50, 110, 80, 15][i]}%`,
-                    width: [2, 2.5, 1.5, 2, 1.5][i],
-                    height: [2, 2.5, 1.5, 2, 1.5][i],
-                    background: i % 2 === 0
-                      ? "rgba(250,220,180,0.6)"
-                      : "rgba(200,175,240,0.6)",
-                    boxShadow: `0 0 6px ${i % 2 === 0 ? "rgba(250,220,180,0.3)" : "rgba(190,160,235,0.3)"}`,
-                    animation: `dustDrift${i % 3} ${14 + i * 3}s ease-in-out ${i * 2}s infinite alternate`,
-                  }}
-                />
-              ))}
-
-              {/* Photo frame */}
+              {/* Glass frame container */}
               <div
                 className="relative w-full h-full"
                 style={{
-                  borderRadius: "32% 68% 55% 45% / 40% 45% 55% 60%",
+                  borderRadius: "35% 65% 60% 40% / 45% 50% 50% 55%",
                   overflow: "hidden",
-                  border: "1.5px solid rgba(175,115,235,0.2)",
-                  boxShadow: "0 0 40px rgba(150,80,220,0.15), 0 0 80px rgba(150,80,220,0.08), inset 0 0 30px rgba(150,80,220,0.05)",
-                  animation: "monumentFloat 8s ease-in-out infinite alternate",
+                  transform: `
+                    translate(${portraitParallax.x}px, ${portraitParallax.y}px)
+                    scale(${portraitHover ? 1.02 : 1})
+                  `,
+                  transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+                  boxShadow: portraitHover
+                    ? "0 0 60px rgba(200, 160, 255, 0.4), 0 0 120px rgba(180, 130, 240, 0.2), inset 0 0 40px rgba(200, 170, 255, 0.15)"
+                    : "0 0 50px rgba(180, 140, 240, 0.25), 0 0 100px rgba(160, 110, 230, 0.12), inset 0 0 30px rgba(180, 150, 240, 0.1)",
                 }}
               >
+                {/* Portrait image */}
                 <img
                   src="/namrata.jpg"
                   alt="Namrata Modha"
@@ -246,31 +276,44 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center 20%",
-                    filter: "brightness(0.9) contrast(1.08) saturate(0.85)",
+                    objectPosition: "center 25%",
+                    filter: "brightness(0.92) contrast(1.12) saturate(0.88)",
                   }}
                 />
-                {/* Purple color blend */}
+
+                {/* Glass overlay with depth */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: "linear-gradient(170deg, rgba(150,80,220,0.06) 0%, rgba(100,50,180,0.12) 100%)",
+                    background: "linear-gradient(170deg, rgba(180, 130, 240, 0.08) 0%, rgba(140, 80, 220, 0.15) 100%)",
                     mixBlendMode: "color",
                   }}
                 />
-                {/* Vignette */}
+
+                {/* Atmospheric vignette */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: "radial-gradient(ellipse at 50% 30%, transparent 45%, rgba(16,10,40,0.45) 100%)",
+                    background: "radial-gradient(ellipse at 50% 35%, transparent 40%, rgba(16, 10, 40, 0.5) 100%)",
                   }}
                 />
+
                 {/* Anime light streak */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: "linear-gradient(135deg, transparent 30%, rgba(220,200,255,0.06) 45%, transparent 60%)",
-                    animation: "portraitSheen 6s ease-in-out 2s infinite",
+                    background: "linear-gradient(135deg, transparent 35%, rgba(240, 220, 255, 0.08) 48%, transparent 62%)",
+                    animation: "portraitSheen 7s ease-in-out 2.5s infinite",
+                  }}
+                />
+
+                {/* Edge light refraction */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    border: "2px solid rgba(220, 190, 255, 0.3)",
+                    borderRadius: "35% 65% 60% 40% / 45% 50% 50% 55%",
+                    boxShadow: "inset 0 0 20px rgba(200, 170, 255, 0.2)",
                   }}
                 />
               </div>
@@ -278,143 +321,101 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
           </div>
         </div>
 
-        {/* Highlight cards */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* HIGHLIGHT CARDS WITH GLASS MATERIAL */}
+        <div
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5"
+          style={{
+            opacity: phase >= 2 ? 1 : 0,
+            transform: phase >= 2 ? "translateY(0)" : "translateY(30px)",
+            transition: "all 1.1s cubic-bezier(0.16,1,0.3,1) 0.2s",
+          }}
+        >
           {ABOUT.highlights.map((h, i) => (
-            <div
+            <GlassCard
               key={i}
-              className="relative p-6 rounded-2xl overflow-hidden transition-all duration-700 cursor-default"
-              style={{
-                background: "rgba(150,80,220,0.02)",
-                border: "1px solid rgba(155,90,215,0.08)",
-                backdropFilter: "blur(6px)",
-                opacity: phase >= 2 ? 1 : 0,
-                transform: phase >= 2 ? "translateY(0)" : "translateY(25px)",
-                transition: `all 1s cubic-bezier(0.16,1,0.3,1) ${0.1 + i * 0.15}s`,
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "rgba(150,80,220,0.07)";
-                el.style.borderColor = "rgba(175,115,235,0.2)";
-                el.style.transform = "translateY(-5px)";
-                el.style.boxShadow = "0 18px 55px rgba(150,80,220,0.08)";
-                const accent = el.querySelector<HTMLElement>(".card-accent");
-                if (accent) accent.style.opacity = "1";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "rgba(150,80,220,0.02)";
-                el.style.borderColor = "rgba(155,90,215,0.08)";
-                el.style.transform = "translateY(0)";
-                el.style.boxShadow = "none";
-                const accent = el.querySelector<HTMLElement>(".card-accent");
-                if (accent) accent.style.opacity = "0";
-              }}
+              depth="mid"
+              variant="default"
+              className="p-7 transition-all duration-700 cursor-default hover:translate-y-[-6px]"
             >
-              <div
-                className="card-accent absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at 50% 0%, rgba(160,95,225,0.06) 0%, transparent 65%)",
-                  opacity: 0,
-                  transition: "opacity 0.6s ease",
-                }}
-              />
-              <span style={{ fontSize: "1.5rem" }}>{h.icon}</span>
+              <span style={{ fontSize: "1.6rem" }}>{h.icon}</span>
               <h3
-                className="mt-3 relative z-10"
+                className="mt-4"
                 style={{
                   fontFamily: "'Space Mono', monospace",
-                  fontSize: "1rem",
+                  fontSize: "1.05rem",
                   letterSpacing: "0.05em",
-                  color: "rgba(225,205,250,0.88)",
+                  color: "rgba(235,220,255,0.92)",
                   fontWeight: 400,
+                  textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
                 }}
               >
                 {h.title}
               </h3>
               <p
-                className="mt-2.5 relative z-10"
+                className="mt-3"
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "0.9rem",
-                  lineHeight: 1.7,
-                  color: "rgba(200,185,228,0.65)",
+                  fontSize: "0.95rem",
+                  lineHeight: 1.75,
+                  color: "rgba(215,200,240,0.75)",
                   fontWeight: 300,
                 }}
               >
                 {h.desc}
               </p>
-            </div>
+            </GlassCard>
           ))}
         </div>
 
-        {/* Tech stack chips */}
+        {/* TECH STACK CHIPS */}
         <div
-          className="mt-9 flex flex-wrap gap-2"
+          className="mt-10 flex flex-wrap gap-3"
           style={{
             opacity: phase >= 3 ? 1 : 0,
-            transform: phase >= 3 ? "translateY(0)" : "translateY(10px)",
-            transition: "all 0.9s cubic-bezier(0.16,1,0.3,1)",
+            transform: phase >= 3 ? "translateY(0)" : "translateY(12px)",
+            transition: "all 1s cubic-bezier(0.16,1,0.3,1) 0.1s",
           }}
         >
           {ABOUT.techStack.map((tech, i) => (
-            <span
+            <GlassChip
               key={tech}
-              className="px-3 py-1.5 rounded-full transition-all duration-500 cursor-default"
-              style={{
-                fontFamily: "'Space Mono', monospace",
-                fontSize: "0.9rem",
-                letterSpacing: "0.05em",
-                color: "rgba(190,162,232,0.58)",
-                background: "rgba(150,80,220,0.03)",
-                border: "1px solid rgba(155,90,215,0.07)",
-                opacity: phase >= 3 ? 1 : 0,
-                animation: phase >= 3 ? `tagFloat 0.6s ease-out ${i * 0.05}s both` : "none",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.borderColor = "rgba(180,125,240,0.28)";
-                el.style.color = "rgba(225,210,250,0.78)";
-                el.style.background = "rgba(150,80,220,0.1)";
-                el.style.boxShadow = "0 0 16px rgba(150,80,220,0.08)";
-                el.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.borderColor = "rgba(155,90,215,0.07)";
-                el.style.color = "rgba(190,162,232,0.58)";
-                el.style.background = "rgba(150,80,220,0.03)";
-                el.style.boxShadow = "none";
-                el.style.transform = "translateY(0)";
-              }}
+              className="px-4 py-2 transition-all duration-500 cursor-default hover:translate-y-[-2px]"
             >
-              {tech}
-            </span>
+              <span
+                style={{
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: "0.95rem",
+                  letterSpacing: "0.05em",
+                  color: "rgba(220,200,250,0.8)",
+                }}
+              >
+                {tech}
+              </span>
+            </GlassChip>
           ))}
         </div>
 
-        {/* Flourish divider */}
+        {/* FLOURISH DIVIDER */}
         <div
-          className="mt-10 flex items-center gap-4"
+          className="mt-12 flex items-center gap-5"
           style={{
             opacity: phase >= 4 ? 1 : 0,
-            transition: "all 1.2s ease-out 0.3s",
+            transition: "all 1.3s ease-out 0.4s",
           }}
         >
           <div
             className="h-px flex-1"
             style={{
-              background: "linear-gradient(to right, transparent, rgba(155,90,215,0.12), transparent)",
+              background: "linear-gradient(to right, transparent, rgba(200, 170, 250, 0.2), transparent)",
             }}
           />
           <span
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1rem",
+              fontSize: "1.05rem",
               fontStyle: "italic",
-              letterSpacing: "0.15em",
-              color: "rgba(195,162,235,0.38)",
+              letterSpacing: "0.18em",
+              color: "rgba(210,180,245,0.5)",
             }}
           >
             {ABOUT.flourish}
@@ -422,13 +423,13 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
           <div
             className="h-px flex-1"
             style={{
-              background: "linear-gradient(to right, transparent, rgba(155,90,215,0.12), transparent)",
+              background: "linear-gradient(to right, transparent, rgba(200, 170, 250, 0.2), transparent)",
             }}
           />
         </div>
 
-        {/* Navigate */}
-        <div className="mt-10 flex items-center gap-4">
+        {/* NAVIGATION */}
+        <div className="mt-12 flex items-center gap-5">
           <NavigateButton
             label="Back"
             onClick={onBack}

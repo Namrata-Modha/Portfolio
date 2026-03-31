@@ -2,8 +2,8 @@
 
 export const PERSONAL = {
   name: "Namrata Modha",
-  tagline: "Developer | Builder | Dreamer",
-  subtitle: "a journey through code and wonder",
+  tagline: "Technical BA | Systems Architect | Developer",
+  subtitle: "bridging strategy and engineering",
   email: "namratamodha3@gmail.com",
   phone: "548-881-3098",
   github: "https://github.com/Namrata-Modha",
@@ -13,41 +13,40 @@ export const PERSONAL = {
 
 export const ABOUT = {
   greeting: "Hey, I'm Namrata.",
-  bio: 'Software engineer who builds things that work, and occasionally things that make people go "wait, that\'s cool." Fueled by K-drama marathons and too many cups of lattè. Built across India and Canada: systems, teams, and time zones.',
+  bio: 'Technical Business Analyst who translates business strategy into engineered solutions. I bridge the gap between "what stakeholders need" and "what engineering builds" - requirements analysis, system architecture, and hands-on development. Built across India and Canada, fueled by lattè and K-drama marathons.',
   highlights: [
     {
       icon: "⚡",
-      title: "Full-Stack Builder",
-      desc: "3+ years shipping scalable web apps: Laravel, React, Vue.js, Node.js. REST APIs and microservices handling 200k+ daily records.",
+      title: "Technical BA + Engineer",
+      desc: "3+ years bridging business and tech. Requirements translation, gap analysis, NFRs, system design. Then I build it: Laravel, React, Vue.js, Node.js, REST APIs.",
     },
     {
-      icon: "☁️",
-      title: "Cloud & DevOps",
-      desc: "AWS Certified Cloud Practitioner. CI/CD pipelines, Docker deployments, 99.9% uptime production environments.",
+      icon: "📊",
+      title: "Systems Architecture",
+      desc: "Design decisions that scale. API standards, data flow diagrams, PIPEDA compliance. AWS/Azure cloud architecture. Release planning and dependency tracking.",
     },
     {
-      icon: "✦",
-      title: "India → Canada",
-      desc: "B.Eng in Computer Engineering from Gujarat. Postgrad at Fanshawe with a 3.97 GPA, Dean's Honor Roll. Built across continents.",
+      icon: "🎯",
+      title: "Agile Delivery",
+      desc: "Risk mitigation, cross-functional coordination, sprint facilitation. Partnered with Product Owners on 10+ client projects. Dean's Honor Roll in Business & IS Architecture (3.97 GPA).",
     },
   ],
   techStack: [
+    "Requirements Analysis",
+    "System Architecture",
+    "Agile/JIRA",
     "Laravel",
     "React",
     "Vue.js",
     "Node.js",
-    "Next.js",
     "TypeScript",
     "Python",
     "AWS",
     "Docker",
     "PostgreSQL",
-    "MySQL",
-    "MongoDB",
     "REST APIs",
-    "Redis",
   ],
-  flourish: "k-drama nights ✦ lattè mornings ✦ borahae code",
+  flourish: "strategy ✦ systems ✦ code ✦ lattè",
 };
 
 export const EDUCATION = {
