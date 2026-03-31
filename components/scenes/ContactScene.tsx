@@ -5,7 +5,12 @@ import { PERSONAL } from "@/lib/data";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
 
-export default function ContactScene() {
+interface ContactSceneProps {
+  onBack: () => void;
+  onContinue: () => void;
+}
+
+export default function ContactScene({ onBack, onContinue }: ContactSceneProps) {
   const contactMethods = [
     {
       icon: (

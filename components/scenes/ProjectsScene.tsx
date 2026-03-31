@@ -5,7 +5,12 @@ import { PROJECTS } from "@/lib/data";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
 
-export default function ProjectsScene() {
+interface ProjectsSceneProps {
+  onBack: () => void;
+  onContinue: () => void;
+}
+
+export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps) {
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
       <CinematicEnvironment scene="projects" />

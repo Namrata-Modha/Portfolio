@@ -3,9 +3,14 @@
 import { motion } from "framer-motion";
 import { EXPERIENCE } from "@/lib/data";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
-import  GlassCard  from "@/components/visuals/GlassCard";
+import GlassCard from "@/components/visuals/GlassCard";
 
-export default function ExperienceScene() {
+interface ExperienceSceneProps {
+  onBack: () => void;
+  onContinue: () => void;
+}
+
+export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneProps) {
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
       <CinematicEnvironment scene="experience" />
