@@ -60,7 +60,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
   ];
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-y-auto">
       <CinematicEnvironment scene="contact" />
 
       <motion.div
@@ -93,7 +93,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
           }}
           style={{
             left: `${8 + i * 20}%`,
-            top: `${15 + i * 12}%`,
+            top: `${40 + i * 10}%`,
             filter: "drop-shadow(0 0 30px rgba(200, 180, 240, 0.6))",
           }}
         >
@@ -103,12 +103,12 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
         </motion.div>
       ))}
 
-      <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-8 pt-32 pb-32">
-        <div className="w-full max-w-5xl">
+      <div className="relative z-10 min-h-screen overflow-y-auto pt-40 pb-32 px-4 sm:px-8">
+        <div className="w-full max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.3, y: -150 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
             className="mb-12 sm:mb-16 text-center"
           >
             <motion.h1
@@ -123,7 +123,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-purple-200/80 text-xl"
+              className="text-purple-200/80 text-base sm:text-lg lg:text-xl"
             >
               Open to new opportunities and collaborations
             </motion.p>
@@ -156,7 +156,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                 }}
               >
                 <GlassCard depth="near" className="h-full">
-                  <div className="p-10 relative overflow-hidden group">
+                  <div className="p-6 sm:p-8 lg:p-10 relative overflow-hidden group">
                     {/* EXPLOSIVE hover glow */}
                     <motion.div
                       className={`absolute inset-0 bg-gradient-to-br ${method.color}`}
@@ -167,7 +167,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
 
                     {/* MASSIVE icon with dramatic glow */}
                     <motion.div
-                      className={`inline-flex p-6 rounded-3xl bg-gradient-to-br ${method.color} mb-6 relative`}
+                      className={`inline-flex p-4 sm:p-5 lg:p-6 rounded-3xl bg-gradient-to-br ${method.color} mb-4 sm:mb-5 lg:mb-6 relative`}
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
                       whileHover={{ 
@@ -197,7 +197,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.8 + index * 0.2 }}
-                      className="text-3xl font-bold text-purple-100 mb-3 relative z-10"
+                      className="text-2xl sm:text-3xl font-bold text-purple-100 mb-2 sm:mb-3 relative z-10"
                     >
                       {method.label}
                     </motion.h3>
@@ -207,7 +207,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1 + index * 0.2 }}
-                      className="text-purple-200/80 text-lg relative z-10 break-all"
+                      className="text-purple-200/80 text-base sm:text-lg relative z-10 break-all"
                     >
                       {method.value}
                     </motion.p>

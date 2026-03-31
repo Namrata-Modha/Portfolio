@@ -59,11 +59,11 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
       <DepthEnvironment scene="about" />
 
       {/* MAIN CONTENT LAYER */}
-      <div className="relative z-20 w-full max-w-6xl mx-auto px-6 md:px-12 py-16 md:pt-24 md:pb-12">
+      <div className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:pt-24 md:pb-12">
         <SectionLabel index="01" label="About" visible={phase >= 1} />
 
         {/* HEADING + PORTRAIT */}
-        <div className="mt-10 flex flex-col md:flex-row md:items-start md:gap-16">
+        <div className="mt-8 sm:mt-10 flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
           {/* Text content */}
           <div
             className="flex-1 relative z-10"
@@ -119,7 +119,7 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
 
           {/* Portrait - IN THE ENVIRONMENT */}
           <div
-            className="mt-10 md:mt-0 flex-shrink-0 relative"
+            className="md:mt-0 flex-shrink-0 relative"
             style={{
               opacity: phase >= 1 ? 1 : 0,
               transform: phase >= 1 
@@ -324,7 +324,7 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
 
         {/* HIGHLIGHT CARDS WITH GLASS MATERIAL */}
         <div
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5"
           style={{
             opacity: phase >= 2 ? 1 : 0,
             transform: phase >= 2 ? "translateY(0)" : "translateY(30px)",
@@ -370,7 +370,7 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
 
         {/* TECH STACK CHIPS */}
         <div
-          className="mt-10 flex flex-wrap gap-3"
+          className="mt-8 sm:mt-10 flex flex-wrap gap-2 sm:gap-3"
           style={{
             opacity: phase >= 3 ? 1 : 0,
             transform: phase >= 3 ? "translateY(0)" : "translateY(12px)",

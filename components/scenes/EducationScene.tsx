@@ -8,7 +8,7 @@ import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface EducationSceneProps {
   onBack: () => void;
-  onContinue?: () => void;
+  onContinue: () => void;
 }
 
 export default function EducationScene({ onBack, onContinue }: EducationSceneProps) {
@@ -30,16 +30,16 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
         }}
       />
 
-      <div className="relative z-10 h-full flex items-center justify-center px-8 py-20">
+      <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="w-full max-w-7xl">
           <motion.div
             initial={{ opacity: 0, scale: 0.3, y: -200 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
-            className="mb-20 text-center"
+            className="mb-8 sm:mb-12 lg:mb-20 text-center"
           >
             <motion.h1
-              className="text-8xl font-bold mb-6 bg-gradient-to-r from-orange-200 via-pink-200 to-cyan-200 bg-clip-text text-transparent"
+              className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-3 sm:mb-6 bg-gradient-to-r from-orange-200 via-pink-200 to-cyan-200 bg-clip-text text-transparent"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 5, repeat: Infinity }}
               style={{ backgroundSize: "200% 200%" }}
@@ -47,7 +47,7 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
               Education
             </motion.h1>
             <motion.p
-              className="text-2xl text-purple-200/80 font-light"
+              className="text-lg sm:text-xl lg:text-2xl text-purple-200/80 font-light"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -56,7 +56,7 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
             {/* INDIA CARD */}
             <motion.div
               initial={{ opacity: 0, x: -300, rotateY: -25 }}
@@ -321,82 +321,82 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
 
                 <div className="relative z-10 p-10 h-full flex flex-col">
                   <motion.div
-                    className="flex items-center gap-4 mb-6"
+                    className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.8 }}
                   >
-                    <div className="h-16 w-2 bg-gradient-to-b from-orange-400 via-pink-400 to-orange-300 rounded-full" />
-                    <h2 className="text-5xl font-bold text-orange-100">India</h2>
+                    <div className="h-12 sm:h-16 w-2 bg-gradient-to-b from-orange-400 via-pink-400 to-orange-300 rounded-full" />
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-orange-100">India</h2>
                   </motion.div>
 
                   <motion.div
-                    className="space-y-6 flex-1"
+                    className="space-y-4 sm:space-y-6 flex-1"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}
                   >
                     <div>
-                      <h3 className="text-3xl font-bold text-white mb-2">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                         {bachelor.degree}
                       </h3>
-                      <p className="text-xl text-orange-200/90">{bachelor.field}</p>
+                      <p className="text-lg sm:text-xl text-orange-200/90">{bachelor.field}</p>
                     </div>
 
                     <div className="space-y-2">
-                      <p className="text-lg text-purple-200/80">{bachelor.school}</p>
-                      <p className="text-lg text-purple-200/70">{bachelor.location}</p>
+                      <p className="text-base sm:text-lg text-purple-200/80">{bachelor.school}</p>
+                      <p className="text-base sm:text-lg text-purple-200/70">{bachelor.location}</p>
                     </div>
 
-                    <div className="flex items-center gap-6 pt-4">
+                    <div className="flex items-center gap-4 sm:gap-6 pt-3 sm:pt-4">
                       <div>
-                        <p className="text-sm text-purple-300/70 mb-1">GPA</p>
-                        <p className="text-2xl font-bold text-orange-200">{bachelor.gpa}</p>
+                        <p className="text-xs sm:text-sm text-purple-300/70 mb-1">GPA</p>
+                        <p className="text-xl sm:text-2xl font-bold text-orange-200">{bachelor.gpa}</p>
                       </div>
-                      <div className="h-12 w-px bg-purple-300/20" />
+                      <div className="h-10 sm:h-12 w-px bg-purple-300/20" />
                       <div>
-                        <p className="text-sm text-purple-300/70 mb-1">Years</p>
-                        <p className="text-xl text-purple-200/90">{bachelor.years}</p>
+                        <p className="text-xs sm:text-sm text-purple-300/70 mb-1">Years</p>
+                        <p className="text-lg sm:text-xl text-purple-200/90">{bachelor.years}</p>
                       </div>
                     </div>
 
-                    <p className="text-sm text-purple-300/60 italic pt-2">
+                    <p className="text-xs sm:text-sm text-purple-300/60 italic pt-2">
                       {bachelor.note}
                     </p>
                   </motion.div>
 
                   {diploma && (
                     <motion.div
-                      className="mt-8 pt-6 border-t border-purple-300/20"
+                      className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-purple-300/20"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.2 }}
                     >
                       <div>
-                        <h4 className="text-3xl font-bold text-white mb-2">
+                        <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                           {diploma.degree}
                         </h4>
-                        <p className="text-xl text-orange-200/90">{diploma.field}</p>
+                        <p className="text-lg sm:text-xl text-orange-200/90">{diploma.field}</p>
                       </div>
 
-                      <div className="space-y-2 mt-4">
-                        <p className="text-lg text-purple-200/80">{diploma.school}</p>
-                        <p className="text-lg text-purple-200/70">{diploma.location}</p>
+                      <div className="space-y-2 mt-3 sm:mt-4">
+                        <p className="text-base sm:text-lg text-purple-200/80">{diploma.school}</p>
+                        <p className="text-base sm:text-lg text-purple-200/70">{diploma.location}</p>
                       </div>
 
-                      <div className="flex items-center gap-6 pt-4">
+                      <div className="flex items-center gap-4 sm:gap-6 pt-3 sm:pt-4">
                         <div>
-                          <p className="text-sm text-purple-300/70 mb-1">GPA</p>
-                          <p className="text-2xl font-bold text-orange-200">{diploma.gpa}</p>
+                          <p className="text-xs sm:text-sm text-purple-300/70 mb-1">GPA</p>
+                          <p className="text-xl sm:text-2xl font-bold text-orange-200">{diploma.gpa}</p>
                         </div>
-                        <div className="h-12 w-px bg-purple-300/20" />
+                        <div className="h-10 sm:h-12 w-px bg-purple-300/20" />
                         <div>
-                          <p className="text-sm text-purple-300/70 mb-1">Years</p>
-                          <p className="text-xl text-purple-200/90">{diploma.years}</p>
+                          <p className="text-xs sm:text-sm text-purple-300/70 mb-1">Years</p>
+                          <p className="text-lg sm:text-xl text-purple-200/90">{diploma.years}</p>
                         </div>
                       </div>
 
-                      <p className="text-sm text-purple-300/60 italic pt-4">
+                      <p className="text-xs sm:text-sm text-purple-300/60 italic pt-3 sm:pt-4">
                         {diploma.note}
                       </p>
                     </motion.div>
@@ -590,53 +590,53 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
 
                 <div className="relative z-10 p-10 h-full flex flex-col">
                   <motion.div
-                    className="flex items-center gap-4 mb-6"
+                    className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1 }}
                   >
-                    <div className="h-16 w-2 bg-gradient-to-b from-cyan-400 via-green-400 to-cyan-300 rounded-full" />
-                    <h2 className="text-5xl font-bold text-cyan-100">Canada</h2>
+                    <div className="h-12 sm:h-16 w-2 bg-gradient-to-b from-cyan-400 via-green-400 to-cyan-300 rounded-full" />
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-cyan-100">Canada</h2>
                   </motion.div>
 
                   <motion.div
-                    className="space-y-6 flex-1"
+                    className="space-y-4 sm:space-y-6 flex-1"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}
                   >
                     <div>
-                      <h3 className="text-3xl font-bold text-white mb-2">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                         {canada.degree}
                       </h3>
-                      <p className="text-xl text-cyan-200/90">{canada.field}</p>
+                      <p className="text-lg sm:text-xl text-cyan-200/90">{canada.field}</p>
                     </div>
 
                     <div className="space-y-2">
-                      <p className="text-lg text-purple-200/80">{canada.school}</p>
-                      <p className="text-lg text-purple-200/70">{canada.location}</p>
+                      <p className="text-base sm:text-lg text-purple-200/80">{canada.school}</p>
+                      <p className="text-base sm:text-lg text-purple-200/70">{canada.location}</p>
                     </div>
 
-                    <div className="flex items-center gap-6 pt-4">
+                    <div className="flex items-center gap-4 sm:gap-6 pt-3 sm:pt-4">
                       <div>
-                        <p className="text-sm text-purple-300/70 mb-1">GPA</p>
-                        <p className="text-2xl font-bold text-cyan-200">{canada.gpa}</p>
+                        <p className="text-xs sm:text-sm text-purple-300/70 mb-1">GPA</p>
+                        <p className="text-xl sm:text-2xl font-bold text-cyan-200">{canada.gpa}</p>
                       </div>
-                      <div className="h-12 w-px bg-purple-300/20" />
+                      <div className="h-10 sm:h-12 w-px bg-purple-300/20" />
                       <div>
-                        <p className="text-sm text-purple-300/70 mb-1">Years</p>
-                        <p className="text-xl text-purple-200/90">{canada.years}</p>
+                        <p className="text-xs sm:text-sm text-purple-300/70 mb-1">Years</p>
+                        <p className="text-lg sm:text-xl text-purple-200/90">{canada.years}</p>
                       </div>
                     </div>
 
                     {canada.honors && (
                       <motion.div
-                        className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-green-500/20 border border-cyan-400/30"
+                        className="inline-block px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-green-500/20 border border-cyan-400/30"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 1.4 }}
                       >
-                        <p className="text-sm font-semibold text-cyan-200">
+                        <p className="text-xs sm:text-sm font-semibold text-cyan-200">
                           {canada.honors}
                         </p>
                       </motion.div>
@@ -644,15 +644,15 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
 
                     {canada.certs && canada.certs.length > 0 && (
                       <motion.div
-                        className="space-y-3 pt-6"
+                        className="space-y-2 sm:space-y-3 pt-4 sm:pt-6"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.6 }}
                       >
-                        <h4 className="text-xl font-bold text-cyan-100 mb-3">
+                        <h4 className="text-lg sm:text-xl font-bold text-cyan-100 mb-2 sm:mb-3">
                           Certifications
                         </h4>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                           {canada.certs.map((cert, idx) => (
                             <motion.div
                               key={cert}
@@ -665,7 +665,7 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
                                 borderColor: "rgba(100, 220, 200, 0.4)",
                               }}
                             >
-                              <p className="text-sm text-cyan-200/90">{cert}</p>
+                              <p className="text-xs sm:text-sm text-cyan-200/90">{cert}</p>
                             </motion.div>
                           ))}
                         </div>

@@ -8,7 +8,7 @@ import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface ProjectsSceneProps {
   onBack: () => void;
-  onContinue?: () => void;
+  onContinue: () => void;
 }
 
 export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps) {
@@ -26,16 +26,16 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
         }}
       />
 
-      <div className="relative z-10 h-screen overflow-y-auto py-20 px-8">
+      <div className="relative z-10 h-screen overflow-y-auto py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.3, y: -150 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
-            className="mb-16 text-center"
+            className="mb-8 sm:mb-12 lg:mb-16 text-center"
           >
             <motion.h1
-              className="text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent"
+              className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 5, repeat: Infinity }}
               style={{ backgroundSize: "200% 200%" }}
@@ -46,7 +46,7 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-purple-200/80 text-xl"
+              className="text-purple-200/80 text-base sm:text-lg lg:text-xl"
             >
               Building systems that solve real problems
             </motion.p>
@@ -307,14 +307,14 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
                       )}
 
                       <div className="relative p-10 z-10">
-                        <div className="flex items-start justify-between mb-8">
+                        <div className="flex items-start justify-between mb-6 sm:mb-8">
                           <div className="flex-1">
                             <motion.h2
                               initial={{ opacity: 0, x: -50 }}
                               animate={{ opacity: 1, x: 0 }}
                               whileHover={{ scale: 1.08, x: 10 }}
                               transition={{ delay: 0.6 + index * 0.3 }}
-                              className="text-4xl font-bold text-purple-100 mb-4"
+                              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-100 mb-3 sm:mb-4"
                             >
                               {project.title}
                             </motion.h2>
@@ -324,16 +324,16 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
                                 animate={{ opacity: 1, scale: 1 }}
                                 whileHover={{ scale: 1.2, rotate: 5 }}
                                 transition={{ delay: 0.8 + index * 0.3, type: "spring", stiffness: 400 }}
-                                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-amber-500/30 border-2 border-amber-300/50"
+                                className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-amber-500/30 border-2 border-amber-300/50"
                               >
                                 <motion.span
-                                  className="text-4xl"
+                                  className="text-3xl sm:text-4xl"
                                   animate={{ rotate: [0, 10, -10, 0] }}
                                   transition={{ duration: 2, repeat: Infinity }}
                                 >
                                   🏆
                                 </motion.span>
-                                <span className="text-amber-200 text-lg font-bold">{project.award}</span>
+                                <span className="text-amber-200 text-base sm:text-lg font-bold">{project.award}</span>
                               </motion.div>
                             )}
                           </div>
@@ -363,12 +363,12 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 1.2 + index * 0.3 }}
-                          className="text-purple-200/90 text-lg mb-8 leading-relaxed"
+                          className="text-purple-200/90 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed"
                         >
                           {project.description}
                         </motion.p>
 
-                        <div className="space-y-4 mb-8">
+                        <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                           {project.highlights.map((highlight, i) => (
                             <motion.div
                               key={i}
@@ -376,7 +376,7 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
                               animate={{ opacity: 1, x: 0 }}
                               whileHover={{ x: 15, scale: 1.02 }}
                               transition={{ delay: 1.4 + index * 0.3 + i * 0.15 }}
-                              className="flex items-start gap-4"
+                              className="flex items-start gap-3 sm:gap-4"
                             >
                               <motion.div
                                 className="w-3 h-3 rounded-full bg-purple-400 mt-2"
@@ -389,7 +389,7 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
                                 }}
                                 transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                               />
-                              <p className="text-purple-200/90 leading-relaxed text-lg">{highlight}</p>
+                              <p className="text-purple-200/90 leading-relaxed text-sm sm:text-base lg:text-lg">{highlight}</p>
                             </motion.div>
                           ))}
                         </div>

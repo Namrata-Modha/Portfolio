@@ -8,7 +8,7 @@ import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface ExperienceSceneProps {
   onBack: () => void;
-  onContinue?: () => void;
+  onContinue: () => void;
 }
 
 export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneProps) {
@@ -27,16 +27,16 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
         }}
       />
 
-      <div className="relative z-10 h-screen overflow-y-auto py-20 px-8">
+      <div className="relative z-10 h-screen overflow-y-auto py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.3, y: -150 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
-            className="mb-16 text-center"
+            className="mb-8 sm:mb-12 lg:mb-16 text-center"
           >
             <motion.h1
-              className="text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent"
+              className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 5, repeat: Infinity }}
               style={{ backgroundSize: "200% 200%" }}
@@ -47,7 +47,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-purple-200/80 text-xl"
+              className="text-purple-200/80 text-base sm:text-lg lg:text-xl"
             >
               3+ years bridging strategy and engineering
             </motion.p>
@@ -339,7 +339,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                               style={{ transformOrigin: isLeft ? "right" : "left" }}
                             />
                             <motion.h2
-                              className="text-3xl font-bold text-purple-100"
+                              className="text-2xl sm:text-3xl font-bold text-purple-100"
                               whileHover={{ scale: 1.15, x: isLeft ? -10 : 10 }}
                             >
                               {job.company}
@@ -352,15 +352,15 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                             transition={{ delay: 1 + index * 0.4 }}
                             className="mb-6"
                           >
-                            <h3 className="text-2xl font-semibold text-purple-200 mb-2">{job.role}</h3>
-                            <div className="flex items-center gap-4 text-sm text-purple-300/80 flex-wrap">
+                            <h3 className="text-xl sm:text-2xl font-semibold text-purple-200 mb-2">{job.role}</h3>
+                            <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-purple-300/80 flex-wrap">
                               <span>{job.location}</span>
                               <span>•</span>
                               <span>{job.period}</span>
                             </div>
                           </motion.div>
 
-                          <div className="space-y-4 mb-6">
+                          <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                             {job.highlights.map((highlight, i) => (
                               <motion.div
                                 key={i}
@@ -368,7 +368,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                 animate={{ opacity: 1, x: 0 }}
                                 whileHover={{ x: 10, scale: 1.02 }}
                                 transition={{ delay: 1.2 + index * 0.4 + i * 0.15 }}
-                                className="flex items-start gap-3"
+                                className="flex items-start gap-2 sm:gap-3"
                               >
                                 <motion.div
                                   className="w-2 h-2 rounded-full bg-purple-400 mt-2"
@@ -381,7 +381,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                   }}
                                   transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
                                 />
-                                <p className="text-purple-200/90 leading-relaxed">{highlight}</p>
+                                <p className="text-purple-200/90 leading-relaxed text-sm sm:text-base">{highlight}</p>
                               </motion.div>
                             ))}
                           </div>
