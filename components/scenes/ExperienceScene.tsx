@@ -16,23 +16,23 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
     <div className="relative w-full min-h-screen overflow-hidden">
       <CinematicEnvironment scene="experience" />
 
-      {/* EXPLOSIVE entrance burst */}
+      {/* Gentle entrance burst */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
-        initial={{ scale: 0, opacity: 1 }}
-        animate={{ scale: 5, opacity: 0 }}
-        transition={{ duration: 2, ease: "easeOut" }}
+        initial={{ scale: 0, opacity: 0.5 }}
+        animate={{ scale: 2, opacity: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         style={{
-          background: "radial-gradient(circle, rgba(255, 100, 200, 0.7) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255, 100, 200, 0.4) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative z-10 h-screen overflow-y-auto py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.3, y: -150 }}
+            initial={{ opacity: 0, scale: 0.9, y: -30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="mb-8 sm:mb-12 lg:mb-16 text-center"
           >
             <motion.h1

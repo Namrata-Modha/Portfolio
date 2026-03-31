@@ -65,50 +65,47 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
 
       <motion.div
         className="absolute inset-0 pointer-events-none"
-        initial={{ scale: 0, opacity: 1 }}
-        animate={{ scale: 5, opacity: 0 }}
-        transition={{ duration: 2, ease: "easeOut" }}
+        initial={{ scale: 0, opacity: 0.5 }}
+        animate={{ scale: 2, opacity: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         style={{
-          background: "radial-gradient(circle, rgba(200, 255, 100, 0.7) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(200, 255, 100, 0.4) 0%, transparent 70%)",
         }}
       />
 
-      {/* MASSIVE floating envelopes */}
+      {/* Gentle floating envelopes */}
       {[0, 1, 2, 3, 4].map((i) => (
         <motion.div
           key={`env-${i}`}
-          className="absolute w-24 h-24 opacity-20 pointer-events-none"
-          initial={{ opacity: 0, scale: 0 }}
+          className="absolute w-16 h-16 opacity-20 pointer-events-none"
+          initial={{ opacity: 0 }}
           animate={{
-            opacity: [0.2, 0.4, 0.2],
-            scale: [1, 1.5, 1],
-            y: [0, -80, 0],
-            x: [0, i % 2 === 0 ? 50 : -50, 0],
-            rotate: [0, i % 2 === 0 ? 30 : -30, 0],
+            opacity: [0.2, 0.3, 0.2],
+            y: [0, -40, 0],
           }}
           transition={{
-            duration: 12 + i * 2,
+            duration: 8 + i,
             repeat: Infinity,
-            delay: i * 0.5,
+            delay: i * 0.3,
+            ease: "easeInOut",
           }}
           style={{
             left: `${8 + i * 20}%`,
             top: `${40 + i * 10}%`,
-            filter: "drop-shadow(0 0 30px rgba(200, 180, 240, 0.6))",
           }}
         >
-          <svg viewBox="0 0 24 24" fill="rgba(200, 180, 240, 0.7)">
+          <svg viewBox="0 0 24 24" fill="rgba(200, 180, 240, 0.5)">
             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
           </svg>
         </motion.div>
       ))}
 
-      <div className="relative z-10 min-h-screen overflow-y-auto pt-40 pb-32 px-4 sm:px-8">
+      <div className="relative z-10 min-h-screen overflow-y-auto pt-20 sm:pt-32 lg:pt-40 pb-20 sm:pb-24 px-4 sm:px-8">
         <div className="w-full max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
             className="mb-12 sm:mb-16 text-center"
           >
             <motion.h1
