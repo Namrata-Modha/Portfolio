@@ -242,7 +242,7 @@ export default function CinematicEnvironment({ scene }: CinematicEnvironmentProp
                 rgba(180, 140, 220, ${0.18 - i * 0.025}) 40%,
                 rgba(160, 120, 200, ${0.1 - i * 0.015}) 70%,
                 transparent 100%)`,
-              transform: `rotate(var(--ray-angle)) translateX(${-80 + i * 40}px)`,
+              transform: `rotate(${-20 + i * 15}deg) translateX(${-80 + i * 40}px)`,
               transformOrigin: "top center",
               filter: "blur(20px)",
               animation: `lightRayShimmer ${10 + i * 2}s ease-in-out ${i * 1.2}s infinite`,

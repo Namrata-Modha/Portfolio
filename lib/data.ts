@@ -66,7 +66,7 @@ export const EDUCATION = {
       school: "Government Polytechnic",
       location: "Porbandar",
       years: "2014 - 2017",
-      gpa: null,
+      gpa: "8.80 / 10",
       note: "Foundation in systems and programming",
     },
   ],
@@ -75,7 +75,7 @@ export const EDUCATION = {
     field: "Business & Information Systems Architecture",
     school: "Fanshawe College",
     location: "London, Ontario",
-    years: "Sept 2023 - Apr 2025",
+    years: "2023 - 2025",
     gpa: "3.97 / 4.0",
     honors: "Dean's Honor Roll (Sem 2, 3, 4)",
     certs: [
@@ -162,6 +162,7 @@ export const PROJECTS: ProjectEntry[] = [
     ],
     techStack: ["PHP", "Laravel", "PostgreSQL", "REST APIs", "Docker"],
     theme: "medical",
+    github: "https://github.com/Namrata-Modha/MyHealthQR",
   },
   {
     title: "MediLight",
@@ -190,5 +191,6 @@ export const PROJECTS: ProjectEntry[] = [
     ],
     techStack: ["React", "WebSocket", "Docker", "Node.js", "CI/CD"],
     theme: "dashboard",
+    github: "https://github.com/Namrata-Modha/InsightOps",
   },
 ];
