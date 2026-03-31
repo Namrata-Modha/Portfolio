@@ -19,23 +19,23 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
     <div className="relative w-full min-h-screen overflow-hidden">
       <CinematicEnvironment scene="education" />
 
-      {/* EXPLOSIVE entrance burst */}
+      {/* Gentler entrance burst - no UFO flickering */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
-        initial={{ scale: 0, opacity: 1 }}
-        animate={{ scale: 4, opacity: 0 }}
-        transition={{ duration: 1.5, ease: [0.34, 1.56, 0.64, 1] }}
+        initial={{ scale: 0, opacity: 0.6 }}
+        animate={{ scale: 2.5, opacity: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         style={{
-          background: "radial-gradient(circle, rgba(255, 200, 100, 0.8) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255, 200, 100, 0.4) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="w-full max-w-7xl">
           <motion.div
-            initial={{ opacity: 0, scale: 0.3, y: -200 }}
+            initial={{ opacity: 0, scale: 0.9, y: -30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="mb-8 sm:mb-12 lg:mb-20 text-center"
           >
             <motion.h1
@@ -59,61 +59,41 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
             {/* INDIA CARD */}
             <motion.div
-              initial={{ opacity: 0, x: -300, rotateY: -25 }}
-              animate={{ opacity: 1, x: 0, rotateY: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{
-                duration: 1.3,
-                delay: 0.6,
-                ease: [0.34, 1.56, 0.64, 1],
-                type: "spring",
-                bounce: 0.5,
+                duration: 0.8,
+                delay: 0.3,
+                ease: "easeOut",
               }}
               whileHover={{ 
-                scale: 1.08, 
-                rotateY: 8,
-                z: 80,
+                scale: 1.02,
               }}
-              style={{ transformStyle: "preserve-3d" }}
             >
-              {/* MASSIVE diyas with trails */}
+              {/* Gentle diyas - mobile friendly */}
               {[0, 1, 2, 3, 4].map((i) => (
                 <motion.div
                   key={`diya-${i}`}
-                  className="absolute w-16 h-16 rounded-full pointer-events-none"
-                  initial={{ opacity: 0, scale: 0 }}
+                  className="absolute w-10 h-10 rounded-full pointer-events-none"
+                  initial={{ opacity: 0 }}
                   animate={{
-                    opacity: [0.4, 0.7, 0.4],
-                    scale: [1, 1.2, 1],
-                    y: [0, -80, -160, -80, 0],
-                    x: [0, (i % 2 === 0 ? 40 : -40), 0, (i % 2 === 0 ? -40 : 40), 0],
-                    rotate: [0, 180, 360],
+                    opacity: [0.3, 0.5, 0.3],
+                    scale: [1, 1.1, 1],
+                    y: [0, -30, 0],
                   }}
                   transition={{
-                    duration: 7 + i,
+                    duration: 4 + i,
                     repeat: Infinity,
-                    delay: i * 0.3,
+                    delay: i * 0.2,
+                    ease: "easeInOut",
                   }}
                   style={{
                     left: `${10 + i * 18}%`,
                     top: `${-10 + i * 8}%`,
-                    background: "radial-gradient(circle, rgba(255, 200, 100, 1) 0%, rgba(255, 150, 50, 0.8) 40%, transparent 100%)",
-                    boxShadow: "0 0 60px rgba(255, 180, 80, 1), 0 0 120px rgba(255, 200, 100, 0.6)",
-                    filter: "blur(2px)",
+                    background: "radial-gradient(circle, rgba(255, 200, 100, 0.6) 0%, transparent 70%)",
+                    boxShadow: "0 0 20px rgba(255, 180, 80, 0.4)",
                   }}
-                >
-                  <motion.div
-                    className="absolute inset-0 rounded-full"
-                    style={{
-                      background: "radial-gradient(circle, rgba(255, 200, 100, 0.8) 0%, transparent 70%)",
-                      filter: "blur(30px)",
-                    }}
-                    animate={{
-                      scale: [1, 1.8, 1],
-                      opacity: [0.4, 0.9, 0.4],
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
-                  />
-                </motion.div>
+                />
               ))}
 
               <GlassCard depth="near" className="h-full overflow-hidden relative">
@@ -407,50 +387,44 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
 
             {/* CANADA CARD */}
             <motion.div
-              initial={{ opacity: 0, x: 300, rotateY: 25 }}
-              animate={{ opacity: 1, x: 0, rotateY: 0 }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{
-                duration: 1.3,
-                delay: 0.8,
-                ease: [0.34, 1.56, 0.64, 1],
-                type: "spring",
-                bounce: 0.5,
+                duration: 0.8,
+                delay: 0.4,
+                ease: "easeOut",
               }}
               whileHover={{ 
-                scale: 1.08, 
-                rotateY: -8,
-                z: 80,
+                scale: 1.02,
               }}
-              style={{ transformStyle: "preserve-3d" }}
             >
-              {/* MASSIVE floating maple leaves */}
+              {/* Gentle floating maple leaves */}
               {[0, 1, 2, 3, 4, 5].map((i) => (
                 <motion.div
                   key={`leaf-${i}`}
-                  className="absolute w-12 h-12 pointer-events-none"
-                  initial={{ opacity: 0, scale: 0, rotate: 0 }}
+                  className="absolute w-8 h-8 pointer-events-none opacity-50"
+                  initial={{ opacity: 0 }}
                   animate={{
-                    opacity: [0.7, 1, 0.7],
-                    scale: [1, 1.3, 1],
-                    rotate: [0, 360],
-                    y: [0, -60, -120, -180, -240],
-                    x: [0, (i % 2 === 0 ? -30 : 30), (i % 2 === 0 ? 30 : -30), 0],
+                    opacity: [0.4, 0.6, 0.4],
+                    y: [0, -60, 0],
+                    rotate: [0, 180, 0],
                   }}
                   transition={{
-                    duration: 9 + i,
+                    duration: 6 + i,
                     repeat: Infinity,
-                    delay: i * 0.4,
+                    delay: i * 0.3,
+                    ease: "easeInOut",
                   }}
                   style={{
                     right: `${8 + i * 15}%`,
                     top: `${100 + i * 5}%`,
                   }}
                 >
-                  <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-lg">
+                  <svg viewBox="0 0 24 24" className="w-full h-full">
                     <path
                       d="M12 2L10 8L4 10L8 12L6 18L12 14L18 18L16 12L20 10L14 8L12 2Z"
-                      fill="rgba(100, 220, 180, 0.9)"
-                      stroke="rgba(80, 200, 160, 1)"
+                      fill="rgba(100, 220, 180, 0.6)"
+                      stroke="rgba(80, 200, 160, 0.6)"
                       strokeWidth="0.5"
                     />
                   </svg>
