@@ -7,7 +7,7 @@ import GlassCard from "@/components/visuals/GlassCard";
 
 interface ContactSceneProps {
   onBack: () => void;
-  onContinue: () => void;
+  onContinue?: () => void;
 }
 
 export default function ContactScene({ onBack, onContinue }: ContactSceneProps) {

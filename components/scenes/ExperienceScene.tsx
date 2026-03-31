@@ -7,7 +7,7 @@ import GlassCard from "@/components/visuals/GlassCard";
 
 interface ExperienceSceneProps {
   onBack: () => void;
-  onContinue: () => void;
+  onContinue?: () => void;
 }
 
 export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneProps) {

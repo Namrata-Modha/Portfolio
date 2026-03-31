@@ -7,7 +7,7 @@ import GlassCard from "@/components/visuals/GlassCard";
 
 interface EducationSceneProps {
   onBack: () => void;
-  onContinue: () => void;
+  onContinue?: () => void;
 }
 
 export default function EducationScene({ onBack, onContinue }: EducationSceneProps) {

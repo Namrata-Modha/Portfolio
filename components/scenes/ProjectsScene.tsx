@@ -7,7 +7,7 @@ import GlassCard from "@/components/visuals/GlassCard";
 
 interface ProjectsSceneProps {
   onBack: () => void;
-  onContinue: () => void;
+  onContinue?: () => void;
 }
 
 export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps) {
