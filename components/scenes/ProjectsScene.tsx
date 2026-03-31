@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { PROJECTS } from "@/lib/data";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
+import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface ProjectsSceneProps {
   onBack: () => void;
@@ -420,6 +421,8 @@ export default function ProjectsScene({ onBack, onContinue }: ProjectsSceneProps
           </div>
         </div>
       </div>
+
+      <NavigationButtons onBack={onBack} onContinue={onContinue} />
     </div>
   );
 }

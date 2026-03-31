@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import { usePhase } from "@/lib/usePhase";
 import { ABOUT } from "@/lib/data";
-import { SectionLabel, NavigateButton } from "@/components/ui";
+import { SectionLabel } from "@/components/ui";
 import DepthEnvironment from "@/components/visuals/DepthEnvironment";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
+import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface AboutSceneProps {
   onBack: () => void;
@@ -427,22 +428,9 @@ export default function AboutScene({ onBack, onContinue }: AboutSceneProps) {
             }}
           />
         </div>
-
-        {/* NAVIGATION */}
-        <div className="mt-12 flex items-center gap-5">
-          <NavigateButton
-            label="Back"
-            onClick={onBack}
-            direction="back"
-            visible={phase >= 4}
-          />
-          <NavigateButton
-            label="Continue to Education"
-            onClick={handleContinue}
-            visible={phase >= 4}
-          />
-        </div>
       </div>
+
+      <NavigationButtons onBack={onBack} onContinue={handleContinue} />
     </div>
   );
 }

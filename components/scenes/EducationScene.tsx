@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { EDUCATION } from "@/lib/data";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
+import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface EducationSceneProps {
   onBack: () => void;
@@ -55,7 +56,7 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12">
             {/* INDIA CARD */}
             <motion.div
               initial={{ opacity: 0, x: -300, rotateY: -25 }}
@@ -81,8 +82,8 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
                   className="absolute w-16 h-16 rounded-full pointer-events-none"
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{
-                    opacity: [0.7, 1, 0.7],
-                    scale: [1, 1.5, 1],
+                    opacity: [0.4, 0.7, 0.4],
+                    scale: [1, 1.2, 1],
                     y: [0, -80, -160, -80, 0],
                     x: [0, (i % 2 === 0 ? 40 : -40), 0, (i % 2 === 0 ? -40 : 40), 0],
                     rotate: [0, 180, 360],
@@ -150,8 +151,8 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
                       rx="50"
                       ry="100"
                       fill="url(#statueGlow)"
-                      animate={{ opacity: [0.5, 0.9, 0.5] }}
-                      transition={{ duration: 4, repeat: Infinity }}
+                      animate={{ opacity: [0.3, 0.5, 0.3] }}
+                      transition={{ duration: 6, repeat: Infinity }}
                     />
 
                     {/* Base pedestal */}
@@ -677,6 +678,8 @@ export default function EducationScene({ onBack, onContinue }: EducationScenePro
           </div>
         </div>
       </div>
+
+      <NavigationButtons onBack={onBack} onContinue={onContinue} />
     </div>
   );
 }

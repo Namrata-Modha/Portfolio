@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { EXPERIENCE } from "@/lib/data";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
+import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface ExperienceSceneProps {
   onBack: () => void;
@@ -441,6 +442,8 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
           </div>
         </div>
       </div>
+
+      <NavigationButtons onBack={onBack} onContinue={onContinue} />
     </div>
   );
 }

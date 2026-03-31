@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import { PERSONAL } from "@/lib/data";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
+import NavigationButtons from "@/components/ui/NavigationButtons";
 
 interface ContactSceneProps {
   onBack: () => void;
-  onContinue?: () => void;
+  onContinue?: () => void; // Optional - Contact is the last scene
 }
 
 export default function ContactScene({ onBack, onContinue }: ContactSceneProps) {
@@ -102,16 +103,16 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
         </motion.div>
       ))}
 
-      <div className="relative z-10 h-full flex items-center justify-center px-8 pt-20">
+      <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-8 pt-32 pb-32">
         <div className="w-full max-w-5xl">
           <motion.div
             initial={{ opacity: 0, scale: 0.3, y: -150 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1], delay: 0.2 }}
-            className="mb-16 text-center"
+            className="mb-12 sm:mb-16 text-center"
           >
             <motion.h1
-              className="text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent"
+              className="text-5xl sm:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 bg-clip-text text-transparent"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 5, repeat: Infinity }}
               style={{ backgroundSize: "200% 200%" }}
@@ -277,6 +278,8 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
           </motion.div>
         </div>
       </div>
+
+      <NavigationButtons onBack={onBack} onContinue={onContinue} />
     </div>
   );
 }
