@@ -9,14 +9,31 @@ import {
   EducationScene,
   ExperienceScene,
   ProjectsScene,
+  RubinScoutScene,
+  MyHealthQRScene,
+  MediLightScene,
   ContactScene,
 } from "@/components/scenes";
 
+type ProjectView = "hub" | "rubin-scout" | "myhealthqr" | "medilight";
+
 export default function Portfolio() {
   const [scene, setScene] = useState<Scene>("gate");
+  const [projectView, setProjectView] = useState<ProjectView>("hub");
 
   const navigateTo = useCallback((target: Scene) => {
     setScene(target);
+    setProjectView("hub");
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
+  const openProject = useCallback((project: Exclude<ProjectView, "hub">) => {
+    setProjectView(project);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
+  const backToHub = useCallback(() => {
+    setProjectView("hub");
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
@@ -53,11 +70,24 @@ export default function Portfolio() {
         />
       )}
 
-      {scene === "projects" && (
+      {scene === "projects" && projectView === "hub" && (
         <ProjectsScene
           onBack={() => navigateTo("experience")}
           onContinue={() => navigateTo("contact")}
+          onSelectProject={openProject}
         />
+      )}
+
+      {scene === "projects" && projectView === "rubin-scout" && (
+        <RubinScoutScene onBack={backToHub} />
+      )}
+
+      {scene === "projects" && projectView === "myhealthqr" && (
+        <MyHealthQRScene onBack={backToHub} />
+      )}
+
+      {scene === "projects" && projectView === "medilight" && (
+        <MediLightScene onBack={backToHub} />
       )}
 
       {scene === "contact" && (

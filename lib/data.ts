@@ -141,17 +141,37 @@ export const EXPERIENCE: ExperienceEntry[] = [
 export interface ProjectEntry {
   title: string;
   award?: string;
+  date: string;
   description: string;
   highlights: string[];
   techStack: string[];
-  theme: "medical" | "dashboard";
+  theme: "space" | "medical" | "pharmacy";
   github?: string;
+  liveDemo?: string;
 }
 
 export const PROJECTS: ProjectEntry[] = [
   {
+    title: "Rubin Scout",
+    award: "First public gravitational wave cross-matching tool",
+    date: "Mar 2026 – Apr 2026",
+    description:
+      "Full-stack astronomical data pipeline processing real transient discoveries from international observatories. Ingests data from IAU Transient Name Server, enriches with ALeRCE ML classifications, cross-matches SIMBAD catalog, and searches LIGO gravitational wave counterparts.",
+    highlights: [
+      "Real-time pipeline pulling from 4 live sources (TNS, ALeRCE, SIMBAD, LIGO)",
+      "Interactive Mollweide sky map with spatial PostGIS queries",
+      "Gravitational wave cross-matching for optical counterpart search",
+      "RESTful API with Swagger docs + admin security controls",
+    ],
+    techStack: ["React", "FastAPI", "PostgreSQL", "PostGIS", "Recharts", "Tailwind", "Vercel", "Render", "Supabase"],
+    theme: "space",
+    liveDemo: "https://rubin-scout.vercel.app",
+    github: "https://github.com/Namrata-Modha/rubin-scout",
+  },
+  {
     title: "MyHealthQR",
     award: "First Place Capstone Award",
+    date: "Dec 2024 – Apr 2025",
     description:
       "PIPEDA-compliant healthcare platform with role-based access control and API gateway strategy.",
     highlights: [
@@ -166,31 +186,18 @@ export const PROJECTS: ProjectEntry[] = [
   },
   {
     title: "MediLight",
-    award: undefined,
+    date: "Smart Pharmacy System",
     description:
       "AI-powered smart pharmacy dispensing system. Upload a prescription, Gemini AI reads it, medications match to inventory, and LED shelf lights guide the pharmacist to the right product.",
     highlights: [
-      "Built full-stack pipeline: React dashboard, Express API, and PostgreSQL on Neon with real-time WebSocket shelf control.",
-      "Integrated Google Gemini 2.5 Flash for prescription OCR handling handwritten, misspelled, and low-quality images.",
-      "Designed LED digital twin simulating ESP32 shelf hardware for live demo without physical devices.",
-      "Deployed across Vercel and Render with Swagger API docs and 10 automated test endpoints.",
+      "Google Gemini AI Vision reads prescriptions with typo/abbreviation handling",
+      "PostgreSQL tracks inventory, orders, compliance audit trails",
+      "WebSocket broadcasts LED signals to shelf hardware in real-time",
+      "Controlled substances trigger age 18+ ID verification",
     ],
-    techStack: ["React", "Node.js", "Express", "PostgreSQL", "Gemini AI", "WebSocket"],
-    theme: "dashboard",
-    github: "https://github.com/Namrata-Modha/Medilight-guide",
-  },
-  {
-    title: "InsightOps",
-    award: undefined,
-    description:
-      "Real-time KPI monitoring dashboard enabling non-technical teams to interpret system health.",
-    highlights: [
-      "Built React-based dashboard with WebSocket APIs and RBAC.",
-      "Containerized deployments using Docker with automated CI/CD pipelines.",
-      "Designed user flows for real-time system health visualization.",
-    ],
-    techStack: ["React", "WebSocket", "Docker", "Node.js", "CI/CD"],
-    theme: "dashboard",
-    github: "https://github.com/Namrata-Modha/InsightOps",
+    techStack: ["React", "Express", "PostgreSQL", "Gemini AI", "WebSocket", "Tesseract", "Vercel", "Render"],
+    theme: "pharmacy",
+    liveDemo: "https://medilight-dashboard.vercel.app/",
+    github: "https://github.com/Namrata-Modha/medilight-guide",
   },
 ];

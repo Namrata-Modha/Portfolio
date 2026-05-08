@@ -3,4 +3,7 @@ export { default as AboutScene } from "./AboutScene";
 export { default as EducationScene } from "./EducationScene";
 export { default as ExperienceScene } from "./ExperienceScene";
 export { default as ProjectsScene } from "./ProjectsScene";
+export { default as RubinScoutScene } from "./RubinScoutScene";
+export { default as MyHealthQRScene } from "./MyHealthQRScene";
+export { default as MediLightScene } from "./MediLightScene";
 export { default as ContactScene } from "./ContactScene";
