@@ -108,9 +108,9 @@ export const EXPERIENCE: ExperienceEntry[] = [
     location: "Ahmedabad, India",
     period: "July 2020 - June 2022",
     highlights: [
-      "Designed data ingestion architectures and microservices for a platform handling 200,000+ daily records with 99.9% uptime.",
-      "Automated CRON workflows and Trunk-based branching, reducing manual team effort by 33%.",
-      "Debugged production incidents and wrote unit tests for PHP/Laravel modules, cutting error rates by 25%.",
+      "Built and maintained Node.js microservices and REST APIs for a platform processing 100K+ daily records; designed backend service components, wrote technical specifications, and maintained Jira and Confluence documentation to align QA and stakeholders with implementation decisions across Agile delivery.",
+      "Diagnosed API performance degradation through profiling and query analysis; implemented database indexing, query optimization, and Redis caching to reduce response times, then delivered the critical business feature on the optimized foundation without regression and bringing back the uptime to around 99%.",
+      "Developed Vue.js frontend components and validated technical requirements with a German client through structured sessions, confirming delivered functionality matched specifications before each sprint sign-off.",
     ],
     techUsed: ["PHP", "Laravel", "Python", "MySQL", "AWS", "Docker"],
     theme: "hotel",
@@ -125,9 +125,9 @@ export const EXPERIENCE: ExperienceEntry[] = [
     location: "Ahmedabad, India",
     period: "July 2022 - July 2023",
     highlights: [
-      "Led legacy modernization migrating 1M+ records from SQL to MongoDB, reducing query latency by 40%.",
-      "Built secure payment gateway integrations using React and Node.js/Express with 100% transaction reliability.",
-      "Championed CI/CD pipelines and Gitflow standards across 10+ client projects, reducing post-release bugs by 20%.",
+      "Built the PayPal and Stripe integration for a PHP/Laravel platform handling 200K+ daily transactions as a systems design challenge: defined the API integration architecture, implemented error recovery and timeout-handling logic, and applied security-aware coding practices to protect payment data at every layer of the transaction flow.",
+      "Led a migration of 1M+ records from MySQL to MongoDB, redesigning the relational schema into document-based collections and validating data integrity throughout the cutover, achieving a 40% reduction in query latency.",
+      "Built a Python OCR pipeline to convert document images into structured text data, implementing image preprocessing and text extraction logic, then integrated the output into the platform's backend data pipeline to process unstructured document inputs automatically.",
     ],
     techUsed: ["React", "Node.js", "MongoDB", "Laravel", "AWS", "Postman"],
     theme: "constellation",
@@ -145,7 +145,7 @@ export interface ProjectEntry {
   description: string;
   highlights: string[];
   techStack: string[];
-  theme: "space" | "medical" | "pharmacy";
+  theme: "space" | "medical" | "pharmacy" | "microservice";
   github?: string;
   liveDemo?: string;
 }
@@ -162,8 +162,9 @@ export const PROJECTS: ProjectEntry[] = [
       "Interactive Mollweide sky map with spatial PostGIS queries",
       "Gravitational wave cross-matching for optical counterpart search",
       "RESTful API with Swagger docs + admin security controls",
+      "Ask Rubin Scout: conversational RAG assistant built with a LangChain LCEL chain over a pgvector store inside the existing Postgres database, with Gemini handling embeddings and generation; verified resistance to prompt-injection attacks",
     ],
-    techStack: ["React", "FastAPI", "PostgreSQL", "PostGIS", "Recharts", "Tailwind", "Vercel", "Render", "Supabase"],
+    techStack: ["React", "FastAPI", "PostgreSQL", "PostGIS", "Recharts", "Tailwind", "Vercel", "Render", "Supabase", "LangChain", "pgvector", "Gemini"],
     theme: "space",
     liveDemo: "https://rubin-scout.vercel.app",
     github: "https://github.com/Namrata-Modha/rubin-scout",
@@ -175,14 +176,29 @@ export const PROJECTS: ProjectEntry[] = [
     description:
       "PIPEDA-compliant healthcare platform with role-based access control and API gateway strategy.",
     highlights: [
-      "Won 1st Place for Technical Excellence among 10+ teams.",
-      "Optimized database queries by 40% through indexing and schema design.",
+      "Won 1st Place for Technical Excellence among 10+ capstone teams.",
+      "Served as Technical Lead, architecting the entire backend including authentication, QR-code generation, and role-based access control end to end.",
+      "Optimized database queries by 40% through strategic indexing and schema design.",
       "Implemented rigorous integration testing ensuring zero unauthorized access.",
-      "Led architecture decisions for secure health data handling.",
     ],
     techStack: ["PHP", "Laravel", "PostgreSQL", "REST APIs", "Docker"],
     theme: "medical",
     github: "https://github.com/Namrata-Modha/MyHealthQR",
+  },
+  {
+    title: "Order Service Microservice",
+    date: "Learning Project",
+    description:
+      "Spring Boot microservice for order management, structured as a deliberate exercise in building real Java/Spring depth. Modelled after a single extracted service in a Strangler Fig migration pattern out of a legacy monolith.",
+    highlights: [
+      "Full CRUD REST API with layered architecture: Controller → Service → Repository → Entity",
+      "PostgreSQL persistence via Spring Data JPA and Hibernate",
+      "Global exception handling with a custom not-found exception",
+      "Built to develop hands-on Spring Boot 3 and Java 17 depth — not a production system, but a focused, honest learning project",
+    ],
+    techStack: ["Java 17", "Spring Boot 3.5", "Spring Data JPA", "Hibernate", "PostgreSQL", "Maven"],
+    theme: "microservice",
+    github: "https://github.com/Namrata-Modha/order-service-microservice",
   },
   {
     title: "MediLight",

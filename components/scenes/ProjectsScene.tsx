@@ -5,7 +5,7 @@ import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
 import NavigationButtons from "@/components/ui/NavigationButtons";
 
-type ProjectView = "rubin-scout" | "myhealthqr" | "medilight";
+type ProjectView = "rubin-scout" | "myhealthqr" | "medilight" | "order-service";
 
 interface ProjectsSceneProps {
   onBack: () => void;
@@ -69,6 +69,35 @@ const PROJECT_CARDS = [
         <rect x="24" y="17" width="4" height="4" fill="rgba(103, 232, 249, 0.3)" rx="0.5" />
         <rect x="17" y="23" width="4" height="5" fill="rgba(103, 232, 249, 0.3)" rx="0.5" />
         <rect x="23" y="23" width="5" height="5" fill="rgba(103, 232, 249, 0.5)" rx="0.5" />
+      </svg>
+    ),
+  },
+  {
+    id: "order-service" as ProjectView,
+    title: "Order Service",
+    tagline: "Spring Boot Microservice",
+    date: "Learning Project",
+    description: "Order management microservice built to develop real Spring Boot / Java depth. Layered architecture, JPA/Hibernate, PostgreSQL — modelled as a Strangler Fig extraction.",
+    tech: ["Java 17", "Spring Boot", "JPA", "PostgreSQL"],
+    accentColor: "rgba(134, 239, 172, 0.8)",
+    accentBg: "rgba(74, 222, 128, 0.08)",
+    accentBorder: "rgba(134, 239, 172, 0.2)",
+    textColor: "rgba(167, 243, 208, 0.9)",
+    badge: "◈ Strangler Fig",
+    badgeStyle: {
+      background: "rgba(134, 239, 172, 0.1)",
+      border: "1px solid rgba(134, 239, 172, 0.3)",
+      color: "rgba(167, 243, 208, 0.9)",
+    },
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <rect x="4" y="10" width="24" height="14" rx="2" stroke="rgba(134, 239, 172, 0.6)" strokeWidth="1.5" fill="rgba(74, 222, 128, 0.06)" />
+        <rect x="8" y="6" width="6" height="6" rx="1" stroke="rgba(134, 239, 172, 0.5)" strokeWidth="1.2" fill="none" />
+        <rect x="18" y="6" width="6" height="6" rx="1" stroke="rgba(134, 239, 172, 0.5)" strokeWidth="1.2" fill="none" />
+        <line x1="11" y1="12" x2="11" y2="10" stroke="rgba(134, 239, 172, 0.4)" strokeWidth="1.2" />
+        <line x1="21" y1="12" x2="21" y2="10" stroke="rgba(134, 239, 172, 0.4)" strokeWidth="1.2" />
+        <rect x="8" y="14" width="16" height="2" rx="1" fill="rgba(134, 239, 172, 0.3)" />
+        <rect x="8" y="18" width="10" height="2" rx="1" fill="rgba(134, 239, 172, 0.2)" />
       </svg>
     ),
   },
@@ -146,7 +175,7 @@ export default function ProjectsScene({ onBack, onContinue, onSelectProject }: P
           </motion.div>
 
           {/* Project cards — 3 columns desktop, 1 column mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {PROJECT_CARDS.map((project, index) => (
               <motion.div
                 key={project.id}

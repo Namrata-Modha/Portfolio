@@ -3,47 +3,34 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
-import { GitFork, ArrowLeft, Award } from "lucide-react";
+import { GitFork, ArrowLeft } from "lucide-react";
 
-interface MyHealthQRSceneProps {
+interface OrderServiceSceneProps {
   onBack: () => void;
 }
 
 const TECH_STACK = [
-  "PHP", "Laravel", "PostgreSQL", "REST APIs",
-  "Docker", "PIPEDA", "RBAC",
+  "Java 17", "Spring Boot 3.5", "Spring Data JPA",
+  "Hibernate", "PostgreSQL", "Maven",
 ];
 
 const FEATURES = [
-  "Won 1st Place for Technical Excellence among 10+ capstone teams",
-  "Served as Technical Lead, architecting the entire backend including authentication, QR-code generation, and role-based access control end to end",
-  "Optimized database queries by 40% through strategic indexing and schema design",
-  "Implemented rigorous integration testing ensuring zero unauthorized access",
+  "Full CRUD REST API with layered architecture: Controller → Service → Repository → Entity",
+  "PostgreSQL persistence via Spring Data JPA and Hibernate",
+  "Global exception handling with a custom not-found exception",
+  "Built to develop hands-on Spring Boot 3 and Java 17 depth — not a production system, but a focused, honest learning project",
 ];
 
-// Stable QR cell grid
-const QR_CELLS: Array<{ row: number; col: number; filled: boolean }> = [];
-const QR_PATTERN = [
-  [1,1,1,1,1,1,1, 0, 1,1,0,1,0, 0, 1,1,1,1,1,1,1],
-  [1,0,0,0,0,0,1, 0, 0,1,1,0,1, 0, 1,0,0,0,0,0,1],
-  [1,0,1,1,1,0,1, 0, 1,0,1,1,0, 0, 1,0,1,1,1,0,1],
-  [1,0,1,1,1,0,1, 0, 0,1,0,1,1, 0, 1,0,1,1,1,0,1],
-  [1,0,0,0,0,0,1, 0, 1,1,0,0,1, 0, 1,0,0,0,0,0,1],
-  [1,1,1,1,1,1,1, 0, 1,0,1,0,1, 0, 1,1,1,1,1,1,1],
-];
-QR_PATTERN.forEach((row, r) =>
-  row.forEach((cell, c) => QR_CELLS.push({ row: r, col: c, filled: cell === 1 }))
-);
+// Grid decoration — simple circuit-board-style dots
+const GRID_DOTS = Array.from({ length: 40 }, (_, i) => ({
+  id: i,
+  x: (i * 7.3) % 100,
+  y: (i * 11.7) % 100,
+  size: i % 4 === 0 ? 3 : 1.5,
+  delay: (i * 0.13) % 3,
+}));
 
-// Cross decoration positions
-const CROSS_POSITIONS = [
-  { x: 5, y: 15, size: 20, opacity: 0.06 },
-  { x: 88, y: 10, size: 16, opacity: 0.05 },
-  { x: 92, y: 75, size: 22, opacity: 0.07 },
-  { x: 3, y: 82, size: 18, opacity: 0.05 },
-];
-
-export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
+export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
   const [entered, setEntered] = useState(false);
 
   useEffect(() => {
@@ -55,74 +42,51 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
     <div
       className="relative w-full min-h-screen overflow-hidden"
       style={{
-        background: "linear-gradient(160deg, #0a1628 0%, #0d1f3c 40%, #091525 70%, #0a1628 100%)",
+        background: "linear-gradient(160deg, #0d1a0d 0%, #0f2010 40%, #0a1a0a 70%, #0d1a0d 100%)",
         opacity: entered ? 1 : 0,
         transition: "opacity 0.8s ease-out",
       }}
     >
       {/* ── BACKGROUND ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Medical cross decorations */}
-        {CROSS_POSITIONS.map((pos, i) => (
-          <motion.div
-            key={`cross-${i}`}
-            className="absolute"
-            style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-            animate={{ opacity: [pos.opacity, pos.opacity * 1.5, pos.opacity] }}
-            transition={{ duration: 5 + i, repeat: Infinity }}
-          >
-            <svg width={pos.size} height={pos.size} viewBox="0 0 24 24">
-              <rect x="9" y="2" width="6" height="20" rx="2" fill="rgba(100, 220, 220, 0.9)" />
-              <rect x="2" y="9" width="20" height="6" rx="2" fill="rgba(100, 220, 220, 0.9)" />
-            </svg>
-          </motion.div>
-        ))}
+        {/* Grid dots */}
+        <svg className="w-full h-full" style={{ position: "absolute", inset: 0 }}>
+          {GRID_DOTS.map((dot) => (
+            <motion.circle
+              key={dot.id}
+              cx={`${dot.x}%`}
+              cy={`${dot.y}%`}
+              r={dot.size}
+              fill="rgba(134, 239, 172, 0.18)"
+              animate={{ opacity: [0.2, 0.6, 0.2] }}
+              transition={{ duration: 3 + (dot.id % 3), repeat: Infinity, delay: dot.delay }}
+            />
+          ))}
+        </svg>
 
-        {/* Cyan glow */}
+        {/* Green glow */}
         <motion.div
           className="absolute rounded-full"
           style={{
-            width: "450px", height: "300px",
-            background: "radial-gradient(ellipse, rgba(100, 220, 220, 0.1) 0%, transparent 70%)",
-            top: "15%", right: "5%",
+            width: "400px", height: "300px",
+            background: "radial-gradient(ellipse, rgba(134, 239, 172, 0.1) 0%, transparent 70%)",
+            top: "10%", right: "8%",
             filter: "blur(50px)",
           }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
           transition={{ duration: 9, repeat: Infinity }}
         />
         <motion.div
           className="absolute rounded-full"
           style={{
-            width: "350px", height: "350px",
-            background: "radial-gradient(ellipse, rgba(124, 58, 237, 0.08) 0%, transparent 70%)",
-            bottom: "10%", left: "5%",
+            width: "300px", height: "300px",
+            background: "radial-gradient(ellipse, rgba(74, 222, 128, 0.07) 0%, transparent 70%)",
+            bottom: "15%", left: "5%",
             filter: "blur(40px)",
           }}
-          animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.7, 0.4] }}
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 11, repeat: Infinity, delay: 3 }}
         />
-
-        {/* QR code silhouette bottom-left */}
-        <motion.div
-          className="absolute bottom-10 left-8 pointer-events-none"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.8 }}
-        >
-          <svg width="90" height="55" viewBox={`0 0 ${21 * 4} ${6 * 4}`}>
-            {QR_CELLS.filter(c => c.filled).map((cell, i) => (
-              <motion.rect
-                key={i}
-                x={cell.col * 4} y={cell.row * 4}
-                width="3.5" height="3.5"
-                fill="rgba(100, 220, 220, 0.15)"
-                rx="0.5"
-                animate={{ opacity: [0.1, 0.25, 0.1] }}
-                transition={{ duration: 3, repeat: Infinity, delay: (cell.row + cell.col) * 0.05 }}
-              />
-            ))}
-          </svg>
-        </motion.div>
       </div>
 
       {/* ── MAIN CONTENT ── */}
@@ -134,9 +98,9 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
             onClick={onBack}
             className="flex items-center gap-2 mb-6 px-4 py-2 rounded-full transition-colors"
             style={{
-              background: "rgba(100, 220, 220, 0.1)",
-              border: "1px solid rgba(100, 220, 220, 0.25)",
-              color: "rgba(150, 240, 240, 0.9)",
+              background: "rgba(134, 239, 172, 0.1)",
+              border: "1px solid rgba(134, 239, 172, 0.25)",
+              color: "rgba(167, 243, 208, 0.9)",
               backdropFilter: "blur(10px)",
             }}
             initial={{ opacity: 0, x: -20 }}
@@ -160,37 +124,35 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               <motion.span
                 className="text-xs font-mono px-3 py-1 rounded-full"
                 style={{
-                  background: "rgba(100, 220, 220, 0.12)",
-                  border: "1px solid rgba(100, 220, 220, 0.3)",
-                  color: "rgba(150, 240, 240, 0.9)",
+                  background: "rgba(134, 239, 172, 0.12)",
+                  border: "1px solid rgba(134, 239, 172, 0.3)",
+                  color: "rgba(167, 243, 208, 0.9)",
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                Dec 2024 – Apr 2025
+                Learning Project
               </motion.span>
-
               <motion.span
-                className="flex items-center gap-1.5 text-xs px-3 py-1 rounded-full"
+                className="text-xs px-3 py-1 rounded-full"
                 style={{
-                  background: "rgba(251, 191, 36, 0.15)",
-                  border: "1px solid rgba(251, 191, 36, 0.35)",
-                  color: "rgba(251, 191, 36, 0.95)",
+                  background: "rgba(134, 239, 172, 0.1)",
+                  border: "1px solid rgba(134, 239, 172, 0.25)",
+                  color: "rgba(167, 243, 208, 0.85)",
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                <Award size={12} />
-                First Place Capstone Award
+                ◈ Strangler Fig Pattern
               </motion.span>
             </div>
 
             <motion.h1
               className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-3"
               style={{
-                background: "linear-gradient(135deg, #67e8f9 0%, #22d3ee 40%, #a78bfa 100%)",
+                background: "linear-gradient(135deg, #86efac 0%, #4ade80 40%, #16a34a 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -198,16 +160,16 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              MyHealthQR
+              Order Service
             </motion.h1>
             <motion.p
               className="text-base sm:text-lg"
-              style={{ color: "rgba(103, 232, 249, 0.65)", fontStyle: "italic" }}
+              style={{ color: "rgba(134, 239, 172, 0.65)", fontStyle: "italic" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              PIPEDA-compliant healthcare platform with role-based access control
+              Spring Boot microservice for order management
             </motion.p>
           </motion.div>
 
@@ -218,35 +180,19 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
             transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
           >
             <GlassCard depth="near" className="p-6 sm:p-8 lg:p-10 mb-6">
-              {/* Award badge decoration */}
-              <motion.div
-                className="absolute top-6 right-6 pointer-events-none"
-                initial={{ opacity: 0, rotate: -20, scale: 0 }}
-                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
-              >
-                <div
-                  className="flex flex-col items-center justify-center w-16 h-16 rounded-full text-center"
-                  style={{
-                    background: "radial-gradient(circle, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.05) 100%)",
-                    border: "1px solid rgba(251, 191, 36, 0.4)",
-                  }}
-                >
-                  <span style={{ fontSize: "22px" }}>🏆</span>
-                </div>
-              </motion.div>
-
               {/* Description */}
               <motion.p
                 className="text-sm sm:text-base leading-relaxed mb-6"
-                style={{ color: "rgba(200, 230, 240, 0.85)", maxWidth: "700px" }}
+                style={{ color: "rgba(200, 240, 215, 0.85)", maxWidth: "700px" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                PIPEDA-compliant healthcare platform with role-based access control and API gateway
-                strategy. Built to give patients control of their health data via QR code — secure,
-                portable, and standards-compliant.
+                Spring Boot microservice for order management, built deliberately to develop real
+                hands-on Java and Spring depth. Structured as a single extracted service that
+                simulates a Strangler Fig migration pattern out of a legacy monolith — full CRUD
+                API, layered architecture, PostgreSQL via JPA/Hibernate, and proper exception
+                handling throughout.
               </motion.p>
 
               {/* Key Features */}
@@ -258,23 +204,23 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-4"
-                  style={{ color: "rgba(103, 232, 249, 0.6)" }}
+                  style={{ color: "rgba(134, 239, 172, 0.6)" }}
                 >
-                  Key Features
+                  What&apos;s Inside
                 </h3>
                 <ul className="space-y-3">
                   {FEATURES.map((feature, i) => (
                     <motion.li
                       key={i}
                       className="flex items-start gap-3 text-sm"
-                      style={{ color: "rgba(200, 230, 240, 0.85)" }}
+                      style={{ color: "rgba(200, 240, 215, 0.85)" }}
                       initial={{ opacity: 0, x: -15 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.7 + i * 0.1 }}
                     >
                       <span
                         className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full"
-                        style={{ background: "rgba(103, 232, 249, 0.9)", boxShadow: "0 0 6px rgba(103, 232, 249, 0.5)" }}
+                        style={{ background: "rgba(134, 239, 172, 0.9)", boxShadow: "0 0 6px rgba(134, 239, 172, 0.5)" }}
                       />
                       {feature}
                     </motion.li>
@@ -290,7 +236,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "rgba(103, 232, 249, 0.6)" }}
+                  style={{ color: "rgba(134, 239, 172, 0.6)" }}
                 >
                   Tech Stack
                 </h3>
@@ -305,7 +251,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                       <GlassChip>
                         <span
                           className="px-3 py-1 text-xs font-medium block"
-                          style={{ color: "rgba(150, 240, 240, 0.9)" }}
+                          style={{ color: "rgba(167, 243, 208, 0.9)" }}
                         >
                           {tech}
                         </span>
@@ -325,17 +271,17 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
             transition={{ delay: 1.1 }}
           >
             <motion.a
-              href="https://github.com/Namrata-Modha/MyHealthQR"
+              href="https://github.com/Namrata-Modha/order-service-microservice"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium"
               style={{
-                background: "linear-gradient(135deg, rgba(34, 211, 238, 0.4) 0%, rgba(103, 232, 249, 0.2) 100%)",
-                border: "1px solid rgba(103, 232, 249, 0.4)",
-                color: "rgba(150, 240, 240, 0.95)",
+                background: "linear-gradient(135deg, rgba(134, 239, 172, 0.35) 0%, rgba(74, 222, 128, 0.2) 100%)",
+                border: "1px solid rgba(134, 239, 172, 0.4)",
+                color: "rgba(167, 243, 208, 0.95)",
                 backdropFilter: "blur(10px)",
               }}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(103, 232, 249, 0.3)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(134, 239, 172, 0.3)" }}
               whileTap={{ scale: 0.97 }}
             >
               <GitFork size={15} />

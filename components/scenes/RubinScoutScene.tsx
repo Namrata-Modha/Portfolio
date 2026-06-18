@@ -13,6 +13,7 @@ interface RubinScoutSceneProps {
 const TECH_STACK = [
   "React", "FastAPI", "PostgreSQL", "PostGIS",
   "Recharts", "Tailwind", "Vercel", "Render", "Supabase",
+  "LangChain", "pgvector", "Gemini",
 ];
 
 const FEATURES = [
@@ -20,6 +21,7 @@ const FEATURES = [
   "Interactive Mollweide sky map with spatial PostGIS queries",
   "Gravitational wave cross-matching for optical counterpart search",
   "RESTful API with Swagger docs + admin security controls",
+  "Ask Rubin Scout: conversational RAG assistant built with a LangChain LCEL chain over a pgvector store inside the existing Postgres database, with Gemini handling embeddings and generation; verified resistance to prompt-injection attacks",
 ];
 
 // Star field data (stable, no Math.random in render)

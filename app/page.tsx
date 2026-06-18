@@ -12,10 +12,11 @@ import {
   RubinScoutScene,
   MyHealthQRScene,
   MediLightScene,
+  OrderServiceScene,
   ContactScene,
 } from "@/components/scenes";
 
-type ProjectView = "hub" | "rubin-scout" | "myhealthqr" | "medilight";
+type ProjectView = "hub" | "rubin-scout" | "myhealthqr" | "medilight" | "order-service";
 
 export default function Portfolio() {
   const [scene, setScene] = useState<Scene>("gate");
@@ -88,6 +89,10 @@ export default function Portfolio() {
 
       {scene === "projects" && projectView === "medilight" && (
         <MediLightScene onBack={backToHub} />
+      )}
+
+      {scene === "projects" && projectView === "order-service" && (
+        <OrderServiceScene onBack={backToHub} />
       )}
 
       {scene === "contact" && (

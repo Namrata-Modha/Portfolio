@@ -6,4 +6,5 @@ export { default as ProjectsScene } from "./ProjectsScene";
 export { default as RubinScoutScene } from "./RubinScoutScene";
 export { default as MyHealthQRScene } from "./MyHealthQRScene";
 export { default as MediLightScene } from "./MediLightScene";
+export { default as OrderServiceScene } from "./OrderServiceScene";
 export { default as ContactScene } from "./ContactScene";
