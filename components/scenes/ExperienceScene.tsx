@@ -91,18 +91,9 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.15 + index * 0.4, type: "spring", stiffness: 400 }}
                     >
-                      <motion.div
+                      <div
                         className="absolute inset-0 rounded-full bg-purple-300"
-                        animate={{ 
-                          scale: [1, 2.5, 1], 
-                          opacity: [1, 0, 1],
-                          boxShadow: [
-                            "0 0 20px rgba(200, 100, 255, 0.8)",
-                            "0 0 60px rgba(255, 100, 200, 1)",
-                            "0 0 20px rgba(200, 100, 255, 0.8)",
-                          ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                        style={{ boxShadow: "0 0 20px rgba(200, 100, 255, 0.8)" }}
                       />
                     </motion.div>
 
@@ -156,12 +147,8 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                       fill="rgba(255, 240, 180, 0.9)"
                                       filter="url(#hotelGlow)"
                                       initial={{ opacity: 0 }}
-                                      animate={{ opacity: [0.6, 1, 0.6] }}
-                                      transition={{ 
-                                        duration: 2 + Math.random(),
-                                        repeat: Infinity,
-                                        delay: 1.3 + index * 0.4 + (row * 0.1) + (col * 0.05)
-                                      }}
+                                      animate={{ opacity: 0.85 }}
+                                      transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                                     />
                                   ))
                                 )}
@@ -180,42 +167,6 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                               </svg>
                             </motion.div>
 
-                            {/* ANIMATED UI cards */}
-                            {[0, 1, 2, 3].map((i) => (
-                              <motion.div
-                                key={`ui-${i}`}
-                                className="absolute w-24 h-20 rounded-xl border-2 border-purple-300/40 bg-purple-500/20 backdrop-blur-sm"
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{
-                                  opacity: [0.4, 0.8, 0.4],
-                                  scale: [1, 1.1, 1],
-                                  y: [0, -30, 0],
-                                  x: [0, i % 2 === 0 ? 10 : -10, 0],
-                                }}
-                                transition={{
-                                  duration: 5 + i,
-                                  repeat: Infinity,
-                                  delay: 1.5 + index * 0.4 + i * 0.3,
-                                }}
-                                style={{
-                                  right: `${8 + i * 16}%`,
-                                  top: `${15 + i * 18}%`,
-                                }}
-                              >
-                                <div className="p-3 space-y-2">
-                                  <motion.div 
-                                    className="h-2 bg-purple-300/50 rounded w-3/4"
-                                    animate={{ opacity: [0.5, 1, 0.5] }}
-                                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-                                  />
-                                  <motion.div 
-                                    className="h-2 bg-purple-300/40 rounded w-1/2"
-                                    animate={{ opacity: [0.5, 1, 0.5] }}
-                                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 + 0.3 }}
-                                  />
-                                </div>
-                              </motion.div>
-                            ))}
                           </>
                         )}
 
@@ -245,12 +196,8 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                     stroke="rgba(220, 200, 255, 0.6)"
                                     strokeWidth="1"
                                     initial={{ opacity: 0 }}
-                                    animate={{ opacity: [0, 0.8, 0] }}
-                                    transition={{ 
-                                      duration: 2,
-                                      repeat: Infinity,
-                                      delay: 1.2 + index * 0.4 + i * 0.15
-                                    }}
+                                    animate={{ opacity: 0.4 }}
+                                    transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                                   />
                                 </g>
                               ))}
@@ -288,18 +235,9 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                               <motion.div
                                 key={`zodiac-${i}`}
                                 className="absolute text-4xl text-purple-300/60 font-bold"
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{
-                                  opacity: [0.4, 0.8, 0.4],
-                                  scale: [1, 1.3, 1],
-                                  y: [0, -40, 0],
-                                  rotate: [0, 360],
-                                }}
-                                transition={{
-                                  duration: 10 + i * 2,
-                                  repeat: Infinity,
-                                  delay: 1.5 + index * 0.4 + i * 0.4,
-                                }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 0.5 }}
+                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                                 style={{
                                   left: `${10 + i * 22}%`,
                                   top: `${12 + i * 18}%`,
@@ -353,16 +291,9 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                 transition={{ delay: 0.15 + index * 0.4 + i * 0.15 }}
                                 className="flex items-start gap-2 sm:gap-3"
                               >
-                                <motion.div
+                                <div
                                   className="w-2 h-2 rounded-full bg-purple-400 mt-2"
-                                  animate={{
-                                    boxShadow: [
-                                      "0 0 5px rgba(200, 100, 255, 0.6)",
-                                      "0 0 15px rgba(200, 100, 255, 1)",
-                                      "0 0 5px rgba(200, 100, 255, 0.6)",
-                                    ]
-                                  }}
-                                  transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                                  style={{ boxShadow: "0 0 5px rgba(200, 100, 255, 0.6)" }}
                                 />
                                 <p className="text-purple-200/90 leading-relaxed text-sm sm:text-base">{highlight}</p>
                               </motion.div>
@@ -397,16 +328,9 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                               className="pt-6 border-t-2 border-purple-300/20"
                             >
                               <div className="flex items-center gap-3 mb-2">
-                                <motion.div
+                                <div
                                   className="w-2 h-6 rounded-full bg-gradient-to-b from-pink-400 to-purple-400"
-                                  animate={{
-                                    boxShadow: [
-                                      "0 0 10px rgba(236, 72, 153, 0.6)",
-                                      "0 0 20px rgba(236, 72, 153, 1)",
-                                      "0 0 10px rgba(236, 72, 153, 0.6)",
-                                    ]
-                                  }}
-                                  transition={{ duration: 2, repeat: Infinity }}
+                                  style={{ boxShadow: "0 0 10px rgba(236, 72, 153, 0.6)" }}
                                 />
                                 <h4 className="text-lg font-bold text-pink-200">
                                   Notable: {job.notableProject.name}
