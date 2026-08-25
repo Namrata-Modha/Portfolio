@@ -16,23 +16,12 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
     <div className="relative w-full min-h-screen overflow-hidden">
       <CinematicEnvironment scene="experience" />
 
-      {/* Gentle entrance burst */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        initial={{ scale: 0, opacity: 0.5 }}
-        animate={{ scale: 2, opacity: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        style={{
-          background: "radial-gradient(circle, rgba(255, 100, 200, 0.4) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative z-10 h-screen overflow-y-auto py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 pb-32">
+      <div className="relative z-10 h-screen overflow-y-auto pt-20 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: -30 }}
+            initial={{ opacity: 0, scale: 0.9, y: -12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
             className="mb-8 sm:mb-12 lg:mb-16 text-center"
           >
             <motion.h1
@@ -46,10 +35,10 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.15 }}
               className="text-purple-200/80 text-base sm:text-lg lg:text-xl"
             >
-              3+ years bridging strategy and engineering
+              3+ years building full-stack applications
             </motion.p>
           </motion.div>
 
@@ -60,7 +49,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                 className="absolute inset-0 bg-gradient-to-b from-purple-500/60 via-pink-500/60 to-blue-500/60"
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: 1 }}
-                transition={{ duration: 2.5, delay: 0.8, ease: "easeOut" }}
+                transition={{ duration: 0.3, delay: 0.15, ease: "easeOut" }}
                 style={{ transformOrigin: "top" }}
               />
               <motion.div
@@ -88,8 +77,8 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                     initial={{ opacity: 0, x: isLeft ? -400 : 400, scale: 0.6 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     transition={{ 
-                      duration: 1.3, 
-                      delay: 0.5 + index * 0.4, 
+                      duration: 0.3, 
+                      delay: 0.15 + index * 0.4, 
                       type: "spring",
                       bounce: 0.6
                     }}
@@ -100,7 +89,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                       className="absolute left-0 md:left-1/2 top-8 w-6 h-6 rounded-full bg-purple-400 -translate-x-[11px] md:-translate-x-1/2 z-20"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      transition={{ delay: 0.7 + index * 0.4, type: "spring", stiffness: 400 }}
+                      transition={{ delay: 0.15 + index * 0.4, type: "spring", stiffness: 400 }}
                     >
                       <motion.div
                         className="absolute inset-0 rounded-full bg-purple-300"
@@ -127,9 +116,9 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                           <>
                             <motion.div
                               className="absolute bottom-0 right-0 w-72 h-96 opacity-40 pointer-events-none"
-                              initial={{ opacity: 0, y: 100, scale: 0.7 }}
+                              initial={{ opacity: 0, y: 12, scale: 0.7 }}
                               animate={{ opacity: 0.5, y: 0, scale: 1 }}
-                              transition={{ duration: 1.5, delay: 0.9 + index * 0.4 }}
+                              transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                               whileHover={{ opacity: 0.7, scale: 1.1 }}
                             >
                               <svg viewBox="0 0 120 180" className="w-full h-full drop-shadow-2xl">
@@ -152,7 +141,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                   filter="url(#hotelGlow)"
                                   initial={{ scaleY: 0 }}
                                   animate={{ scaleY: 1 }}
-                                  transition={{ duration: 1.2, delay: 1.1 + index * 0.4 }}
+                                  transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                                   style={{ transformOrigin: "bottom" }}
                                 />
 
@@ -186,7 +175,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                   filter="url(#hotelGlow)"
                                   initial={{ opacity: 0 }}
                                   animate={{ opacity: 1 }}
-                                  transition={{ delay: 2 + index * 0.4 }}
+                                  transition={{ delay: 0.15 + index * 0.4 }}
                                 />
                               </svg>
                             </motion.div>
@@ -239,16 +228,13 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                   <motion.circle
                                     cx={x}
                                     cy={y}
-                                    r="0"
+                                    r="3"
                                     fill="rgba(220, 200, 255, 1)"
-                                    initial={{ r: 0, opacity: 0 }}
-                                    animate={{ 
-                                      r: [0, 4, 3],
-                                      opacity: [0, 1, 0.7, 1],
-                                    }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: [0, 1, 0.7, 1] }}
                                     transition={{ 
-                                      duration: 0.8,
-                                      delay: 1 + index * 0.4 + i * 0.1
+                                      duration: 0.3,
+                                      delay: 0.15 + index * 0.4 + i * 0.1
                                     }}
                                   />
                                   <motion.circle
@@ -258,11 +244,8 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                     fill="none"
                                     stroke="rgba(220, 200, 255, 0.6)"
                                     strokeWidth="1"
-                                    initial={{ scale: 0, opacity: 0 }}
-                                    animate={{ 
-                                      scale: [0, 2, 1.5],
-                                      opacity: [0, 0.8, 0],
-                                    }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: [0, 0.8, 0] }}
                                     transition={{ 
                                       duration: 2,
                                       repeat: Infinity,
@@ -279,7 +262,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                 fill="none"
                                 initial={{ pathLength: 0, opacity: 0 }}
                                 animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 2, delay: 1.5 + index * 0.4 }}
+                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                               />
                               <motion.path
                                 d="M 45 85 L 105 95 L 145 105"
@@ -288,7 +271,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                 fill="none"
                                 initial={{ pathLength: 0, opacity: 0 }}
                                 animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 2, delay: 1.8 + index * 0.4 }}
+                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                               />
                               <motion.path
                                 d="M 60 140 L 125 155 L 180 135"
@@ -297,7 +280,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                 fill="none"
                                 initial={{ pathLength: 0, opacity: 0 }}
                                 animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 2, delay: 2.1 + index * 0.4 }}
+                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                               />
                             </svg>
 
@@ -335,7 +318,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                               className={`flex-1 h-1 bg-gradient-to-${isLeft ? "l" : "r"} from-purple-500/70 to-transparent`}
                               initial={{ scaleX: 0 }}
                               animate={{ scaleX: 1 }}
-                              transition={{ duration: 1, delay: 0.8 + index * 0.4 }}
+                              transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
                               style={{ transformOrigin: isLeft ? "right" : "left" }}
                             />
                             <motion.h2
@@ -347,9 +330,9 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                           </div>
 
                           <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 12 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1 + index * 0.4 }}
+                            transition={{ delay: 0.15 + index * 0.4 }}
                             className="mb-6"
                           >
                             <h3 className="text-xl sm:text-2xl font-semibold text-purple-200 mb-2">{job.role}</h3>
@@ -364,10 +347,10 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                             {job.highlights.map((highlight, i) => (
                               <motion.div
                                 key={i}
-                                initial={{ opacity: 0, x: -40 }}
+                                initial={{ opacity: 0, x: -12 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 whileHover={{ x: 10, scale: 1.02 }}
-                                transition={{ delay: 1.2 + index * 0.4 + i * 0.15 }}
+                                transition={{ delay: 0.15 + index * 0.4 + i * 0.15 }}
                                 className="flex items-start gap-2 sm:gap-3"
                               >
                                 <motion.div
@@ -397,7 +380,7 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                                   y: -8,
                                   boxShadow: "0 10px 30px rgba(200, 100, 255, 0.5)"
                                 }}
-                                transition={{ delay: 1.5 + index * 0.4 + i * 0.08 }}
+                                transition={{ delay: 0.15 + index * 0.4 + i * 0.08 }}
                                 className="px-4 py-2 rounded-full bg-purple-500/30 border-2 border-purple-300/30 text-sm text-purple-100 font-semibold cursor-default"
                               >
                                 {tech}
@@ -407,10 +390,10 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
 
                           {job.notableProject && (
                             <motion.div
-                              initial={{ opacity: 0, y: 20 }}
+                              initial={{ opacity: 0, y: 12 }}
                               animate={{ opacity: 1, y: 0 }}
                               whileHover={{ scale: 1.03 }}
-                              transition={{ delay: 1.8 + index * 0.4 }}
+                              transition={{ delay: 0.15 + index * 0.4 }}
                               className="pt-6 border-t-2 border-purple-300/20"
                             >
                               <div className="flex items-center gap-3 mb-2">

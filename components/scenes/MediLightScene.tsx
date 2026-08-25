@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import { ExternalLink, GitFork, BookOpen, ArrowLeft } from "lucide-react";
 
@@ -47,21 +46,12 @@ const DOTS = Array.from({ length: 30 }, (_, i) => ({
 }));
 
 export default function MediLightScene({ onBack }: MediLightSceneProps) {
-  const [entered, setEntered] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setEntered(true), 100);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <div
       className="relative w-full min-h-screen overflow-hidden"
       style={{
         background:
           "linear-gradient(160deg, #0d0520 0%, #120a2e 40%, #0a0618 70%, #0d0520 100%)",
-        opacity: entered ? 1 : 0,
-        transition: "opacity 0.8s ease-out",
       }}
     >
       {/* ── BACKGROUND ELEMENTS ── */}
@@ -150,7 +140,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
           className="absolute bottom-12 right-10 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.12 }}
-          transition={{ duration: 2, delay: 1 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
         >
           <svg
             width="80"
@@ -168,7 +158,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative z-10 min-h-screen overflow-y-auto py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
+      <div className="relative z-10 min-h-screen overflow-y-auto pt-20 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-5xl mx-auto">
 
           {/* Back button */}
@@ -181,9 +171,9 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
               color: "rgba(196, 181, 253, 0.9)",
               backdropFilter: "blur(10px)",
             }}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             whileHover={{ scale: 1.05, x: -3 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -194,9 +184,9 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
           {/* Header */}
           <motion.div
             className="mb-8 sm:mb-10"
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           >
             <div className="flex flex-wrap items-center gap-3 mb-3">
               <motion.span
@@ -208,7 +198,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.15 }}
               >
                 Smart Pharmacy System
               </motion.span>
@@ -221,7 +211,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.15 }}
               >
                 ✦ PHI auto-redacted · never leaves device
               </motion.span>
@@ -236,9 +226,9 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 WebkitTextFillColor: "transparent",
                 textShadow: "0 0 60px rgba(167, 139, 250, 0.3)",
               }}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
             >
               MediLight
             </motion.h1>
@@ -247,7 +237,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
               style={{ color: "rgba(196, 181, 253, 0.7)", fontStyle: "italic" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.15 }}
             >
               AI-powered prescription scanning for pharmacy dispensing
             </motion.p>
@@ -255,9 +245,9 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
 
           {/* Main card */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15, type: "spring", bounce: 0.3 }}
           >
             <GlassCard depth="near" className="p-6 sm:p-8 lg:p-10 mb-6">
               {/* LED indicator decoration */}
@@ -286,7 +276,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 style={{ color: "rgba(220, 210, 255, 0.85)", maxWidth: "700px" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.15 }}
               >
                 Scans prescription images → Google Gemini AI reads medications
                 (including messy handwriting) → matches against live inventory →
@@ -299,7 +289,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 className="mb-6"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-4"
@@ -313,9 +303,9 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                       key={i}
                       className="flex items-start gap-3 text-sm"
                       style={{ color: "rgba(210, 200, 255, 0.85)" }}
-                      initial={{ opacity: 0, x: -15 }}
+                      initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7 + i * 0.1 }}
+                      transition={{ delay: 0.15 + i * 0.1 }}
                     >
                       <span
                         className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full"
@@ -334,7 +324,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
@@ -348,7 +338,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                       key={tech}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1 + i * 0.07 }}
+                      transition={{ delay: 0.15 + i * 0.07 }}
                     >
                       <GlassChip>
                         <span
@@ -368,9 +358,9 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-wrap gap-3"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 0.15 }}
           >
             <motion.a
               href="https://medilight-dashboard.vercel.app/"

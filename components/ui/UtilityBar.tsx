@@ -5,41 +5,30 @@ import type { Scene } from "@/lib/scenes";
 import { SCENE_ORDER, SCENE_META } from "@/lib/scenes";
 
 interface UtilityBarProps {
-  visible: boolean;
   currentScene: Scene;
   onNavigate: (scene: Scene) => void;
 }
 
 const NAV_ITEMS = [
-  { label: "Resume", icon: "CV", href: "/Namrata_Modha.pdf", download: true },
+  { label: "Resume", icon: "CV", href: "/Namrata_Modha_Resume.pdf" },
   { label: "GitHub", icon: "GH", href: PERSONAL.github },
   { label: "LinkedIn", icon: "in", href: PERSONAL.linkedin },
   { label: "Email", icon: "@", href: `mailto:${PERSONAL.email}` },
 ];
 
-const NAVIGABLE_SCENES = SCENE_ORDER.filter((s) => s !== "gate");
-
-export default function UtilityBar({ visible, currentScene, onNavigate }: UtilityBarProps) {
+export default function UtilityBar({ currentScene, onNavigate }: UtilityBarProps) {
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(-20px)",
-        transition: "all 1s cubic-bezier(0.4,0,0.2,1) 0.4s",
-        pointerEvents: visible ? "auto" : "none",
-      }}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-3 sm:px-5 py-3">
       {/* Left: Scene navigation dots */}
       <div className="flex items-center gap-1.5">
-        {NAVIGABLE_SCENES.map((sceneId) => {
+        {SCENE_ORDER.map((sceneId) => {
           const meta = SCENE_META[sceneId];
           const isActive = currentScene === sceneId;
           return (
             <button
               key={sceneId}
               onClick={() => onNavigate(sceneId)}
-              className="relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-full cursor-pointer transition-all duration-500"
+              className="relative flex items-center gap-1.5 px-2.5 py-3 sm:py-1.5 rounded-full cursor-pointer transition-all duration-500"
               style={{
                 background: isActive
                   ? "rgba(150,80,220,0.14)"
@@ -100,21 +89,14 @@ export default function UtilityBar({ visible, currentScene, onNavigate }: Utilit
       </div>
 
       {/* Right: External links */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         {NAV_ITEMS.map((item) => (
           <a
             key={item.label}
             href={item.href}
-            target={
-              item.download
-                ? undefined
-                : item.href.startsWith("mailto")
-                  ? undefined
-                  : "_blank"
-            }
+            target={item.href.startsWith("mailto") ? undefined : "_blank"}
             rel="noopener noreferrer"
-            download={item.download ? true : undefined}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition-all duration-500"
+            className="flex items-center gap-1.5 px-2 sm:px-3 py-2.5 sm:py-1.5 rounded-full text-xs transition-all duration-500"
             style={{
               background: "rgba(130,60,190,0.06)",
               backdropFilter: "blur(16px)",

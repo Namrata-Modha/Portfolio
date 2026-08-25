@@ -1,5 +1,4 @@
 export type Scene =
-  | "gate"
   | "about"
   | "education"
   | "experience"
@@ -7,7 +6,6 @@ export type Scene =
   | "contact";
 
 export const SCENE_ORDER: Scene[] = [
-  "gate",
   "about",
   "education",
   "experience",
@@ -22,7 +20,6 @@ export interface SceneMeta {
 }
 
 export const SCENE_META: Record<Scene, SceneMeta> = {
-  gate: { id: "gate", label: "Enter", index: "00" },
   about: { id: "about", label: "About", index: "01" },
   education: { id: "education", label: "Education", index: "02" },
   experience: { id: "experience", label: "Experience", index: "03" },

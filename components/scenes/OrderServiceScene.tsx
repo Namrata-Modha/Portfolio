@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import { GitFork, ArrowLeft } from "lucide-react";
 
@@ -31,20 +30,11 @@ const GRID_DOTS = Array.from({ length: 40 }, (_, i) => ({
 }));
 
 export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
-  const [entered, setEntered] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setEntered(true), 100);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <div
       className="relative w-full min-h-screen overflow-hidden"
       style={{
         background: "linear-gradient(160deg, #0d1a0d 0%, #0f2010 40%, #0a1a0a 70%, #0d1a0d 100%)",
-        opacity: entered ? 1 : 0,
-        transition: "opacity 0.8s ease-out",
       }}
     >
       {/* ── BACKGROUND ── */}
@@ -90,7 +80,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative z-10 min-h-screen overflow-y-auto py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
+      <div className="relative z-10 min-h-screen overflow-y-auto pt-20 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-5xl mx-auto">
 
           {/* Back button */}
@@ -103,9 +93,9 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
               color: "rgba(167, 243, 208, 0.9)",
               backdropFilter: "blur(10px)",
             }}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             whileHover={{ scale: 1.05, x: -3 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -116,9 +106,9 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
           {/* Header */}
           <motion.div
             className="mb-8 sm:mb-10"
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           >
             <div className="flex flex-wrap items-center gap-3 mb-3">
               <motion.span
@@ -130,7 +120,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.15 }}
               >
                 Learning Project
               </motion.span>
@@ -143,7 +133,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.15 }}
               >
                 ◈ Strangler Fig Pattern
               </motion.span>
@@ -156,9 +146,9 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
             >
               Order Service
             </motion.h1>
@@ -167,7 +157,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
               style={{ color: "rgba(134, 239, 172, 0.65)", fontStyle: "italic" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.15 }}
             >
               Spring Boot microservice for order management
             </motion.p>
@@ -175,9 +165,9 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
 
           {/* Main card */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15, type: "spring", bounce: 0.3 }}
           >
             <GlassCard depth="near" className="p-6 sm:p-8 lg:p-10 mb-6">
               {/* Description */}
@@ -186,7 +176,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                 style={{ color: "rgba(200, 240, 215, 0.85)", maxWidth: "700px" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.15 }}
               >
                 Spring Boot microservice for order management, built deliberately to develop real
                 hands-on Java and Spring depth. Structured as a single extracted service that
@@ -200,7 +190,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                 className="mb-6"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-4"
@@ -214,9 +204,9 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                       key={i}
                       className="flex items-start gap-3 text-sm"
                       style={{ color: "rgba(200, 240, 215, 0.85)" }}
-                      initial={{ opacity: 0, x: -15 }}
+                      initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7 + i * 0.1 }}
+                      transition={{ delay: 0.15 + i * 0.1 }}
                     >
                       <span
                         className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full"
@@ -232,7 +222,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
@@ -246,7 +236,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                       key={tech}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1 + i * 0.07 }}
+                      transition={{ delay: 0.15 + i * 0.07 }}
                     >
                       <GlassChip>
                         <span
@@ -266,9 +256,9 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-wrap gap-3"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 0.15 }}
           >
             <motion.a
               href="https://github.com/Namrata-Modha/order-service-microservice"
