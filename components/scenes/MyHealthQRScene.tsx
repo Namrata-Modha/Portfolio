@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import { GitFork, ArrowLeft, Award } from "lucide-react";
 
@@ -44,20 +43,11 @@ const CROSS_POSITIONS = [
 ];
 
 export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
-  const [entered, setEntered] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setEntered(true), 100);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <div
       className="relative w-full min-h-screen overflow-hidden"
       style={{
         background: "linear-gradient(160deg, #0a1628 0%, #0d1f3c 40%, #091525 70%, #0a1628 100%)",
-        opacity: entered ? 1 : 0,
-        transition: "opacity 0.8s ease-out",
       }}
     >
       {/* ── BACKGROUND ── */}
@@ -107,7 +97,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
           className="absolute bottom-10 left-8 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.8 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
         >
           <svg width="90" height="55" viewBox={`0 0 ${21 * 4} ${6 * 4}`}>
             {QR_CELLS.filter(c => c.filled).map((cell, i) => (
@@ -126,7 +116,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative z-10 min-h-screen overflow-y-auto py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
+      <div className="relative z-10 min-h-screen overflow-y-auto pt-20 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-5xl mx-auto">
 
           {/* Back button */}
@@ -139,9 +129,9 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               color: "rgba(150, 240, 240, 0.9)",
               backdropFilter: "blur(10px)",
             }}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             whileHover={{ scale: 1.05, x: -3 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -152,9 +142,9 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
           {/* Header */}
           <motion.div
             className="mb-8 sm:mb-10"
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           >
             <div className="flex flex-wrap items-center gap-3 mb-3">
               <motion.span
@@ -166,7 +156,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.15 }}
               >
                 Dec 2024 – Apr 2025
               </motion.span>
@@ -180,7 +170,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.15 }}
               >
                 <Award size={12} />
                 First Place Capstone Award
@@ -194,9 +184,9 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
             >
               MyHealthQR
             </motion.h1>
@@ -205,7 +195,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               style={{ color: "rgba(103, 232, 249, 0.65)", fontStyle: "italic" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.15 }}
             >
               PIPEDA-compliant healthcare platform with role-based access control
             </motion.p>
@@ -213,9 +203,9 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
 
           {/* Main card */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15, type: "spring", bounce: 0.3 }}
           >
             <GlassCard depth="near" className="p-6 sm:p-8 lg:p-10 mb-6">
               {/* Award badge decoration */}
@@ -223,7 +213,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 className="absolute top-6 right-6 pointer-events-none"
                 initial={{ opacity: 0, rotate: -20, scale: 0 }}
                 animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
+                transition={{ duration: 0.3, delay: 0.15, type: "spring" }}
               >
                 <div
                   className="flex flex-col items-center justify-center w-16 h-16 rounded-full text-center"
@@ -242,7 +232,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 style={{ color: "rgba(200, 230, 240, 0.85)", maxWidth: "700px" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.15 }}
               >
                 PIPEDA-compliant healthcare platform with role-based access control and API gateway
                 strategy. Built to give patients control of their health data via QR code — secure,
@@ -254,7 +244,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 className="mb-6"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-4"
@@ -268,9 +258,9 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                       key={i}
                       className="flex items-start gap-3 text-sm"
                       style={{ color: "rgba(200, 230, 240, 0.85)" }}
-                      initial={{ opacity: 0, x: -15 }}
+                      initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7 + i * 0.1 }}
+                      transition={{ delay: 0.15 + i * 0.1 }}
                     >
                       <span
                         className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full"
@@ -286,7 +276,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
@@ -300,7 +290,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                       key={tech}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1 + i * 0.07 }}
+                      transition={{ delay: 0.15 + i * 0.07 }}
                     >
                       <GlassChip>
                         <span
@@ -320,9 +310,9 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-wrap gap-3"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 0.15 }}
           >
             <motion.a
               href="https://github.com/Namrata-Modha/MyHealthQR"

@@ -17,12 +17,7 @@ export default function NavigationButtons({
   continueLabel = "Continue",
 }: NavigationButtonsProps) {
   return (
-    <motion.div
-      className="fixed bottom-8 left-0 right-0 z-50 flex justify-center gap-6 px-4"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1, duration: 0.6 }}
-    >
+    <div className="fixed bottom-8 left-0 right-0 z-50 flex justify-center gap-6 px-4">
       {onBack && (
         <motion.button
           onClick={onBack}
@@ -46,6 +41,6 @@ export default function NavigationButtons({
           <ArrowRight size={20} />
         </motion.button>
       )}
-    </motion.div>
+    </div>
   );
 }

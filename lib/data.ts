@@ -2,8 +2,7 @@
 
 export const PERSONAL = {
   name: "Namrata Modha",
-  tagline: "Technical BA | Systems Architect | Developer",
-  subtitle: "bridging strategy and engineering",
+  tagline: "Full-Stack Developer",
   email: "namratamodha3@gmail.com",
   phone: "548-881-3098",
   github: "https://github.com/Namrata-Modha",
@@ -13,12 +12,12 @@ export const PERSONAL = {
 
 export const ABOUT = {
   greeting: "Hey, I'm Namrata.",
-  bio: 'Technical Business Analyst who translates business strategy into engineered solutions. I bridge the gap between "what stakeholders need" and "what engineering builds" - requirements analysis, system architecture, and hands-on development. Built across India and Canada, fueled by lattè and K-drama marathons.',
+  bio: 'Technical Business Analyst who translates business strategy into engineered solutions. I bridge the gap between "what stakeholders need" and "what engineering builds" - requirements analysis, system architecture, and hands-on development. Built across India and Canada, fueled by latte and K-drama marathons.',
   highlights: [
     {
       icon: "⚡",
-      title: "Technical BA + Engineer",
-      desc: "3+ years bridging business and tech. Requirements translation, gap analysis, NFRs, system design. Then I build it: Laravel, React, Vue.js, Node.js, REST APIs.",
+      title: "Full-Stack Developer",
+      desc: "3+ years shipping production systems: Laravel, React, Vue.js, Node.js, REST APIs. Backed by requirements translation, gap analysis, NFRs, and system design, so what I build is what the business actually needed.",
     },
     {
       icon: "📊",
@@ -32,21 +31,21 @@ export const ABOUT = {
     },
   ],
   techStack: [
-    "Requirements Analysis",
-    "System Architecture",
-    "Agile/JIRA",
-    "Laravel",
     "React",
-    "Vue.js",
-    "Node.js",
     "TypeScript",
+    "Node.js",
+    "Laravel",
+    "Vue.js",
     "Python",
-    "AWS",
-    "Docker",
     "PostgreSQL",
     "REST APIs",
+    "AWS",
+    "Docker",
+    "System Architecture",
+    "Requirements Analysis",
+    "Agile/JIRA",
   ],
-  flourish: "strategy ✦ systems ✦ code ✦ lattè",
+  flourish: "code ✦ systems ✦ strategy ✦ latte",
 };
 
 export const EDUCATION = {

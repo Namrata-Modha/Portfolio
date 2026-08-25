@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import type { Scene } from "@/lib/scenes";
 import { UtilityBar } from "@/components/ui";
 import {
-  GateScene,
   AboutScene,
   EducationScene,
   ExperienceScene,
@@ -19,7 +18,7 @@ import {
 type ProjectView = "hub" | "rubin-scout" | "myhealthqr" | "medilight" | "order-service";
 
 export default function Portfolio() {
-  const [scene, setScene] = useState<Scene>("gate");
+  const [scene, setScene] = useState<Scene>("about");
   const [projectView, setProjectView] = useState<ProjectView>("hub");
 
   const navigateTo = useCallback((target: Scene) => {
@@ -40,21 +39,10 @@ export default function Portfolio() {
 
   return (
     <div className="relative w-full min-h-screen" style={{ background: "#06031a" }}>
-      <UtilityBar
-        visible={scene !== "gate"}
-        currentScene={scene}
-        onNavigate={navigateTo}
-      />
-
-      {scene === "gate" && (
-        <GateScene onEnter={() => navigateTo("about")} />
-      )}
+      <UtilityBar currentScene={scene} onNavigate={navigateTo} />
 
       {scene === "about" && (
-        <AboutScene
-          onBack={() => navigateTo("gate")}
-          onContinue={() => navigateTo("education")}
-        />
+        <AboutScene onContinue={() => navigateTo("education")} />
       )}
 
       {scene === "education" && (

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import NavigationButtons from "@/components/ui/NavigationButtons";
 import { ExternalLink, GitFork, BookOpen, ArrowLeft } from "lucide-react";
@@ -46,20 +45,11 @@ const CONSTELLATION_LINES = [
 ];
 
 export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
-  const [entered, setEntered] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setEntered(true), 100);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <div
       className="relative w-full min-h-screen overflow-hidden"
       style={{
         background: "linear-gradient(135deg, #0a0e27 0%, #0d1235 40%, #0f0a2e 70%, #0a0e27 100%)",
-        opacity: entered ? 1 : 0,
-        transition: "opacity 0.8s ease-out",
       }}
     >
       {/* ── STAR FIELD ── */}
@@ -75,7 +65,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
               strokeWidth="0.8"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 2, delay: 0.5 + i * 0.15, ease: "easeInOut" }}
+              transition={{ duration: 0.3, delay: 0.15 + i * 0.15, ease: "easeInOut" }}
             />
           ))}
 
@@ -87,10 +77,8 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
               cy={`${star.y}%`}
               r={star.size}
               fill={star.id % 7 === 0 ? "rgba(196, 181, 253, 0.9)" : "rgba(255, 255, 255, 0.85)"}
-              animate={{
-                opacity: [0.3, 1, 0.3],
-                r: [star.size, star.size * 1.4, star.size],
-              }}
+              initial={{ opacity: 0.3 }}
+              animate={{ opacity: [0.3, 1, 0.3] }}
               transition={{
                 duration: star.duration,
                 repeat: Infinity,
@@ -138,7 +126,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
           className="absolute bottom-8 right-8 opacity-10 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.1 }}
-          transition={{ duration: 2, delay: 1 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
         >
           <svg width="120" height="160" viewBox="0 0 120 160" fill="rgba(167,139,250,0.8)">
             <ellipse cx="60" cy="30" rx="50" ry="15" />
@@ -151,7 +139,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative z-10 min-h-screen overflow-y-auto py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
+      <div className="relative z-10 min-h-screen overflow-y-auto pt-20 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 pb-32">
         <div className="w-full max-w-5xl mx-auto">
 
           {/* Back button */}
@@ -163,9 +151,9 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
               border: "1px solid rgba(167, 139, 250, 0.3)",
               backdropFilter: "blur(10px)",
             }}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             whileHover={{ scale: 1.05, x: -3 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -176,9 +164,9 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
           {/* Header */}
           <motion.div
             className="mb-8 sm:mb-10"
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           >
             <div className="flex flex-wrap items-center gap-3 mb-3">
               <motion.span
@@ -190,7 +178,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.15 }}
               >
                 Mar 2026 – Apr 2026
               </motion.span>
@@ -203,7 +191,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.15 }}
               >
                 ✦ First public gravitational wave cross-matching tool
               </motion.span>
@@ -217,9 +205,9 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                 WebkitTextFillColor: "transparent",
                 textShadow: "0 0 60px rgba(167, 139, 250, 0.3)",
               }}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
             >
               Rubin Scout
             </motion.h1>
@@ -228,7 +216,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
               style={{ color: "rgba(196, 181, 253, 0.75)", fontStyle: "italic" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.15 }}
             >
               Astronomical Alert Dashboard
             </motion.p>
@@ -236,9 +224,9 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
 
           {/* Main card */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15, type: "spring", bounce: 0.3 }}
           >
             <GlassCard depth="near" className="p-6 sm:p-8 lg:p-10 mb-6">
               {/* Decorative orbit ring */}
@@ -261,7 +249,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                 style={{ color: "rgba(220, 210, 255, 0.85)", maxWidth: "700px" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.15 }}
               >
                 Full-stack astronomical data pipeline processing real transient discoveries from
                 international observatories. Ingests data from IAU Transient Name Server, enriches
@@ -274,7 +262,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                 className="mb-6"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-4"
@@ -288,9 +276,9 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                       key={i}
                       className="flex items-start gap-3 text-sm"
                       style={{ color: "rgba(210, 200, 255, 0.85)" }}
-                      initial={{ opacity: 0, x: -15 }}
+                      initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7 + i * 0.1 }}
+                      transition={{ delay: 0.15 + i * 0.1 }}
                     >
                       <span
                         className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full"
@@ -306,7 +294,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
+                transition={{ delay: 0.15 }}
               >
                 <h3
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
@@ -320,7 +308,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                       key={tech}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1 + i * 0.06 }}
+                      transition={{ delay: 0.15 + i * 0.06 }}
                     >
                       <GlassChip>
                         <span
@@ -340,9 +328,9 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-wrap gap-3"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 0.15 }}
           >
             <motion.a
               href="https://rubin-scout.vercel.app"

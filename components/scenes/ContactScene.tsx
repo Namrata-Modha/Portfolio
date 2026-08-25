@@ -63,16 +63,6 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
     <div className="relative w-full h-screen overflow-y-auto">
       <CinematicEnvironment scene="contact" />
 
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        initial={{ scale: 0, opacity: 0.5 }}
-        animate={{ scale: 2, opacity: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        style={{
-          background: "radial-gradient(circle, rgba(200, 255, 100, 0.4) 0%, transparent 70%)",
-        }}
-      />
-
       {/* Gentle floating envelopes */}
       {[0, 1, 2, 3, 4].map((i) => (
         <motion.div
@@ -105,7 +95,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
             className="mb-12 sm:mb-16 text-center"
           >
             <motion.h1
@@ -119,7 +109,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.15 }}
               className="text-purple-200/80 text-base sm:text-lg lg:text-xl"
             >
               Open to new opportunities and collaborations
@@ -133,7 +123,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                 href={method.href}
                 target={method.label !== "Email" ? "_blank" : undefined}
                 rel={method.label !== "Email" ? "noopener noreferrer" : undefined}
-                initial={{ opacity: 0, y: 100, scale: 0.5, rotateX: 90 }}
+                initial={{ opacity: 0, y: 12, scale: 0.5, rotateX: 90 }}
                 animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
                 whileHover={{ 
                   scale: 1.15, 
@@ -142,8 +132,8 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{
-                  duration: 0.8,
-                  delay: 0.4 + index * 0.2,
+                  duration: 0.3,
+                  delay: 0.15 + index * 0.2,
                   type: "spring",
                   bounce: 0.5,
                 }}
@@ -159,7 +149,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                       className={`absolute inset-0 bg-gradient-to-br ${method.color}`}
                       initial={{ opacity: 0, scale: 0 }}
                       whileHover={{ opacity: 0.4, scale: 1.5 }}
-                      transition={{ duration: 0.6 }}
+                      transition={{ duration: 0.3 }}
                     />
 
                     {/* MASSIVE icon with dramatic glow */}
@@ -172,8 +162,8 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                         scale: 1.3,
                       }}
                       transition={{ 
-                        duration: 0.8,
-                        delay: 0.6 + index * 0.2,
+                        duration: 0.3,
+                        delay: 0.15 + index * 0.2,
                         type: "spring",
                       }}
                     >
@@ -191,9 +181,9 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
 
                     {/* Label with dramatic entrance */}
                     <motion.h3
-                      initial={{ opacity: 0, x: -50 }}
+                      initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + index * 0.2 }}
+                      transition={{ delay: 0.15 + index * 0.2 }}
                       className="text-2xl sm:text-3xl font-bold text-purple-100 mb-2 sm:mb-3 relative z-10"
                     >
                       {method.label}
@@ -201,9 +191,9 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
 
                     {/* Value */}
                     <motion.p
-                      initial={{ opacity: 0, x: -50 }}
+                      initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 1 + index * 0.2 }}
+                      transition={{ delay: 0.15 + index * 0.2 }}
                       className="text-purple-200/80 text-base sm:text-lg relative z-10 break-all"
                     >
                       {method.value}
@@ -246,7 +236,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
                             x: Math.cos(i * 45 * Math.PI / 180) * 100,
                             y: Math.sin(i * 45 * Math.PI / 180) * 100,
                           }}
-                          transition={{ duration: 0.8, delay: i * 0.05 }}
+                          transition={{ duration: 0.3, delay: i * 0.03 }}
                         />
                       ))}
                     </div>
@@ -258,9 +248,9 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
 
           {/* Footer with dramatic entrance */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 1 }}
+            transition={{ delay: 0.15, duration: 0.3 }}
             className="mt-16 text-center"
           >
             <motion.p
@@ -270,7 +260,7 @@ export default function ContactScene({ onBack, onContinue }: ContactSceneProps) 
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              Based in {PERSONAL.location} 📍 • Always happy to chat over lattè ☕
+              Based in {PERSONAL.location} 📍 • Always happy to chat over latte ☕
             </motion.p>
           </motion.div>
         </div>
