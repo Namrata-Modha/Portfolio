@@ -68,8 +68,6 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
             <div className="space-y-20">
               {EXPERIENCE.map((job, index) => {
                 const isLeft = index % 2 === 0;
-                const isHotel = job.theme === "hotel";
-                const isConstellation = job.theme === "constellation";
 
                 return (
                   <motion.div
@@ -84,172 +82,19 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                     }}
                     className={`relative ${isLeft ? "md:pr-[calc(50%+3rem)]" : "md:pl-[calc(50%+3rem)]"}`}
                   >
-                    {/* EXPLOSIVE timeline dot */}
+                    {/* Timeline dot */}
                     <motion.div
                       className="absolute left-0 md:left-1/2 top-8 w-6 h-6 rounded-full bg-purple-400 -translate-x-[11px] md:-translate-x-1/2 z-20"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.15 + index * 0.4, type: "spring", stiffness: 400 }}
-                    >
-                      <div
-                        className="absolute inset-0 rounded-full bg-purple-300"
-                        style={{ boxShadow: "0 0 20px rgba(200, 100, 255, 0.8)" }}
-                      />
-                    </motion.div>
+                    />
 
                     <motion.div
                       whileHover={{ scale: 1.08, y: -15 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <GlassCard depth="mid" className="relative overflow-hidden">
-                        {/* HOTEL THEME - MASSIVE building */}
-                        {isHotel && (
-                          <>
-                            <motion.div
-                              className="absolute bottom-0 right-0 w-72 h-96 opacity-40 pointer-events-none"
-                              initial={{ opacity: 0, y: 12, scale: 0.7 }}
-                              animate={{ opacity: 0.5, y: 0, scale: 1 }}
-                              transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                              whileHover={{ opacity: 0.7, scale: 1.1 }}
-                            >
-                              <svg viewBox="0 0 120 180" className="w-full h-full drop-shadow-2xl">
-                                <defs>
-                                  <filter id="hotelGlow">
-                                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                                    <feMerge>
-                                      <feMergeNode in="coloredBlur"/>
-                                      <feMergeNode in="SourceGraphic"/>
-                                    </feMerge>
-                                  </filter>
-                                </defs>
-
-                                <motion.rect
-                                  x="15"
-                                  y="50"
-                                  width="90"
-                                  height="130"
-                                  fill="rgba(220, 200, 240, 0.8)"
-                                  filter="url(#hotelGlow)"
-                                  initial={{ scaleY: 0 }}
-                                  animate={{ scaleY: 1 }}
-                                  transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                                  style={{ transformOrigin: "bottom" }}
-                                />
-
-                                {Array.from({ length: 8 }).map((_, row) =>
-                                  Array.from({ length: 5 }).map((_, col) => (
-                                    <motion.rect
-                                      key={`${row}-${col}`}
-                                      x={25 + col * 16}
-                                      y={60 + row * 14}
-                                      width="11"
-                                      height="9"
-                                      fill="rgba(255, 240, 180, 0.9)"
-                                      filter="url(#hotelGlow)"
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: 0.85 }}
-                                      transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                                    />
-                                  ))
-                                )}
-
-                                <motion.rect
-                                  x="50"
-                                  y="160"
-                                  width="20"
-                                  height="20"
-                                  fill="rgba(255, 240, 180, 1)"
-                                  filter="url(#hotelGlow)"
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  transition={{ delay: 0.15 + index * 0.4 }}
-                                />
-                              </svg>
-                            </motion.div>
-
-                          </>
-                        )}
-
-                        {/* CONSTELLATION THEME - DRAMATIC stars */}
-                        {isConstellation && (
-                          <>
-                            <svg className="absolute inset-0 w-full h-full opacity-50 pointer-events-none" viewBox="0 0 200 200">
-                              {[[30, 40], [65, 25], [95, 45], [130, 30], [160, 50], [45, 85], [105, 95], [145, 105], [60, 140], [125, 155], [180, 135], [25, 165]].map(([x, y], i) => (
-                                <g key={i}>
-                                  <motion.circle
-                                    cx={x}
-                                    cy={y}
-                                    r="3"
-                                    fill="rgba(220, 200, 255, 1)"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: [0, 1, 0.7, 1] }}
-                                    transition={{ 
-                                      duration: 0.3,
-                                      delay: 0.15 + index * 0.4 + i * 0.1
-                                    }}
-                                  />
-                                  <motion.circle
-                                    cx={x}
-                                    cy={y}
-                                    r="8"
-                                    fill="none"
-                                    stroke="rgba(220, 200, 255, 0.6)"
-                                    strokeWidth="1"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 0.4 }}
-                                    transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                                  />
-                                </g>
-                              ))}
-
-                              <motion.path
-                                d="M 30 40 L 65 25 L 95 45 L 130 30 L 160 50"
-                                stroke="rgba(220, 200, 255, 0.7)"
-                                strokeWidth="2"
-                                fill="none"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                              />
-                              <motion.path
-                                d="M 45 85 L 105 95 L 145 105"
-                                stroke="rgba(220, 200, 255, 0.7)"
-                                strokeWidth="2"
-                                fill="none"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                              />
-                              <motion.path
-                                d="M 60 140 L 125 155 L 180 135"
-                                stroke="rgba(220, 200, 255, 0.7)"
-                                strokeWidth="2"
-                                fill="none"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ pathLength: 1, opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                              />
-                            </svg>
-
-                            {["♈", "♉", "♊", "♋"].map((symbol, i) => (
-                              <motion.div
-                                key={`zodiac-${i}`}
-                                className="absolute text-4xl text-purple-300/60 font-bold"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 0.5 }}
-                                transition={{ duration: 0.3, delay: 0.15 + index * 0.4 }}
-                                style={{
-                                  left: `${10 + i * 22}%`,
-                                  top: `${12 + i * 18}%`,
-                                  textShadow: "0 0 30px rgba(220, 200, 255, 0.8)",
-                                }}
-                              >
-                                {symbol}
-                              </motion.div>
-                            ))}
-                          </>
-                        )}
-
                         <div className="relative p-8 z-10">
                           <div className={`flex items-center gap-4 mb-6 ${isLeft ? "md:flex-row-reverse" : ""}`}>
                             <motion.div
@@ -293,7 +138,6 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                               >
                                 <div
                                   className="w-2 h-2 rounded-full bg-purple-400 mt-2"
-                                  style={{ boxShadow: "0 0 5px rgba(200, 100, 255, 0.6)" }}
                                 />
                                 <p className="text-purple-200/90 leading-relaxed text-sm sm:text-base">{highlight}</p>
                               </motion.div>
@@ -330,7 +174,6 @@ export default function ExperienceScene({ onBack, onContinue }: ExperienceSceneP
                               <div className="flex items-center gap-3 mb-2">
                                 <div
                                   className="w-2 h-6 rounded-full bg-gradient-to-b from-pink-400 to-purple-400"
-                                  style={{ boxShadow: "0 0 10px rgba(236, 72, 153, 0.6)" }}
                                 />
                                 <h4 className="text-lg font-bold text-pink-200">
                                   Notable: {job.notableProject.name}
