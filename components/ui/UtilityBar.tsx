@@ -18,7 +18,7 @@ const NAV_ITEMS = [
 
 export default function UtilityBar({ currentScene, onNavigate }: UtilityBarProps) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-3 sm:px-5 py-3">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-3 sm:px-5 py-3 bg-[#06031a]/85 backdrop-blur-md">
       {/* Left: Scene navigation dots */}
       <div className="flex items-center gap-1.5">
         {SCENE_ORDER.map((sceneId) => {
