@@ -13,6 +13,11 @@ export const PERSONAL = {
 export const ABOUT = {
   greeting: "Hey, I'm Namrata.",
   bio: "Full-stack developer. In India I built hotel booking, payment and data features for live client systems at two companies. Since moving to Canada I've kept shipping: a live astronomy alert platform, a pharmacy dispensing system, and a storefront a small business runs on. Fueled by K-drama marathons and too many cups of latte.",
+  // The phrase must appear verbatim in bio above; AboutScene links it.
+  bioLink: {
+    text: "a storefront a small business runs on",
+    href: "https://tulsiart.vercel.app/",
+  },
   highlights: [
     {
       icon: "⚡",
@@ -56,7 +61,7 @@ export const EDUCATION = {
     {
       degree: "Bachelor of Engineering",
       field: "Computer Engineering",
-      school: "Gujarat Technological University",
+      school: "Silver Oak College / Gujarat Technological University",
       location: "Ahmedabad",
       years: "2017 - 2020",
       gpa: "8.35 / 10",

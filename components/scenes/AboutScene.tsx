@@ -11,6 +11,10 @@ interface AboutSceneProps {
   onContinue: () => void;
 }
 
+// Splits the bio around the linked phrase. Falls back to plain text if the
+// phrase is ever edited out of ABOUT.bio.
+const BIO_PARTS = ABOUT.bio.split(ABOUT.bioLink.text);
+
 export default function AboutScene({ onContinue }: AboutSceneProps) {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [portraitHover, setPortraitHover] = useState(false);
@@ -106,7 +110,28 @@ export default function AboutScene({ onContinue }: AboutSceneProps) {
                 textShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
               }}
             >
-              {ABOUT.bio}
+              {BIO_PARTS.length === 2 ? (
+                <>
+                  {BIO_PARTS[0]}
+                  <a
+                    href={ABOUT.bioLink.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-all duration-300 hover:brightness-125"
+                    style={{
+                      color: "rgba(220,180,255,0.95)",
+                      textDecoration: "underline",
+                      textDecorationColor: "rgba(200,170,250,0.4)",
+                      textUnderlineOffset: "4px",
+                    }}
+                  >
+                    {ABOUT.bioLink.text}
+                  </a>
+                  {BIO_PARTS[1]}
+                </>
+              ) : (
+                ABOUT.bio
+              )}
             </p>
           </div>
 
