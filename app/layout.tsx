@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Namrata Modha | Portfolio",
+  title: "Namrata Modha | Full-Stack Developer",
   description:
-    "Software Engineer portfolio - an immersive journey through code, culture, and craft. Built with Next.js and Framer Motion.",
+    "Full-stack developer in London, Ontario. Node.js, TypeScript, React, Python, PHP and Java. Projects include Rubin Scout, MediLight and MyHealthQR.",
   openGraph: {
-    title: "Namrata Modha | Portfolio",
-    description: "Enter the world of Namrata Modha - Software Engineer.",
+    title: "Namrata Modha | Full-Stack Developer",
+    description:
+      "Full-stack developer in London, Ontario. Node.js, TypeScript, React, Python, PHP and Java. Projects include Rubin Scout, MediLight and MyHealthQR.",
     type: "website",
   },
 };

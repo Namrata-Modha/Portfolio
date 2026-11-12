@@ -3,22 +3,15 @@
 import { motion } from "framer-motion";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import { GitFork, ArrowLeft, Award } from "lucide-react";
+import { PROJECTS } from "@/lib/data";
 
 interface MyHealthQRSceneProps {
   onBack: () => void;
 }
 
-const TECH_STACK = [
-  "PHP", "Laravel", "PostgreSQL", "REST APIs",
-  "Docker", "PIPEDA", "RBAC",
-];
-
-const FEATURES = [
-  "Won 1st Place for Technical Excellence among 10+ capstone teams",
-  "Served as Technical Lead, architecting the entire backend including authentication, QR-code generation, and role-based access control end to end",
-  "Optimized database queries by 40% through strategic indexing and schema design",
-  "Implemented rigorous integration testing ensuring zero unauthorized access",
-];
+const PROJECT = PROJECTS.filter((p) => p.title === "MyHealthQR")[0];
+const TECH_STACK = PROJECT.techStack;
+const FEATURES = PROJECT.highlights;
 
 // Stable QR cell grid
 const QR_CELLS: Array<{ row: number; col: number; filled: boolean }> = [];
@@ -158,23 +151,25 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                Dec 2024 – Apr 2025
+                {PROJECT.date}
               </motion.span>
 
-              <motion.span
-                className="flex items-center gap-1.5 text-xs px-3 py-1 rounded-full"
-                style={{
-                  background: "rgba(251, 191, 36, 0.15)",
-                  border: "1px solid rgba(251, 191, 36, 0.35)",
-                  color: "rgba(251, 191, 36, 0.95)",
-                }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.15 }}
-              >
-                <Award size={12} />
-                First Place Capstone Award
-              </motion.span>
+              {PROJECT.award && (
+                <motion.span
+                  className="flex items-center gap-1.5 text-xs px-3 py-1 rounded-full"
+                  style={{
+                    background: "rgba(251, 191, 36, 0.15)",
+                    border: "1px solid rgba(251, 191, 36, 0.35)",
+                    color: "rgba(251, 191, 36, 0.95)",
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <Award size={12} />
+                  {PROJECT.award}
+                </motion.span>
+              )}
             </div>
 
             <motion.h1
@@ -197,7 +192,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.15 }}
             >
-              PIPEDA-compliant healthcare platform with role-based access control
+              QR-based health records platform
             </motion.p>
           </motion.div>
 
@@ -234,9 +229,7 @@ export default function MyHealthQRScene({ onBack }: MyHealthQRSceneProps) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                PIPEDA-compliant healthcare platform with role-based access control and API gateway
-                strategy. Built to give patients control of their health data via QR code — secure,
-                portable, and standards-compliant.
+                {PROJECT.description}
               </motion.p>
 
               {/* Key Features */}

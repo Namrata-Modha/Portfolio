@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import CinematicEnvironment from "@/components/visuals/CinematicEnvironment";
 import GlassCard from "@/components/visuals/GlassCard";
 import NavigationButtons from "@/components/ui/NavigationButtons";
+import { PROJECTS } from "@/lib/data";
 
 type ProjectView = "rubin-scout" | "myhealthqr" | "medilight" | "order-service";
 
@@ -13,14 +14,21 @@ interface ProjectsSceneProps {
   onSelectProject: (project: ProjectView) => void;
 }
 
+const byTitle = (title: string) => PROJECTS.filter((p) => p.title === title)[0];
+
+const RUBIN_SCOUT = byTitle("Rubin Scout");
+const MYHEALTHQR = byTitle("MyHealthQR");
+const ORDER_SERVICE = byTitle("Order Service Microservice");
+const MEDILIGHT = byTitle("MediLight");
+
 const PROJECT_CARDS = [
   {
     id: "rubin-scout" as ProjectView,
-    title: "Rubin Scout",
+    title: RUBIN_SCOUT.title,
     tagline: "Astronomical Alert Dashboard",
-    date: "Mar – Apr 2026",
-    description: "First public tool with gravitational wave cross-matching. Real-time pipeline from 4 live astronomy sources.",
-    tech: ["React", "FastAPI", "PostGIS", "LIGO"],
+    date: RUBIN_SCOUT.date,
+    description: "Live astronomy alert platform. Pulls real transient discoveries from international observatories and searches LIGO gravitational-wave events for possible counterparts.",
+    tech: RUBIN_SCOUT.techStack.slice(0, 4),
     accentColor: "rgba(167, 139, 250, 0.8)",
     accentBg: "rgba(124, 58, 237, 0.12)",
     accentBorder: "rgba(167, 139, 250, 0.25)",
@@ -42,11 +50,11 @@ const PROJECT_CARDS = [
   },
   {
     id: "myhealthqr" as ProjectView,
-    title: "MyHealthQR",
+    title: MYHEALTHQR.title,
     tagline: "Healthcare Data Platform",
-    date: "Dec 2024 – Apr 2025",
-    description: "PIPEDA-compliant healthcare platform with role-based access control. Won 1st Place at Capstone.",
-    tech: ["Laravel", "PostgreSQL", "Docker", "RBAC"],
+    date: MYHEALTHQR.date,
+    description: "QR-based health records platform. Patients choose what medical information to share, and a first responder scans their code.",
+    tech: MYHEALTHQR.techStack.slice(0, 4),
     accentColor: "rgba(103, 232, 249, 0.8)",
     accentBg: "rgba(34, 211, 238, 0.08)",
     accentBorder: "rgba(103, 232, 249, 0.2)",
@@ -76,9 +84,9 @@ const PROJECT_CARDS = [
     id: "order-service" as ProjectView,
     title: "Order Service",
     tagline: "Spring Boot Microservice",
-    date: "Learning Project",
-    description: "Order management microservice built to develop real Spring Boot / Java depth. Layered architecture, JPA/Hibernate, PostgreSQL — modelled as a Strangler Fig extraction.",
-    tech: ["Java 17", "Spring Boot", "JPA", "PostgreSQL"],
+    date: ORDER_SERVICE.date,
+    description: "Spring Boot microservice for order management, structured as a deliberate exercise in building real Java/Spring depth.",
+    tech: ORDER_SERVICE.techStack.slice(0, 4),
     accentColor: "rgba(134, 239, 172, 0.8)",
     accentBg: "rgba(74, 222, 128, 0.08)",
     accentBorder: "rgba(134, 239, 172, 0.2)",
@@ -103,16 +111,16 @@ const PROJECT_CARDS = [
   },
   {
     id: "medilight" as ProjectView,
-    title: "MediLight",
+    title: MEDILIGHT.title,
     tagline: "AI Prescription Scanner",
-    date: "Smart Pharmacy",
-    description: "AI-powered prescription scanning for pharmacy dispensing. Gemini Vision + LED shelf hardware control.",
-    tech: ["Gemini AI", "React", "WebSocket", "Express"],
+    date: MEDILIGHT.date,
+    description: "Pharmacy dispensing system. Upload a prescription, AI reads it, and a simulated LED shelf lights up to show where to pick.",
+    tech: MEDILIGHT.techStack.slice(0, 4),
     accentColor: "rgba(124, 58, 237, 0.8)",
     accentBg: "rgba(124, 58, 237, 0.1)",
     accentBorder: "rgba(124, 58, 237, 0.2)",
     textColor: "rgba(167, 139, 250, 0.9)",
-    badge: "✦ PHI auto-redacted",
+    badge: "✦ PHI redacted locally",
     badgeStyle: {
       background: "rgba(134, 239, 172, 0.12)",
       border: "1px solid rgba(134, 239, 172, 0.3)",
