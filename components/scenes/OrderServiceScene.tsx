@@ -3,22 +3,15 @@
 import { motion } from "framer-motion";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import { GitFork, ArrowLeft } from "lucide-react";
+import { PROJECTS } from "@/lib/data";
 
 interface OrderServiceSceneProps {
   onBack: () => void;
 }
 
-const TECH_STACK = [
-  "Java 17", "Spring Boot 3.5", "Spring Data JPA",
-  "Hibernate", "PostgreSQL", "Maven",
-];
-
-const FEATURES = [
-  "Full CRUD REST API with layered architecture: Controller → Service → Repository → Entity",
-  "PostgreSQL persistence via Spring Data JPA and Hibernate",
-  "Global exception handling with a custom not-found exception",
-  "Built to develop hands-on Spring Boot 3 and Java 17 depth — not a production system, but a focused, honest learning project",
-];
+const PROJECT = PROJECTS.filter((p) => p.title === "Order Service Microservice")[0];
+const TECH_STACK = PROJECT.techStack;
+const FEATURES = PROJECT.highlights;
 
 // Grid decoration — simple circuit-board-style dots
 const GRID_DOTS = Array.from({ length: 40 }, (_, i) => ({
@@ -122,7 +115,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                Learning Project
+                {PROJECT.date}
               </motion.span>
               <motion.span
                 className="text-xs px-3 py-1 rounded-full"
@@ -178,11 +171,7 @@ export default function OrderServiceScene({ onBack }: OrderServiceSceneProps) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                Spring Boot microservice for order management, built deliberately to develop real
-                hands-on Java and Spring depth. Structured as a single extracted service that
-                simulates a Strangler Fig migration pattern out of a legacy monolith — full CRUD
-                API, layered architecture, PostgreSQL via JPA/Hibernate, and proper exception
-                handling throughout.
+                {PROJECT.description}
               </motion.p>
 
               {/* Key Features */}

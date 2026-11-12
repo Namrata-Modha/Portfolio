@@ -3,22 +3,15 @@
 import { motion } from "framer-motion";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import { ExternalLink, GitFork, BookOpen, ArrowLeft } from "lucide-react";
+import { PROJECTS } from "@/lib/data";
 
 interface MediLightSceneProps {
   onBack: () => void;
 }
 
-const TECH_STACK = [
-  "React", "Express", "PostgreSQL", "Gemini AI",
-  "WebSocket", "Tesseract", "Vercel", "Render",
-];
-
-const FEATURES = [
-  "Google Gemini AI Vision reads prescriptions with typo/abbreviation handling",
-  "PostgreSQL tracks inventory, orders, compliance audit trails",
-  "WebSocket broadcasts LED signals to shelf hardware in real-time",
-  "Controlled substances trigger age 18+ ID verification",
-];
+const PROJECT = PROJECTS.filter((p) => p.title === "MediLight")[0];
+const TECH_STACK = PROJECT.techStack;
+const FEATURES = PROJECT.highlights;
 
 // Stable Rx symbol positions
 const RX_SYMBOLS = [
@@ -200,7 +193,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                Smart Pharmacy System
+                {PROJECT.date}
               </motion.span>
               <motion.span
                 className="text-xs px-3 py-1 rounded-full"
@@ -213,7 +206,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                ✦ PHI auto-redacted · never leaves device
+                ✦ PHI redacted locally
               </motion.span>
             </div>
 
@@ -278,10 +271,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                Scans prescription images → Google Gemini AI reads medications
-                (including messy handwriting) → matches against live inventory →
-                lights up LED shelf hardware showing exactly where to pick. Patient
-                data never leaves device (PHI auto-redacted).
+                {PROJECT.description}
               </motion.p>
 
               {/* Key Features */}
@@ -399,7 +389,7 @@ export default function MediLightScene({ onBack }: MediLightSceneProps) {
               whileTap={{ scale: 0.97 }}
             >
               <ExternalLink size={15} />
-              Shelf Device
+              Simulated Shelf
             </motion.a>
 
             <motion.a

@@ -4,24 +4,15 @@ import { motion } from "framer-motion";
 import GlassCard, { GlassChip } from "@/components/visuals/GlassCard";
 import NavigationButtons from "@/components/ui/NavigationButtons";
 import { ExternalLink, GitFork, BookOpen, ArrowLeft } from "lucide-react";
+import { PROJECTS } from "@/lib/data";
 
 interface RubinScoutSceneProps {
   onBack: () => void;
 }
 
-const TECH_STACK = [
-  "React", "FastAPI", "PostgreSQL", "PostGIS",
-  "Recharts", "Tailwind", "Vercel", "Render", "Supabase",
-  "LangChain", "pgvector", "Gemini",
-];
-
-const FEATURES = [
-  "Real-time pipeline pulling from 4 live sources (TNS, ALeRCE, SIMBAD, LIGO)",
-  "Interactive Mollweide sky map with spatial PostGIS queries",
-  "Gravitational wave cross-matching for optical counterpart search",
-  "RESTful API with Swagger docs + admin security controls",
-  "Ask Rubin Scout: conversational RAG assistant built with a LangChain LCEL chain over a pgvector store inside the existing Postgres database, with Gemini handling embeddings and generation; verified resistance to prompt-injection attacks",
-];
+const PROJECT = PROJECTS.filter((p) => p.title === "Rubin Scout")[0];
+const TECH_STACK = PROJECT.techStack;
+const FEATURES = PROJECT.highlights;
 
 // Star field data (stable, no Math.random in render)
 const STARS = Array.from({ length: 120 }, (_, i) => ({
@@ -180,21 +171,23 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                Mar 2026 – Apr 2026
+                {PROJECT.date}
               </motion.span>
-              <motion.span
-                className="text-xs px-3 py-1 rounded-full"
-                style={{
-                  background: "rgba(167, 139, 250, 0.15)",
-                  border: "1px solid rgba(196, 181, 253, 0.3)",
-                  color: "rgba(196, 181, 253, 0.9)",
-                }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.15 }}
-              >
-                ✦ First public gravitational wave cross-matching tool
-              </motion.span>
+              {PROJECT.award && (
+                <motion.span
+                  className="text-xs px-3 py-1 rounded-full"
+                  style={{
+                    background: "rgba(167, 139, 250, 0.15)",
+                    border: "1px solid rgba(196, 181, 253, 0.3)",
+                    color: "rgba(196, 181, 253, 0.9)",
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  ✦ {PROJECT.award}
+                </motion.span>
+              )}
             </div>
 
             <motion.h1
@@ -251,10 +244,7 @@ export default function RubinScoutScene({ onBack }: RubinScoutSceneProps) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                Full-stack astronomical data pipeline processing real transient discoveries from
-                international observatories. Ingests data from IAU Transient Name Server, enriches
-                with ALeRCE ML classifications, cross-matches SIMBAD catalog, and searches LIGO
-                gravitational wave counterparts.
+                {PROJECT.description}
               </motion.p>
 
               {/* Key Features */}

@@ -92,7 +92,7 @@ export default function AboutScene({ onContinue }: AboutSceneProps) {
                 textShadow: "0 0 80px rgba(200, 170, 240, 0.3)",
               }}
             >
-              Hey, I&apos;m Namrata.
+              {ABOUT.greeting}
             </h2>
             <p
               className="mt-5"
@@ -106,20 +106,7 @@ export default function AboutScene({ onContinue }: AboutSceneProps) {
                 textShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
               }}
             >
-              Software engineer who builds things that work, and occasionally things that make
-              people go{" "}
-              <span
-                style={{
-                  color: "rgba(220,180,255,0.9)",
-                  fontStyle: "italic",
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.1em",
-                }}
-              >
-                &ldquo;wait, that&apos;s cool.&rdquo;
-              </span>{" "}
-              Fueled by K-drama marathons and too many cups of latte. Built across India and Canada:
-              systems, teams, and time zones.
+              {ABOUT.bio}
             </p>
           </div>
 
